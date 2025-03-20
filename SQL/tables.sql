@@ -9,3 +9,6 @@ CREATE TABLE tfgs (
     CONSTRAINT chk_fecha CHECK (fecha REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
 );
 
+CREATE TABLE alumno (
+    id_alumno INT AUTO_INCREMENT PRIMARY KEY,
+    id_proyecto INT
