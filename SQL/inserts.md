@@ -155,7 +155,7 @@ UPDATE tfgs set palabras_clave = "Plataforma de venta online, seguridad en comer
 
 ## Inserción
 ~~~
-inser into usuarios (nombre, email, password, rol)
+insert into usuarios (nombre, email, password, rol)
 VALUES
 ('prueba', 'prueba@localhost.es', '232425', 'alumno'),
 ('gilbert', 'magicomagico@localhost.es', 'bonitobonito', 'profesor');
