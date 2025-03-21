@@ -98,3 +98,47 @@ VALUES
 ('Plataforma de venta segura', '2019-12-10', 5, 'Somos Leans y Hugo, alumnos de 2° de ASIR de La Salle Institución. Se desarrollará una parte impresa (memoria y presentación) y una parte práctica mediante una página web en Wordpress con una base de datos implementada para la venta segura.', 'NS', 'David Hugo Plaza González, Leans Alexander Ascho Nuñez'),
 ('Intromisión de Google en la privacidad de las personas', '2014-12-11', 3, 'Nuestro proyecto trata sobre la intromisión de Google en la privacidad de las personas. Se explica cómo la conexión constante a internet a través del móvil puede vulnerar la privacidad, y se plantean medidas para evitar la vigilancia indebida.', 'Intromisión, Google, location, history, privacidad', 'Adrian Sánchez Gómez, Daniel Paredes Ávila'),
 ('Elaboración de un curso guía práctico del uso de Moodle 2.6', '2014-06-13', 5, 'En este proyecto se realiza un trabajo sobre la plataforma Moodle, analizando su historia, características, gestión, herramientas y comparativas entre versiones, y se elabora un curso-guía práctico orientado a profesores para mejorar su enseñanza mediante un sistema de gestión de aprendizaje gratuito.', 'Aula-Virtual, Seguridad, Autogestión, Plataforma-Aprendizaje, Moodle.', 'Pedro de la Calle Fernández, Miguel Ángel Flores Alcequíez');
+
+UPDATE tfgs set palabras_clave = "Inclusión digital, tercera edad y accesibilidad tecnológica" WHERE id = 15;
+UPDATE tfgs set palabras_clave = "Repositorio educativo, libros de texto digitales y Acceso mediante QR" WHERE id = 29;
+UPDATE tfgs set palabras_clave = "Emprendimiento, autoempleo y plan de empresa" WHERE id = 31;
+UPDATE tfgs set palabras_clave = "Recetas digitalizadas, base de datos culinaria y estandarización gastronómica" WHERE id = 32;
+UPDATE tfgs set palabras_clave = "Educación online, transformación digital y aprendizaje híbrido" WHERE id = 33;
+UPDATE tfgs set titulo = "Educación digital postpandemia" WHERE id = 33;
+UPDATE tfgs set palabras_clave = "Soporte técnico, resolución de incidencias y atención al usuario." WHERE id = 34;
+UPDATE tfgs set palabras_clave = "WireGuard VPN, active directory federation services y redes seguras" WHERE id = 35;
+UPDATE tfgs set palabras_clave = "Control de acceso, arduino y seguridad electrónica" WHERE id = 37;
+UPDATE tfgs set palabras_clave = "Infraestructura de red, Active Directory y Automatización IT" WHERE id = 38;
+UPDATE tfgs set palabras_clave = "Automatización de servidores, Debian 10 y Scripting bash" WHERE id = 39;
+UPDATE tfgs set palabras_clave = "DHCP Failover, SQL Server Express y Monitoreo de concesiones" WHERE id = 40;
+UPDATE tfgs set palabras_clave = "VPN TailScale, conectividad entre redes y pfSense" WHERE id = 42;
+UPDATE tfgs set palabras_clave = "Sheetsee, Google Apps Script y Alternativa a Awesome Table" WHERE id = 43;
+UPDATE tfgs set palabras_clave = "Servidores web con RAID, Balanceo de carga y Bases de datos distribuidas" WHERE id = 44;
+UPDATE tfgs set palabras_clave = "Servidor multipropósito, Debian 11 e Integración de servicios" WHERE id = 45;
+UPDATE tfgs set palabras_clave = "Despliegue de Windows 8, WDS y Automatización con Sysprep" WHERE id = 48;
+UPDATE tfgs set palabras_clave = "Aplicación web Joomla, Desarrollo modular e implementación y funcionalidades" WHERE id = 51;
+UPDATE tfgs set palabras_clave = "Tienda virtual, comercio justo y optimización multiplataforma" WHERE id = 52;
+UPDATE tfgs set palabras_clave = "Búsqueda inteligente de vehículos, vehículos elétricos e híbridos e impacto ambiental" WHERE id = 53;
+UPDATE tfgs set palabras_clave = "Licencias de software, Microsoft y educación y modelos de distribución" WHERE id = 54;
+UPDATE tfgs set palabras_clave = "Dispositivos móviles en educación, aprendizaje digital e integración tecnológica en el aula" WHERE id = 56;
+UPDATE tfgs set palabras_clave = "Arranque de Windows 8, Multiboot y compatibilidad y gestión de sistemas operativos" WHERE id = 58;
+UPDATE tfgs set palabras_clave = "Portal web con Joomla, Accesibilidad y usabilidad y gestión de roles y usuarios" WHERE id = 68;
+UPDATE tfgs set palabras_clave = "Posicionamiento SEO, optimización wbe y estrategias de búsqueda en Google" WHERE id = 69;
+UPDATE tfgs set palabras_clave = "Root-kids, Firewire, Boot-Source, BIOS, UEFI" WHERE id = 70;
+UPDATE tfgs set palabras_clave = "SharePint Foundation, Gestión documental y colaboración empresarial" WHERE id = 71;
+UPDATE tfgs set palabras_clave = "Servidor de streaming, optimización de ancho de banda y transmisión multimedia en tiempo real" WHERE id = 72;
+UPDATE tfgs set palabras_clave = "Análisis de riesgos informáticos, seguridad en centros educativos y Método OCTAVE-S" WHERE id = 73;
+UPDATE tfgs set palabras_clave = "Licencias de Software, Modelos de licencia Microsoft, Adobe y Oracle y políticas de licencias en educación" WHERE id = 76;
+UPDATE tfgs set palabras_clave = "Bot de Telegram, monitorización de contaminación y automatización de alertas" WHERE id = 79;
+UPDATE tfgs set palabras_clave = "Esports en educación, videojuegos y aprendizaje y gamificación en las aulas" WHERE id = 85;
+UPDATE tfgs set palabras_clave = "Televisión a la carta, video bajo demanda (VOD) y plataforma de suscripción" WHERE id = 86;
+UPDATE tfgs set palabras_clave = "Control de acceso biométrico, identificación por huella dactilar y gestión de asistencia escolar" WHERE id = 87;
+UPDATE tfgs set palabras_clave = "Esports en España, difusión de deportes electrónicos y plataforma de noticias y torneos" WHERE id = 88;
+UPDATE tfgs set palabras_clave = "Tienda virtual educativa, material escolar y uniformes y plataforma para estudiantes y familias" WHERE id = 89;
+UPDATE tfgs set palabras_clave = "Formación en informática básica, capacitación docente en TIC y plataforma de aprendizaje para profesores" WHERE id = 90;
+UPDATE tfgs set palabras_clave = "Optimización empresarial, desarrollo de software y mejora de productividad" WHERE id = 91;
+UPDATE tfgs set palabras_clave = "Gestión de tráfico de redes educativas, implementación de DMZ y seguridad en infraestructuras escolares." WHERE id = 92;
+UPDATE tfgs set palabras_clave = "Gestión de mantenimiento de vehículos, base de datos para el sector automotiz y automatización del seguimiento mecánico" WHERE id = 93;
+UPDATE tfgs set palabras_clave = "Detección de lenguaje sexista, extensión para navegador y análisis de contenido en diarios digitales" WHERE id = 94;
+UPDATE tfgs set palabras_clave = "Digitalización de recetas, base de datos culinaria y estandarización gastronómica" WHERE id = 95;
+UPDATE tfgs set palabras_clave = "Plataforma de venta online, seguridad en comercio electrónico y desarrollo web con Wordpress" WHERE id = 96;
