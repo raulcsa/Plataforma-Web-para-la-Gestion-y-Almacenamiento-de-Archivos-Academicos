@@ -1,3 +1,7 @@
+# Tabla tfgs
+
+## Inserción
+~~~
 INSERT INTO tfgs (titulo, fecha, nota, resumen, palabras_clave, integrantes)
 VALUES
 ('Creación y operación de una empresa con enfoche al teletrabajo', '2022-06-15', 8, 'Este trabajo surgió de la idea de crear una empresa funcional con la capacidad de tener un entorno seguro para la empresa y el trabajador, permitiendo trabajar desde la red de la empresa o desde el domicilio del trabajador y ejercer todas las funciones necesarias para ambas partes sin ninguna complicación. Partiendo de esta idea, pensamos en cuál sería la manera más sencilla pero eficaz de poder implementar nuestras ideas en un entorno virtualizado y que nos fuera sencillo de administrar. Teniendo en cuenta lo que queríamos hacer decidimos utilizar varias técnicas de planificación como brainstorming y trello. En el momento en el que pusimos todas las ideas sobre la mesa, nos dimos cuenta de que existían herramientas en el mercado que podíamos usar para conseguir nuestros objetivos, ası que recopilamos información sobre todas las herramientas de teletrabajo disponibles y que fuesen útiles para nuestros objetivos. Las herramientas que más nos gustaron como para ser implementadas fueron las siguientes: • VPN de Windows Server • Team Viewer • Anydesk • Radius Escogimos estas tres herramientas para tener multitud de opciones disponibles, que fuesen fáciles de montar y de usar, y que además cumpliesen todos nuestros objetivos, por lo que nos pusimos manos a la obra con la creación y de todo lo necesario para poder implementar estas herramientas.', 'VPN,Teletrabajo,TeamViewer,Anydesk', 'Carlos Díez Rodríguez, Rubén Martínez López, Juan Pablo Retana Díaz'),
@@ -98,7 +102,10 @@ VALUES
 ('Plataforma de venta segura', '2019-12-10', 5, 'Somos Leans y Hugo, alumnos de 2° de ASIR de La Salle Institución. Se desarrollará una parte impresa (memoria y presentación) y una parte práctica mediante una página web en Wordpress con una base de datos implementada para la venta segura.', 'NS', 'David Hugo Plaza González, Leans Alexander Ascho Nuñez'),
 ('Intromisión de Google en la privacidad de las personas', '2014-12-11', 3, 'Nuestro proyecto trata sobre la intromisión de Google en la privacidad de las personas. Se explica cómo la conexión constante a internet a través del móvil puede vulnerar la privacidad, y se plantean medidas para evitar la vigilancia indebida.', 'Intromisión, Google, location, history, privacidad', 'Adrian Sánchez Gómez, Daniel Paredes Ávila'),
 ('Elaboración de un curso guía práctico del uso de Moodle 2.6', '2014-06-13', 5, 'En este proyecto se realiza un trabajo sobre la plataforma Moodle, analizando su historia, características, gestión, herramientas y comparativas entre versiones, y se elabora un curso-guía práctico orientado a profesores para mejorar su enseñanza mediante un sistema de gestión de aprendizaje gratuito.', 'Aula-Virtual, Seguridad, Autogestión, Plataforma-Aprendizaje, Moodle.', 'Pedro de la Calle Fernández, Miguel Ángel Flores Alcequíez');
+~~~
 
+## Actualización de datos
+~~~
 UPDATE tfgs set palabras_clave = "Inclusión digital, tercera edad y accesibilidad tecnológica" WHERE id = 15;
 UPDATE tfgs set palabras_clave = "Repositorio educativo, libros de texto digitales y Acceso mediante QR" WHERE id = 29;
 UPDATE tfgs set palabras_clave = "Emprendimiento, autoempleo y plan de empresa" WHERE id = 31;
@@ -142,3 +149,13 @@ UPDATE tfgs set palabras_clave = "Gestión de mantenimiento de vehículos, base 
 UPDATE tfgs set palabras_clave = "Detección de lenguaje sexista, extensión para navegador y análisis de contenido en diarios digitales" WHERE id = 94;
 UPDATE tfgs set palabras_clave = "Digitalización de recetas, base de datos culinaria y estandarización gastronómica" WHERE id = 95;
 UPDATE tfgs set palabras_clave = "Plataforma de venta online, seguridad en comercio electrónico y desarrollo web con Wordpress" WHERE id = 96;
+~~~
+
+# Tabla usuarios
+
+## Inserción
+~~~
+inser into usuarios (nombre, email, password, rol)
+VALUES
+('prueba', 'prueba@localhost.es', '232425', 'alumno'),
+('gilbert', 'magicomagico@localhost.es', 'bonitobonito', 'profesor');
