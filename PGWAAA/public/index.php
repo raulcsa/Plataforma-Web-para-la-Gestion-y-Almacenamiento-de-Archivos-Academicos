@@ -27,8 +27,8 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login.php">
-              <i class="bi bi-person-circle"></i> Iniciar sesión
+            <a class="navbar-brand" href="registro.php">
+              <i class="bi bi-person-circle"></i> Registrarse
             </a>
           </li>
         </ul>
@@ -68,7 +68,7 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
     <div class="container">
       <p class="mb-0">&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
     </div>
-  </footer>>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
