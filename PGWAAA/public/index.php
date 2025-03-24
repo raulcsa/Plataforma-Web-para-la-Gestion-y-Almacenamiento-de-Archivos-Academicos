@@ -2,21 +2,55 @@
 require_once '../config/database.php';
 
 $conexion = conectarDB();
-$mostrartfgs = "SELECT titulo, fecha, resumen, integrantes, palabras_clave FROM tfgs";
-$resultados = realizarquery($conexion, $mostrartfgs, null, true);
+
+$whereClause = "";
+$parametros = null;
+$buscar = "";
+$campoSeleccionado = "";
+
+// Comprobamos si se ha enviado una búsqueda
+if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
+    // Campos permitidos para evitar inyección SQL
+    $allowedFields = ['titulo', 'fecha', 'palabras_clave', 'integrantes'];
+    $campoSeleccionado = in_array($_GET['campo'], $allowedFields) ? $_GET['campo'] : 'titulo';
+    $buscar = trim($_GET['buscar']);
+    
+    // Se crea la cláusula WHERE según el campo seleccionado
+    $whereClause = "WHERE $campoSeleccionado LIKE ?";
+    $parametros = ["%$buscar%"];
+}
+
+$mostrartfgs = "SELECT titulo, fecha, resumen, integrantes, palabras_clave FROM tfgs $whereClause";
+$resultados = realizarquery($conexion, $mostrartfgs, $parametros, true);
+
+/**
+ * Función para resaltar en negrita las coincidencias del término buscado.
+ *
+ * @param string $text El texto a procesar.
+ * @param string $keyword El término de búsqueda.
+ * @return string El texto con las coincidencias envueltas en <strong>.
+ */
+function highlight($text, $keyword) {
+    if (!$keyword) {
+        return htmlspecialchars($text);
+    }
+    // Escapar el texto para evitar problemas con HTML
+    $text = htmlspecialchars($text);
+    // Se escapan caracteres especiales en el término buscado para la expresión regular
+    $keyword = preg_quote($keyword, '/');
+    // Se envuelven en <strong> todas las coincidencias, ignorando mayúsculas/minúsculas
+    return preg_replace("/($keyword)/i", "<strong>$1</strong>", $text);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Listado de TFGs</title>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <a class="navbar-brand" href="index.php">PWGAAA</a>
@@ -36,9 +70,27 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
     </div>
   </nav>
 
-
   <div class="container mt-5">
     <h1 class="mb-4 text-primary">Listado de TFGs</h1>
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <form method="GET" action="index.php" class="d-flex">
+          <div class="input-group">
+            <select name="campo" class="form-select">
+              <option value="titulo" <?php if($campoSeleccionado === 'titulo') echo 'selected'; ?>>Título</option>
+              <option value="fecha" <?php if($campoSeleccionado === 'fecha') echo 'selected'; ?>>Fecha</option>
+              <option value="palabras_clave" <?php if($campoSeleccionado === 'palabras_clave') echo 'selected'; ?>>Palabras Clave</option>
+              <option value="integrantes" <?php if($campoSeleccionado === 'integrantes') echo 'selected'; ?>>Integrantes</option>
+            </select>
+            <input type="text" name="buscar" class="form-control" placeholder="Buscar..." value="<?php echo htmlspecialchars($buscar); ?>">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
         <thead class="table-primary">
@@ -53,18 +105,17 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
         <tbody>
           <?php foreach ($resultados as $fila): ?>
           <tr>
-            <td><?php echo htmlspecialchars($fila['titulo']); ?></td>
-            <td><?php echo htmlspecialchars($fila['fecha']); ?></td>
-            <td><?php echo htmlspecialchars($fila['resumen']); ?></td>
-            <td><?php echo htmlspecialchars($fila['palabras_clave']); ?></td>
-            <td><?php echo htmlspecialchars($fila['integrantes']); ?></td>
+            <td><?php echo highlight($fila['titulo'], $buscar); ?></td>
+            <td><?php echo highlight($fila['fecha'], $buscar); ?></td>  
+            <td><?php echo highlight($fila['resumen'], $buscar); ?></td>
+            <td><?php echo highlight($fila['palabras_clave'], $buscar); ?></td>
+            <td><?php echo highlight($fila['integrantes'], $buscar); ?></td>
           </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
     </div>
   </div>
-
 
   <footer class="bg-primary text-white text-center py-3 mt-5">
     <div class="container">
