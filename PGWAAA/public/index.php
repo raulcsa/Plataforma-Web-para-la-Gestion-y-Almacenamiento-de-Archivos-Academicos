@@ -2,7 +2,7 @@
 require_once '../config/database.php';
 
 $conexion = conectarDB();
-$mostrartfgs = "SELECT titulo, fecha, resumen, integrantes FROM tfgs";
+$mostrartfgs = "SELECT titulo, fecha, resumen, integrantes, palabras_clave FROM tfgs";
 $resultados = realizarquery($conexion, $mostrartfgs, null, true);
 ?>
 <!DOCTYPE html>
@@ -46,6 +46,7 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
             <th>Título</th>
             <th>Fecha</th>
             <th>Resumen</th>
+            <th>Palabras Clave</th>
             <th>Integrantes</th>
           </tr>
         </thead>
@@ -55,6 +56,7 @@ $resultados = realizarquery($conexion, $mostrartfgs, null, true);
             <td><?php echo htmlspecialchars($fila['titulo']); ?></td>
             <td><?php echo htmlspecialchars($fila['fecha']); ?></td>
             <td><?php echo htmlspecialchars($fila['resumen']); ?></td>
+            <td><?php echo htmlspecialchars($fila['palabras_clave']); ?></td>
             <td><?php echo htmlspecialchars($fila['integrantes']); ?></td>
           </tr>
           <?php endforeach; ?>
