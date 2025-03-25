@@ -1,10 +1,8 @@
----
 
 ## ¿Qué es MVC?
 
 **MVC** significa **Modelo-Vista-Controlador**, es un **patrón de diseño** que ayuda a estructurar el código de una aplicación web, separando claramente responsabilidades en tres partes. Esto facilita el desarrollo, mantenimiento y escalabilidad de las aplicaciones.
 
----
 
 ## Componentes Fundamentales del MVC
 
