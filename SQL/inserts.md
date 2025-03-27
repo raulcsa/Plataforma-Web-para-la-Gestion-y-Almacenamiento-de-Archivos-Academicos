@@ -258,203 +258,228 @@ VALUES
 
 ## Inserción
 ~~~
-INSERT INTO usuarios (nombre, email, password, rol) VALUES
-('Carlos Díez Rodríguez', 'carlos.diez.rodriguez@example.com', 'password', 'alumno'),
-('Rubén Martínez López', 'ruben.martinez.lopez@example.com', 'password', 'alumno'),
-('Juan Pablo Retana Díaz', 'juan.pablo.retana.diaz@example.com', 'password', 'alumno'),
-('Álvaro Casado Bodas', 'alvaro.casado.bodas@example.com', 'password', 'alumno'),
-('Mario Díaz Jiménez', 'mario.diaz.jimenez@example.com', 'password', 'alumno'),
-('Cristian Hernández Rodríguez Barbero', 'cristian.hernandez.rodriguez.barbero@example.com', 'password', 'alumno'),
-('Rafael Alfalla Alonso', 'rafael.alfalla.alonso@example.com', 'password', 'alumno'),
-('Óscar Guerra Rodríguez', 'oscar.guerra.rodriguez@example.com', 'password', 'alumno'),
-('Ignacio García García', 'ignacio.garcia.garcia@example.com', 'password', 'alumno'),
-('Sergio Cortijo Flores', 'sergio.cortijo.flores@example.com', 'password', 'alumno'),
-('Brian Fuentes Chavez', 'brian.fuentes.chavez@example.com', 'password', 'alumno'),
-('Luis Miguel Pérez Mesón', 'luis.miguel.perez.meson@example.com', 'password', 'alumno'),
-('Ignacio Escudero López Rufián', 'ignacio.escudero.lopez.rufian@example.com', 'password', 'alumno'),
-('Martín Sixto Abad', 'martin.sixto.abad@example.com', 'password', 'alumno'),
-('Jairo Meco Cavero', 'jairo.meco.cavero@example.com', 'password', 'alumno'),
-('Javier Botella González', 'javier.botella.gonzalez@example.com', 'password', 'alumno'),
-('José Carlos Botella González', 'jose.carlos.botella.gonzalez@example.com', 'password', 'alumno'),
-('Javier Hernández Duro', 'javier.hernandez.duro@example.com', 'password', 'alumno'),
-('Mario Aránega Orgaz', 'mario.aranega.orgaz@example.com', 'password', 'alumno'),
-('Pedro Soriano Díaz', 'pedro.soriano.diaz@example.com', 'password', 'alumno'),
-('Javier Calles Tirez', 'javier.calles.tirez@example.com', 'password', 'alumno'),
-('Sergio David Marcos Ruiz', 'sergio.david.marcos.ruiz@example.com', 'password', 'alumno'),
-('Alejandro González de la Jara', 'alejandro.gonzalez.de.la.jara@example.com', 'password', 'alumno'),
-('Jesús García Sánchez', 'jesus.garcia.sanchez@example.com', 'password', 'alumno'),
-('Esperanza Castrillo', 'esperanza.castrillo@example.com', 'password', 'alumno'),
-('David Muñoz López', 'david.munoz.lopez@example.com', 'password', 'alumno'),
-('Elvis Sánchez Cardo', 'elvis.sanchez.cardo@example.com', 'password', 'alumno'),
-('Ricardo León López Jiménez', 'ricardo.leon.lopez.jimenez@example.com', 'password', 'alumno'),
-('Alejandro Asenjo Pita', 'alejandro.asenjo.pita@example.com', 'password', 'alumno'),
-('Manuel Lozano', 'manuel.lozano@example.com', 'password', 'alumno'),
-('Mario Martinez', 'mario.martinez@example.com', 'password', 'alumno'),
-('Luis Eduardo Espinosa Hoyos', 'luis.eduardo.espinosa.hoyos@example.com', 'password', 'alumno'),
-('José Manuel Barranco Díaz', 'jose.manuel.barranco.diaz@example.com', 'password', 'alumno'),
-('Justo Fabio Pérez Picón', 'justo.fabio.perez.picon@example.com', 'password', 'alumno'),
-('Javier Espina Salazar', 'javier.espina.salazar@example.com', 'password', 'alumno'),
-('Álvaro de Don Pablos Paredes', 'alvaro.de.don.pablos.paredes@example.com', 'password', 'alumno'),
-('Elías Fabian Arrua Delgado', 'elias.fabian.arrua.delgado@example.com', 'password', 'alumno'),
-('Iván Orteg Ferrero', 'ivan.orteg.ferrero@example.com', 'password', 'alumno'),
-('Álvaro Palomino Llaguno', 'alvaro.palomino.llaguno@example.com', 'password', 'alumno'),
-('Aarón Marugán de la Torre', 'aaron.marugan.de.la.torre@example.com', 'password', 'alumno'),
-('Jorge García Merino', 'jorge.garcia.merino@example.com', 'password', 'alumno'),
-('Héctor Ramos Murga', 'hector.ramos.murga@example.com', 'password', 'alumno'),
-('Raúl Vicente Trigueros', 'raul.vicente.trigueros@example.com', 'password', 'alumno'),
-('Fátima Perea Rodríguez', 'fatima.perea.rodriguez@example.com', 'password', 'alumno'),
-('Celia Briones Plaza', 'celia.briones.plaza@example.com', 'password', 'alumno'),
-('Borja Sánchez Cabezudo Alfonso', 'borja.sanchez.cabezudo.alfonso@example.com', 'password', 'alumno'),
-('Alejandro de Castillo Roldán', 'alejandro.de.castillo.roldan@example.com', 'password', 'alumno'),
-('Iker Pastoriza Lopez', 'iker.pastoriza.lopez@example.com', 'password', 'alumno'),
-('Álvaro Lozano Rodríguez', 'alvaro.lozano.rodriguez@example.com', 'password', 'alumno'),
-('Pablo Gálvez Reguera', 'pablo.galvez.reguera@example.com', 'password', 'alumno'),
-('Alejandro Desviat Alcázar', 'alejandro.desviat.alcazar@example.com', 'password', 'alumno'),
-('Marcos Robles Romero', 'marcos.robles.romero@example.com', 'password', 'alumno'),
-('Erik Villegas Conde', 'erik.villegas.conde@example.com', 'password', 'alumno'),
-('Pedro Macías Bodas', 'pedro.macias.bodas@example.com', 'password', 'alumno'),
-('Izan Lbrado Fernández', 'izan.lbrado.fernandez@example.com', 'password', 'alumno'),
-('Patricia Ramírez López', 'patricia.ramirez.lopez@example.com', 'password', 'alumno'),
-('ÁLvaro Lopezosa Pino', 'alvaro.lopezosa.pino@example.com', 'password', 'alumno'),
-('Rebeca Rodríguez Pinto', 'rebeca.rodriguez.pinto@example.com', 'password', 'alumno'),
-('Verónica Villacis Almeida', 'veronica.villacis.almeida@example.com', 'password', 'alumno'),
-('Sebastian Jean Carlos Alayo Moreno', 'sebastian.jean.carlos.alayo.moreno@example.com', 'password', 'alumno'),
-('Michael Andrés Molina Soto', 'michael.andres.molina.soto@example.com', 'password', 'alumno'),
-('Santiago Prieto Ayra', 'santiago.prieto.ayra@example.com', 'password', 'alumno'),
-('Aitor Conejo de la Flor', 'aitor.conejo.de.la.flor@example.com', 'password', 'alumno'),
-('Fernando Castro Vilar', 'fernando.castro.vilar@example.com', 'password', 'alumno'),
-('Roberto', 'roberto@example.com', 'password', 'alumno'),
-('José Martín Cobos', 'jose.martin.cobos@example.com', 'password', 'alumno'),
-('Pablo Castro Brea', 'pablo.castro.brea@example.com', 'password', 'alumno'),
-('Daniel Rodríguez de la Morena', 'daniel.rodriguez.de.la.morena@example.com', 'password', 'alumno'),
-('Iván Bravo Muñoz', 'ivan.bravo.munoz@example.com', 'password', 'alumno'),
-('David Gómez Calcerrada Herrero', 'david.gomez.calcerrada.herrero@example.com', 'password', 'alumno'),
-('Diego Sánchez Arcos', 'diego.sanchez.arcos@example.com', 'password', 'alumno'),
-('Carlos Rodríguez Moya', 'carlos.rodriguez.moya@example.com', 'password', 'alumno'),
-('Diego Arias Ortega', 'diego.arias.ortega@example.com', 'password', 'alumno'),
-('Erik Rojas Escobedo', 'erik.rojas.escobedo@example.com', 'password', 'alumno'),
-('Adrián Montoya Roldán', 'adrian.montoya.roldan@example.com', 'password', 'alumno'),
-('Víctor Soriano Parreño', 'victor.soriano.parreno@example.com', 'password', 'alumno'),
-('Eduardo Jesús Ortiz Chena', 'eduardo.jesus.ortiz.chena@example.com', 'password', 'alumno'),
-('Bartosz Grzech', 'bartosz.grzech@example.com', 'password', 'alumno'),
-('David López', 'david.lopez@example.com', 'password', 'alumno'),
-('Aitor García', 'aitor.garcia@example.com', 'password', 'alumno'),
-('Adrián Calzado Huete', 'adrian.calzado.huete@example.com', 'password', 'alumno'),
-('Rodigo Pérez Sanguino', 'rodigo.perez.sanguino@example.com', 'password', 'alumno'),
-('Pablo Ramos Igual', 'pablo.ramos.igual@example.com', 'password', 'alumno'),
-('Juan Manuel Casero Arnay', 'juan.manuel.casero.arnay@example.com', 'password', 'alumno'),
-('César García González', 'cesar.garcia.gonzalez@example.com', 'password', 'alumno'),
-('Iván Ferrera Cerezo', 'ivan.ferrera.cerezo@example.com', 'password', 'alumno'),
-('Ismael de Castro de la Cruz', 'ismael.de.castro.de.la.cruz@example.com', 'password', 'alumno'),
-('Jorge Mora Rubio', 'jorge.mora.rubio@example.com', 'password', 'alumno'),
-('Bryan Moreira Bravo', 'bryan.moreira.bravo@example.com', 'password', 'alumno'),
-('Martín Murado Jiménez', 'martin.murado.jimenez@example.com', 'password', 'alumno'),
-('Sergio Gómez Pérez', 'sergio.gomez.perez@example.com', 'password', 'alumno'),
-('Javier Mora Prieto', 'javier.mora.prieto@example.com', 'password', 'alumno'),
-('Diego Horrillo Hernández', 'diego.horrillo.hernandez@example.com', 'password', 'alumno'),
-('Pablo Ramos Fernánez', 'pablo.ramos.fernanez@example.com', 'password', 'alumno'),
-('Adrián González Iglesias', 'adrian.gonzalez.iglesias@example.com', 'password', 'alumno'),
-('Alexis Quisilema Rodríguez', 'alexis.quisilema.rodriguez@example.com', 'password', 'alumno'),
-('Sergio Kwech Gómez', 'sergio.kwech.gomez@example.com', 'password', 'alumno'),
-('Alejandro Ballester', 'alejandro.ballester@example.com', 'password', 'alumno'),
-('Javier Calleja', 'javier.calleja@example.com', 'password', 'alumno'),
-('Juan Carlos García', 'juan.carlos.garcia@example.com', 'password', 'alumno'),
-('Bryan Caguana', 'bryan.caguana@example.com', 'password', 'alumno'),
-('Andrés Cumbicus', 'andres.cumbicus@example.com', 'password', 'alumno'),
-('Carlos Ureta', 'carlos.ureta@example.com', 'password', 'alumno'),
-('César Eduardo Grcía Cueva', 'cesar.eduardo.garcia.cueva@example.com', 'password', 'alumno'),
-('Jorge Mrtínez Nieto', 'jorge.martinez.nieto@example.com', 'password', 'alumno'),
-('Pablo Castuera Cabello', 'pablo.castuera.cabello@example.com', 'password', 'alumno'),
-('María Fernández García', 'maria.fernandez.garcia@example.com', 'password', 'alumno'),
-('Roberto Robledo Cubero', 'roberto.robledo.cubero@example.com', 'password', 'alumno'),
-('Milagros Peralta González', 'milagros.peralta.gonzalez@example.com', 'password', 'alumno'),
-('David Serradilla Candil', 'david.serradilla.candil@example.com', 'password', 'alumno'),
-('Víctor Aldea García', 'victor.aldea.garcia@example.com', 'password', 'alumno'),
-('Nicolás Durán Benavides', 'nicolas.duran.benavides@example.com', 'password', 'alumno'),
-('Ana Fernández Fernández', 'ana.fernandez.fernandez@example.com', 'password', 'alumno'),
-('Daniel Pedraza Gómez', 'daniel.pedraza.gomez@example.com', 'password', 'alumno'),
-('Santiago Vallejo Hernández', 'santiago.vallejo.hernandez@example.com', 'password', 'alumno'),
-('Héctor García Pernas', 'hector.garcia.pernas@example.com', 'password', 'alumno'),
-('Franklin Cabrera Cherrez', 'franklin.cabrera.cherrez@example.com', 'password', 'alumno'),
-('Iván Solera Reca', 'ivan.solera.reca@example.com', 'password', 'alumno'),
-('Pedro Pavón Díaz', 'pedro.pavon.diaz@example.com', 'password', 'alumno'),
-('Jorge Coello', 'jorge.coello@example.com', 'password', 'alumno'),
-('Cristhian Rodriguez', 'cristhian.rodriguez@example.com', 'password', 'alumno'),
-('David Jaramillo', 'david.jaramillo@example.com', 'password', 'alumno'),
-('Josué García López', 'josue.garcia.lopez@example.com', 'password', 'alumno'),
-('Javier de la Cruz de la Torre', 'javier.delacruz.torre@example.com', 'password', 'alumno'),
-('David Bernardo Sanz', 'david.bernardo.sanz@example.com', 'password', 'alumno'),
-('Pablo Sánchez Alonso', 'pablo.sanchez.alonso@example.com', 'password', 'alumno'),
-('Sergio Martín Pedroviejo', 'sergio.martin.pedroviejo@example.com', 'password', 'alumno'),
-('Adrian Sánchez Gómez', 'adrian.sanchez.gomez@example.com', 'password', 'alumno'),
-('Daniel Paredes Ávila', 'daniel.paredes.avila@example.com', 'password', 'alumno'),
-('Laura Gutiérrez Pérez', 'laura.gutierrez.perez@example.com', 'password', 'alumno'),
-('Diego Yalta Bernaza', 'diego.yalta.bernaza@example.com', 'password', 'alumno'),
-('Alverto Navacerrada Montero', 'alverto.navacerrada.montero@example.com', 'password', 'alumno'),
-('Alberto Luengo González', 'alberto.luengo.gonzalez@example.com', 'password', 'alumno'),
-('Cristian Martínez García', 'cristian.martinez.garcia@example.com', 'password', 'alumno'),
-('Benjamín de Lucas Rodríguez', 'benjamin.de.lucas.rodriguez@example.com', 'password', 'alumno'),
-('Adrián Vizcaíno Galán', 'adrian.vizcaino.galan@example.com', 'password', 'alumno'),
-('Javier Otero García', 'javier.otero.garcia@example.com', 'password', 'alumno'),
-('Borja conejo de la flor', 'borja.conejo.de.la.flor@example.com', 'password', 'alumno'),
-('Jonathan Carrera Santamaría', 'jonathan.carrera.santamaria@example.com', 'password', 'alumno'),
-('Raúl Gallardo Rebolledo', 'raul.gallardo.rebolledo@example.com', 'password', 'alumno'),
-('Pedro de la Calle Fernández', 'pedro.de.la.calle.fernandez@example.com', 'password', 'alumno'),
-('Miguel Ángel Flores Alcequíez', 'miguel.angel.flores.alcequiez@example.com', 'password', 'alumno'),
-('Oscar Fuentes Ferrera', 'oscar.fuentes.ferrera@example.com', 'password', 'alumno'),
-('Esteban Alexander Villlacis Almeida', 'esteban.alexander.villlacis.almeida@example.com', 'password', 'alumno'),
-('Carlos Delgado Herráiz', 'carlos.delgado.herraiz@example.com', 'password', 'alumno'),
-('Emilio Javier Coscaron Estévez', 'emilio.javier.coscaron.estevez@example.com', 'password', 'alumno'),
-('Christian Felipe Guevara Albarracín', 'christian.felipe.guevara.albarracin@example.com', 'password', 'alumno'),
-('Eva Gloria Robas González', 'eva.gloria.robas.gonzalez@example.com', 'password', 'alumno'),
-('Edgar Martín Santos', 'edgar.martin.santos@example.com', 'password', 'alumno'),
-('Gonzalo Moreno Mejías', 'gonzalo.moreno.mejias@example.com', 'password', 'alumno'),
-('Luis Fernando García Alcaraz', 'luis.fernando.garcia.alcaraz@example.com', 'password', 'alumno'),
-('Pablo Anibal Astudillo Olmedo', 'pablo.anibal.astudillo.olmedo@example.com', 'password', 'alumno'),
-('José Manuel Chinchilla Juan', 'jose.manuel.chinchilla.juan@example.com', 'password', 'alumno'),
-('Iván Álvaro Sánchez', 'ivan.alvaro.sanchez@example.com', 'password', 'alumno'),
-('Jose Luis Amador Centeno', 'jose.luis.amador.centeno@example.com', 'password', 'alumno'),
-('Javier Domínguez Sanchez', 'javier.dominguez.sanchez@example.com', 'password', 'alumno'),
-('Alejandro Gil Mingorance', 'alejandro.gil.mingorance@example.com', 'password', 'alumno'),
-('Francisco Carrillo Mansilla', 'francisco.carrillo.mansilla@example.com', 'password', 'alumno'),
-('Daniel Yagüe Sanchez', 'daniel.yague.sanchez@example.com', 'password', 'alumno'),
-('Jorge Rangel Moronta', 'jorge.rangel.moronta@example.com', 'password', 'alumno'),
-('Iván Núñez Barrena', 'ivan.nunez.barrena@example.com', 'password', 'alumno'),
-('James Alexander Paima Peña', 'james.alexander.paima.pena@example.com', 'password', 'alumno'),
-('Rodrigo Cano Macusaya', 'rodrigo.cano.macusaya@example.com', 'password', 'alumno'),
-('Daniel Galisteo', 'daniel.galisteo@example.com', 'password', 'alumno'),
-('Ricardo Rodriguez', 'ricardo.rodriguez@example.com', 'password', 'alumno'),
-('Antonio Sánchez', 'antonio.sanchez@example.com', 'password', 'alumno'),
-('Victor José Albarrán Ramos', 'victor.jose.albarran.ramos@example.com', 'password', 'alumno'),
-('Victor Diaz Iglesias', 'victor.diaz.iglesias@example.com', 'password', 'alumno'),
-('Carlos Fernandez García', 'carlos.fernandez.garcia@example.com', 'password', 'alumno'),
-('Sergio Casado Sanz', 'sergio.casado.sanz@example.com', 'password', 'alumno'),
-('Jorge Peñalver Campos', 'jorge.penalver.campos@example.com', 'password', 'alumno'),
-('Fernando Jiménez Iglesias', 'fernando.jimenez.iglesias@example.com', 'password', 'alumno'),
-('Pierre Antony Neyra Yupanqui', 'pierre.antony.neyra.yupanqui@example.com', 'password', 'alumno'),
-('Jose Manuel Hernández Haideur', 'jose.manuel.hernandez.haideur@example.com', 'password', 'alumno'),
-('Javier González Serrano', 'javier.gonzalez.serrano@example.com', 'password', 'alumno'),
-('Alberto Fernández Panadero', 'alberto.fernandez.panadero@example.com', 'password', 'alumno'),
-('Joaquín García Rodríguez', 'joaquin.garcia.rodriguez@example.com', 'password', 'alumno'),
-('Alejandro Anacleto', 'alejandro.anacleto@example.com', 'password', 'alumno'),
-('Javier Ruiz', 'javier.ruiz@example.com', 'password', 'alumno'),
-('Miguel Rego', 'miguel.rego@example.com', 'password', 'alumno'),
-('David Gallego Palomar', 'david.gallego.palomar@example.com', 'password', 'alumno'),
-('José Luis Rodríguez', 'jose.luis.rodriguez@example.com', 'password', 'alumno'),
-('Kevin Aln Sanchez Meroño', 'kevin.aln.sanchez.merono@example.com', 'password', 'alumno'),
-('Beatriz Reyes García', 'beatriz.reyes.garcia@example.com', 'password', 'alumno'),
-('Rocío Solange García Cruz', 'rocio.solange.garcia.cruz@example.com', 'password', 'alumno'),
-('Pablo Montalbán Expósito', 'pablo.montalban.exposto@example.com', 'password', 'alumno'),
-('Jaime Cortés Tirado', 'jaime.cortes.tirado@example.com', 'password', 'alumno'),
-('Javier Bayón González', 'javier.bayon.gonzalez@example.com', 'password', 'alumno'),
-('Gema Álvarez Parras', 'gema.alvarez.parras@example.com', 'password', 'alumno'),
-('Guillermo Castaño Granados', 'guillermo.castano.granados@example.com', 'password', 'alumno'),
-('Alberto Luaces Martínez', 'alberto.luaces.martinez@example.com', 'password', 'alumno'),
-('Marcos M. García Lavilla', 'marcos.m.garcia.lavilla@example.com', 'password', 'alumno'),
-('Adrián Gómez López', 'adrian.gomez.lopez@example.com', 'password', 'alumno'),
-('Andrea Moreno Mansilla', 'andrea.moreno.mansilla@example.com', 'password', 'alumno'),
-('Anthony Raúl Loor Aray', 'anthony.raul.loor.aray@example.com', 'password', 'alumno'),
-('David de la O Monroy', 'david.de.la.o.monroy@example.com', 'password', 'alumno'),
-('Víctor Caja Magdaleno', 'victor.caja.magdaleno@example.com', 'password', 'alumno'),
-('Victor M. Martín Antón', 'victor.m.martin.anton@example.com', 'password', 'alumno');
-
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Carlos Díez Rodríguez', 'crodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rubén Martínez López', 'rlpez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Juan Pablo Retana Díaz', 'jdaz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Álvaro Casado Bodas', 'bodas@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Mario Díaz Jiménez', 'mjimnez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Cristian Hernández Rodríguez Barbero', 'cbarbero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rafael Alfalla Alonso', 'ralonso@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Óscar Guerra Rodríguez', 'rodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ignacio García García', 'igarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio Cortijo Flores', 'sflores@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Brian Fuentes Chavez', 'bchavez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Luis Miguel Pérez Mesón', 'lmesn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ignacio Escudero López Rufián', 'irufin@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Martín Sixto Abad', 'mabad@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jairo Meco Cavero', 'jcavero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Botella González', 'jgonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Carlos Botella González', 'jgonzlez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Hernández Duro', 'jduro@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Mario Aránega Orgaz', 'morgaz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro Soriano Díaz', 'pdaz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Calles Tirez', 'jtirez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio David Marcos Ruiz', 'sruiz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro González De La Jara', 'ajara@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jesús García Sánchez', 'jsnchez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Esperanza Castrillo', 'ecastrillo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Muñoz López', 'dlpez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Elvis Sánchez Cardo', 'ecardo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ricardo León López Jiménez', 'rjimnez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Asenjo Pita', 'apita@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Manuel Lozano', 'mlozano@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Mario Martinez', 'mmartinez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Luis Eduardo Espinosa Hoyos', 'lhoyos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Manuel Barranco Díaz', 'jdaz1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Justo Fabio Pérez Picón', 'jpicn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Espina Salazar', 'jsalazar@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Álvaro De Don Pablos Paredes', 'paredes@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Elías Fabian Arrua Delgado', 'edelgado@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Orteg Ferrero', 'iferrero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Álvaro Palomino Llaguno', 'llaguno@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Aarón Marugán De La Torre', 'atorre@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge García Merino', 'jmerino@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Héctor Ramos Murga', 'hmurga@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Raúl Vicente Trigueros', 'rtrigueros@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Fátima Perea Rodríguez', 'frodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Celia Briones Plaza', 'cplaza@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Borja Sánchez Cabezudo Alfonso', 'balfonso@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro De Castillo Roldán', 'aroldn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iker Pastoriza Lopez', 'ilopez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Álvaro Lozano Rodríguez', 'rodrguez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Gálvez Reguera', 'preguera@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Desviat Alcázar', 'aalczar@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Marcos Robles Romero', 'mromero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Erik Villegas Conde', 'econde@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro Macías Bodas', 'pbodas@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Izan Lbrado  Fernández', 'ifernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Patricia Ramírez López', 'plpez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Álvaro Lopezosa Pino', 'pino@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rebeca Rodríguez Pinto', 'rpinto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Verónica Villacis Almeida', 'valmeida@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sebastian Jean Carlos Alayo Moreno', 'smoreno@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Michael Andrés Molina Soto', 'msoto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Santiago Prieto Ayra', 'sayra@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Aitor Conejo De La Flor', 'aflor@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Fernando Castro Vilar', 'fvilar@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Roberto', 'roberto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Martín Cobos', 'jcobos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Castro Brea', 'pbrea@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Rodríguez De La Morena', 'dmorena@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Bravo Muñoz', 'imuoz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Gómez Calcerrada Herrero', 'dherrero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Diego Sánchez Arcos', 'darcos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Carlos Rodríguez Moya', 'cmoya@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Diego Arias Ortega', 'dortega@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Erik Rojas Escobedo', 'eescobedo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián Montoya Roldán', 'aroldn1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Víctor Soriano Parreño', 'vparreo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Eduardo Jesús Ortiz Chena', 'echena@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Bartosz Grzech', 'bgrzech@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David López', 'dlpez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Aitor García', 'agarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián Calzado Huete', 'ahuete@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rodigo Pérez Sanguino', 'rsanguino@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Ramos Igual', 'pigual@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Juan Manuel Casero Arnay', 'jarnay@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('César García González', 'cgonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Ferrera Cerezo', 'icerezo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ismael De Castro De La Cruz', 'icruz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge Mora Rubio', 'jrubio@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Bryan Moreira Bravo', 'bbravo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Martín Murado Jiménez', 'mjimnez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio Gómez Pérez', 'sprez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Mora Prieto', 'jprieto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Diego Horrillo Hernández', 'dhernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Ramos Fernánez', 'pfernnez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián González Iglesias', 'aiglesias@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alexis Quisilema Rodríguez', 'arodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio Kwech Gómez', 'sgmez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Ballester', 'aballester@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Calleja Y Juan Carlos García', 'jgarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Bryan Caguana', 'bcaguana@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Andrés Cumbicus', 'acumbicus@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Carlos Ureta', 'cureta@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('César Eduardo Grcía Cueva', 'ccueva@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge Mrtínez Nieto', 'jnieto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Castuera Cabello', 'pcabello@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('María Fernández García', 'mgarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Roberto Robledo Cubero', 'rcubero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Milagros Peralta González', 'mgonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Serradilla Candil', 'dcandil@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Víctor Aldea García', 'vgarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Nicolás Durán Benavides', 'nbenavides@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alvaro Rodríguez Pino', 'apino@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jean Patrivk Riveros Fernández', 'jfernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Manuel Rodríguez Collado', 'acollado@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('María Cantón González', 'mgonzlez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Estrella Gutiérrez', 'dgutirrez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Marta Artíguez Gabriel', 'mgabriel@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Artur Grochal', 'agrochal@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Medina Caravantes', 'acaravantes@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Aitor Fernández Díez', 'adez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Antonio Morales Gamarra', 'jgamarra@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sonia García Martín', 'smartn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Andrés Arriaga', 'aarriaga@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ana Fernández Fernández', 'afernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Pedraza Gómez', 'dgmez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Santiago Vallejo Hernández', 'shernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Héctor García Pernas', 'hpernas@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Franklin Cabrera Cherrez', 'fcherrez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Solera Reca', 'ireca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro Pavón Díaz', 'pdaz1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge Coello', 'jcoello@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Cristhian Rodriguez', 'crodriguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Jaramillo', 'djaramillo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Josué García López', 'jlpez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier De La Cruz De La Torre', 'jtorre@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Bernardo Sanz', 'dsanz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Sánchez Alonso', 'palonso@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio Martín Pedroviejo', 'spedroviejo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián Sánchez Gómez', 'agmez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Paredes Ávila', 'dvila@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Laura Gutiérrez Pérez', 'lprez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Diego Yalta Bernaza', 'dbernaza@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alverto Navacerrada Montero', 'amontero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alberto Luengo González', 'agonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Cristian Martínez García', 'cgarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Benjamín De Lucas Rodríguez', 'brodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Fernando Pérez Martíne', 'fmartne@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jonatan Drca Ruiz Del Pozo', 'jpozo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jonathan Carrera Santamaría', 'jsantamara@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Raúl Gallardo Rebolledo', 'rrebolledo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('María De Los Llanos Fernández Taboada', 'mtaboada@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Antonio García Pertero', 'jpertero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Oscar Fuentes Ferrera', 'oferrera@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Esteban Alexander Villlacis Almeida', 'ealmeida@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Carlos Delgado Herráiz', 'cherriz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián Vizcaíno Galán', 'agaln@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Otero García', 'jgarca1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Borja Conejo De La Flor', 'bflor@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Emilio Javier Coscaron Estévez', 'eestvez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Christian Felipe Guevara Albarracín', 'calbarracn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Hersson Jaldin', 'hjaldin@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Eva Gloria Robas González', 'egonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Edgar Martín Santos', 'esantos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Gonzalo Moreno Mejías', 'gmejas@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Luis Fernando García Alcaraz', 'lalcaraz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Anibal Astudillo Olmedo', 'polmedo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Manuel Chinchilla Juan', 'jjuan@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Álvaro Sánchez', 'isnchez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jose Luis Amador Centeno', 'jcenteno@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Domínguez Sanchez', 'jsanchez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Solera Reca', 'ireca1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro Pavón Díaz', 'pdaz2@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Gil Mingorance', 'amingorance@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Francisco Carrillo Mansilla', 'fmansilla@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Yagüe Sanchez', 'dsanchez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge Rangel Moronta', 'jmoronta@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Iván Núñez Barrena', 'ibarrena@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('James Alexander Paima Peña', 'jpea@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rodrigo Cano Macusaya', 'rmacusaya@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Galisteo', 'dgalisteo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ricardo Rodriguez', 'rrodriguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Antonio Sánchez', 'asnchez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Galisteo', 'dgalisteo1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Ricardo Rodriguez', 'rrodriguez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Antonio Sánchez', 'asnchez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('James Alexander Paima Peña', 'jpea1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rodrigo Cano Macusaya', 'rmacusaya1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Victor José Albarrán Ramos', 'vramos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Victor Diaz Iglesias', 'viglesias@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Carlos Fernandez García', 'cgarca1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Sergio Casado Sanz', 'ssanz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jorge Peñalver Campos', 'jcampos@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Fernando Jiménez Iglesias', 'figlesias@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pierre Antony Neyra Yupanqui', 'pyupanqui@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jose Manuel Hernández Haideur', 'jhaideur@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier González Serrano', 'jserrano@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alberto Fernández Panadero', 'apanadero@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Joaquín García Rodríguez', 'jrodrguez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alejandro Anacleto', 'aanacleto@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Ruiz', 'jruiz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Miguel Rego', 'mrego@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Gallego Palomar', 'dpalomar@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('José Luis Rodríguez', 'jrodrguez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Kevin Aln Sanchez Meroño', 'kmeroo@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Beatriz Reyes García', 'bgarca@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Rocío Solange García Cruz', 'rcruz@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pablo Montalbán Expósito', 'pexpsito@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Jaime Cortés Tirado', 'jtirado@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Javier Bayón González', 'jgonzlez2@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Gema Álvarez Parras', 'gparras@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Guillermo Castaño Granados', 'ggranados@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Alberto Luaces Martínez', 'amartnez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Marcos M. García Lavilla', 'mlavilla@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrián Gómez López', 'alpez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Andrea Moreno Mansilla', 'amansilla@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Anthony Raúl Loor Aray', 'aaray@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David De La O Monroy', 'dmonroy@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Víctor Caja Magdaleno', 'vmagdaleno@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Victor M. Martín Antón', 'vantn@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('David Hugo Plaza González', 'dgonzlez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Leans Alexander Ascho Nuñez', 'lnuez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrian Sánchez Gómez', 'agmez1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Paredes Ávila', 'dvila1@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro De La Calle Fernández', 'pfernndez@gmail.com', '6862', 'alumno');
+INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Miguel Ángel Flores Alcequíez', 'malcequez@gmail.com', '6862', 'alumno');
