@@ -2,8 +2,8 @@
 
 ## Inserción
 ~~~
-## Inserción
- ~~~
+
+ 
  INSERT INTO tfgs (titulo, fecha, nota, resumen, palabras_clave, integrantes)
  VALUES
  ('Creación y operación de una empresa con enfoche al teletrabajo', '2022-06-15', 8, 'Este trabajo surgió de la idea de crear una empresa funcional con la capacidad de tener un entorno seguro para la empresa y el trabajador, permitiendo trabajar desde la red de la empresa o desde el domicilio del trabajador y ejercer todas las funciones necesarias para ambas partes sin ninguna complicación. Partiendo de esta idea, pensamos en cuál sería la manera más sencilla pero eficaz de poder implementar nuestras ideas en un entorno virtualizado y que nos fuera sencillo de administrar. Teniendo en cuenta lo que queríamos hacer decidimos utilizar varias técnicas de planificación como brainstorming y trello. En el momento en el que pusimos todas las ideas sobre la mesa, nos dimos cuenta de que existían herramientas en el mercado que podíamos usar para conseguir nuestros objetivos, ası que recopilamos información sobre todas las herramientas de teletrabajo disponibles y que fuesen útiles para nuestros objetivos. Las herramientas que más nos gustaron como para ser implementadas fueron las siguientes: • VPN de Windows Server • Team Viewer • Anydesk • Radius Escogimos estas tres herramientas para tener multitud de opciones disponibles, que fuesen fáciles de montar y de usar, y que además cumpliesen todos nuestros objetivos, por lo que nos pusimos manos a la obra con la creación y de todo lo necesario para poder implementar estas herramientas.', 'VPN,Teletrabajo,TeamViewer,Anydesk', 'Carlos Díez Rodríguez, Rubén Martínez López, Juan Pablo Retana Díaz'),
