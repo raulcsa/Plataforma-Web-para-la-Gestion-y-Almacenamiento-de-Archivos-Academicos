@@ -34,3 +34,4 @@ class UsuarioController {
         require_once __DIR__ . '/../views/registro.php';
     }
 }
+
