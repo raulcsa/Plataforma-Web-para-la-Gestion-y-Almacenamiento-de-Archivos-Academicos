@@ -107,6 +107,6 @@ CREATE TABLE archivos (
     tipo VARCHAR(50) DEFAULT NULL,
     tamaño INT DEFAULT NULL,  -- Tamaño en bytes
     fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    descripcion TEXT,
     FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
