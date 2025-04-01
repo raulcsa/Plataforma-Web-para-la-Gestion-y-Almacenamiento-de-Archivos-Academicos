@@ -51,9 +51,11 @@ class Tfg {
 
     public static function obtenerArchivos($tfgId) {
         $db = conectarDB();
-        $stmt = $db->prepare("SELECT * FROM archivos WHERE tfg_id = ?");
+        // Si sólo quieres obtener archivos de tipo pdf:
+        $stmt = $db->prepare("SELECT * FROM archivos WHERE tfg_id = ? AND tipo = 'pdf'");
         $stmt->execute([$tfgId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
 ?>
