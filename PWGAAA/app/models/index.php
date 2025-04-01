@@ -41,5 +41,19 @@ class Tfg {
         }
         return ['resultados' => $resultados, 'total' => $total];
     }
+
+    public static function obtenerPorId($id) {
+        $db = conectarDB();
+        $stmt = $db->prepare("SELECT * FROM tfgs WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function obtenerArchivos($tfgId) {
+        $db = conectarDB();
+        $stmt = $db->prepare("SELECT * FROM archivos WHERE tfg_id = ?");
+        $stmt->execute([$tfgId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

@@ -113,31 +113,34 @@ function truncateText($text, $limit = 200) {
     <?php if (isset($resultados) && !empty($resultados)): ?>
       <?php foreach ($resultados as $fila): ?>
         <div class="card tfg-card">
-          <div class="card-body">
-            <h3 class="card-title tfg-title">
-              <?php 
-                echo ($campo === 'titulo' || $campo === '') 
-                      ? highlight(htmlspecialchars($fila['titulo']), $busqueda) 
-                      : htmlspecialchars($fila['titulo']);
-              ?>
-            </h3>
-            <p class="card-text tfg-date">
-              <?php 
-                echo ($campo === 'fecha' || $campo === '') 
-                      ? highlight(htmlspecialchars($fila['fecha']), $busqueda) 
-                      : htmlspecialchars($fila['fecha']);
-              ?>
-            </p>
-            <p class="card-text tfg-summary">
-              <?php 
-                $resumenTruncado = truncateText(htmlspecialchars($fila['resumen']), 200);
-                echo ($campo === 'resumen' || $campo === '') 
-                      ? highlight($resumenTruncado, $busqueda) 
-                      : $resumenTruncado;
-              ?>
-            </p>
-          </div>
-        </div>
+  <div class="card-body">
+    <h3 class="card-title tfg-title">
+      <a href="verTfg.php?id=<?php echo $fila['id']; ?>" class="text-decoration-none">
+        <?php 
+          echo ($campo === 'titulo' || $campo === '') 
+                ? highlight(htmlspecialchars($fila['titulo']), $busqueda) 
+                : htmlspecialchars($fila['titulo']);
+        ?>
+      </a>
+    </h3>
+    <p class="card-text tfg-date">
+      <?php 
+        echo ($campo === 'fecha' || $campo === '') 
+              ? highlight(htmlspecialchars($fila['fecha']), $busqueda) 
+              : htmlspecialchars($fila['fecha']);
+      ?>
+    </p>
+    <p class="card-text tfg-summary">
+      <?php 
+        $resumenTruncado = truncateText(htmlspecialchars($fila['resumen']), 200);
+        echo ($campo === 'resumen' || $campo === '') 
+              ? highlight($resumenTruncado, $busqueda) 
+              : $resumenTruncado;
+      ?>
+    </p>
+  </div>
+</div>
+
       <?php endforeach; ?>
     <?php else: ?>
       <p class="text-center">No se encontraron TFGs.</p>
