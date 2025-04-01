@@ -16,3 +16,6 @@
 
 ## Instalación de PHPMyAdmin en el servidor
 [Link](https://foro.puntocomunica.com/viewtopic.php?t=104)
+
+
+prueba gits
