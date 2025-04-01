@@ -9,14 +9,45 @@ function highlight($text, $search) {
     if ($search === "") return $text;
     return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<strong>$1</strong>', $text);
 }
+
+// Función para truncar el resumen a un límite de caracteres (por ejemplo, 200)
+function truncateText($text, $limit = 200) {
+    if (strlen($text) > $limit) {
+        return substr($text, 0, $limit) . '...';
+    }
+    return $text;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Home - PWGAAA</title>
+  <!-- Importa Google Fonts para "Open Sans" -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .tfg-card {
+      margin-bottom: 1.5rem;
+    }
+    .tfg-title {
+      color: #007bff; /* Ajusta el color según la imagen de referencia */
+      text-decoration: underline;
+      margin-bottom: 0.5rem;
+    }
+    .tfg-date {
+      color: #6c757d; /* Tono gris */
+      margin-bottom: 0.75rem;
+    }
+    .tfg-summary {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -77,70 +108,42 @@ function highlight($text, $search) {
         <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Buscar</button>
       </div>
     </form>
+    
+    <!-- Listado de TFGs en formato de tarjetas, una debajo del otro -->
+    <?php if (isset($resultados) && !empty($resultados)): ?>
+      <?php foreach ($resultados as $fila): ?>
+        <div class="card tfg-card">
+          <div class="card-body">
+            <h3 class="card-title tfg-title">
+              <?php 
+                echo ($campo === 'titulo' || $campo === '') 
+                      ? highlight(htmlspecialchars($fila['titulo']), $busqueda) 
+                      : htmlspecialchars($fila['titulo']);
+              ?>
+            </h3>
+            <p class="card-text tfg-date">
+              <?php 
+                echo ($campo === 'fecha' || $campo === '') 
+                      ? highlight(htmlspecialchars($fila['fecha']), $busqueda) 
+                      : htmlspecialchars($fila['fecha']);
+              ?>
+            </p>
+            <p class="card-text tfg-summary">
+              <?php 
+                $resumenTruncado = truncateText(htmlspecialchars($fila['resumen']), 200);
+                echo ($campo === 'resumen' || $campo === '') 
+                      ? highlight($resumenTruncado, $busqueda) 
+                      : $resumenTruncado;
+              ?>
+            </p>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p class="text-center">No se encontraron TFGs.</p>
+    <?php endif; ?>
 
-    <!-- Tabla de TFGs -->
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered">
-        <thead class="table-primary">
-          <tr>
-            <th>Título</th>
-            <th>Fecha</th>
-            <th>Resumen</th>
-            <th>Integrantes</th>
-            <th>Palabras Clave</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (isset($resultados) && !empty($resultados)): ?>
-            <?php foreach ($resultados as $fila): ?>
-              <tr>
-                <td>
-                  <?php 
-                    echo ($campo === 'titulo' || $campo === '') 
-                          ? highlight(htmlspecialchars($fila['titulo']), $busqueda) 
-                          : htmlspecialchars($fila['titulo']);
-                  ?>
-                </td>
-                <td>
-                  <?php 
-                    echo ($campo === 'fecha' || $campo === '') 
-                          ? highlight(htmlspecialchars($fila['fecha']), $busqueda) 
-                          : htmlspecialchars($fila['fecha']);
-                  ?>
-                </td>
-                <td>
-                  <?php 
-                    echo ($campo === 'resumen' || $campo === '') 
-                          ? highlight(htmlspecialchars($fila['resumen']), $busqueda) 
-                          : htmlspecialchars($fila['resumen']);
-                  ?>
-                </td>
-                <td>
-                  <?php 
-                    echo ($campo === 'integrantes' || $campo === '') 
-                          ? highlight(htmlspecialchars($fila['integrantes']), $busqueda) 
-                          : htmlspecialchars($fila['integrantes']);
-                  ?>
-                </td>
-                <td>
-                  <?php 
-                    echo ($campo === 'palabras_clave' || $campo === '') 
-                          ? highlight(htmlspecialchars($fila['palabras_clave']), $busqueda) 
-                          : htmlspecialchars($fila['palabras_clave']);
-                  ?>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          <?php else: ?>
-            <tr>
-              <td colspan="5" class="text-center">No se encontraron TFGs.</td>
-            </tr>
-          <?php endif; ?>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Controles de paginación solo si se realizó una búsqueda -->
+    <!-- Controles de paginación: se muestran únicamente si se ha realizado una búsqueda -->
     <?php if (!empty($busqueda) && $totalPages > 1): ?>
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
