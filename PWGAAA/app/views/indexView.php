@@ -29,7 +29,8 @@ session_start();
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
                 <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
-                <li><a class="dropdown-item" href="mis_proyectos.php">Mis Proyectos</a></li>
+                <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
+                <li><a class="dropdown-item" href="uploadtfg.php">Subir Proyecto</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
