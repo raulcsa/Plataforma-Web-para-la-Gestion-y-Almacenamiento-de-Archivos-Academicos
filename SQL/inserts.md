@@ -492,3 +492,8 @@ INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Adrian Sánchez Gó
 INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Daniel Paredes Ávila', 'dvila1@gmail.com', '6862', 'alumno');
 INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Pedro De La Calle Fernández', 'pfernndez@gmail.com', '6862', 'alumno');
 INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Miguel Ángel Flores Alcequíez', 'malcequez@gmail.com', '6862', 'alumno');
+
+
+
+
+UPDATE `usuarios` SET `password`='$2y$10$EzDamVIz7VA8was7jiyeLOTFa1ACe3R/5nrJw.rUNdg4SxFdeaXLK' WHERE id < 230; 
