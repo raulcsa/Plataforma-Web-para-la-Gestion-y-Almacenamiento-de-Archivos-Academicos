@@ -3,7 +3,9 @@ require_once __DIR__ . '/../models/LoginUsuario.php';
 
 class LoginController {
     public function login() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $mensaje = "";
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
