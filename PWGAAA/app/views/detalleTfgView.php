@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 // Se asume que el controlador ha definido las variables $tfg y $archivos
 // $tfg: arreglo asociativo con la información del TFG (título, integrantes, fecha, palabras_clave, resumen, etc.)
 // $archivos: arreglo con los archivos asociados a ese TFG

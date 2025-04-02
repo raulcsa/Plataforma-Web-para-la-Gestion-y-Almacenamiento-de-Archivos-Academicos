@@ -1,9 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-session_start();
+// Muestra errores y notice en la parte superior de la pantalla, en caso de problema utilizar.
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../app/controllers/PanelAdminController.php';
 
 // Solo los usuarios admin pueden acceder

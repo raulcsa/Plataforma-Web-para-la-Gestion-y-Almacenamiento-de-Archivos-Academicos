@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $campo = isset($_GET['campo']) ? trim($_GET['campo']) : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
