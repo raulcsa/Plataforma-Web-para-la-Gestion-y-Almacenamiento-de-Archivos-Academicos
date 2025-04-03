@@ -39,10 +39,10 @@
         }
         /* Separadores */
         .section {
-            margin-bottom: 0; /* Elimina el margen inferior */
-            padding-bottom: 0; /* Elimina el espacio inferior */
-            border-bottom: none; /* Elimina el borde inferior */
-            min-height: 180px; /* Mantiene la altura mínima */
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+            min-height: 180px;
         }
         .profile-photo {
             display: flex;
@@ -68,7 +68,7 @@
             background-color: #00509e;
         }
         .profile-photo img {
-            width: 250px; /* Aumento el tamaño de la imagen */
+            width: 250px;
             height: 250px;
             object-fit: cover;
             border-radius: 50%;
@@ -83,7 +83,7 @@
         }
         h2 {
             color: #003366;
-            margin-bottom: 15px; /* Ajustado para que sea más compacto */
+            margin-bottom: 15px;
         }
         .input-field, .input-file {
             width: 100%;
@@ -109,7 +109,8 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             width: 100%;
-            margin-top: 20px; /* Espaciado ajustado para un diseño más compacto */
+            margin-top: 20px;
+            display: none; /* Ocultar por defecto */
         }
         #guardar:hover {
             background-color: #00509e;
@@ -129,7 +130,7 @@
             margin-bottom: 20px;
         }
         .profile-info {
-            margin-left: 40px; /* Separar más a la derecha */
+            margin-left: 40px;
             max-width: 500px;
         }
         /* Estilo para el campo de subida de archivo PDF */
@@ -139,7 +140,31 @@
         }
         /* Evitar redimensionamiento del contenedor del textarea */
         textarea {
-            resize: none; /* Evita que el usuario cambie el tamaño */
+            resize: none;
+        }
+        /* Estilo para el nombre y edad */
+        .name-age {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .name-age h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .name-age p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .edit-button {
+            font-size: 20px;
+            color: white; /* Texto blanco para "Editar perfil" */
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .edit-button:hover {
+            color: #00509e;
         }
     </style>
 </head>
@@ -152,18 +177,27 @@
 </div>
 
 <div class="container">
-    <!-- Foto de Perfil y Datos de Contacto -->
+    <!-- Botón de Editar -->
+    <span class="edit-button" id="edit-button">⚙️ Editar perfil</span>
+
+    <!-- Nombre, Apellidos y Edad -->
+    <div class="name-age">
+        <h1>Juan Pérez</h1>
+        <p>Edad: 25 años</p>
+    </div>
+
+    <!-- Datos de contacto -->
     <div class="profile-container">
         <div class="profile-photo">
             <img id="profile-image" src="" alt="Foto de perfil">
             <input type="file" id="profile-photo" name="profile-photo" accept="image/*" onchange="previewImage(event)">
-            <label for="profile-photo">Sube tu foto</label>
+            <label for="profile-photo" id="upload-label" style="display: none;">Sube tu foto</label> <!-- Ocultar por defecto -->
         </div>
         <div class="profile-info">
             <div class="section">
                 <h2>Datos de contacto</h2>
-                <input type="text" placeholder="Teléfono" class="input-field">
-                <input type="email" placeholder="Correo electrónico" class="input-field">
+                <input type="text" placeholder="Teléfono" class="input-field" disabled>
+                <input type="email" placeholder="Correo electrónico" class="input-field" disabled>
             </div>
         </div>
     </div>
@@ -171,9 +205,10 @@
     <!-- Un poco de mí -->
     <div class="section">
         <h2>Un poco de mí</h2>
-        <textarea placeholder="Breve descripción sobre ti" rows="4" class="input-field"></textarea>
+        <textarea placeholder="Breve descripción sobre ti" rows="4" class="input-field" disabled></textarea>
     </div>
 
+    <hr style="border: 1px solid #ccc; margin: 10px 0;">
     <!-- Actividad de acceso -->
     <div class="section">
         <h2>Actividad de acceso</h2>
@@ -181,78 +216,19 @@
         <p><strong>IP de acceso:</strong> 192.168.1.10</p>
     </div>
 
+    <hr style="border: 1px solid #ccc; margin: 10px 0;">
     <!-- Informes -->
     <div class="section">
         <h2>Informes</h2>
-        <h3>Resumen de calificaciones</h3>
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th>Asignatura</th>
-                    <th>1er Parcial</th>
-                    <th>2do Parcial</th>
-                    <th>3er Parcial</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Administración de Sistemas</td>
-                    <td>9</td>
-                    <td>9</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Gestores de bases de datos</td>
-                    <td>9</td>
-                    <td>9</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Administración de Sistemas Operativos</td>
-                    <td>9</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Empresa e iniciativa emprendedora</td>
-                    <td>9</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Implantación de Aplicaciones web</td>
-                    <td>9</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Inglés Técnico para Grado Superior</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Seguridad y Alta Disponibilidad</td>
-                    <td>9</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>Servicios de Red e Internet</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
-                <tr>
-                    <td>Proyecto de administración de sistemas informáticos en red</td>
-                    <td colspan="3">Excelente</td>
-                </tr>
-                <tr>
-                    <td>Formación en centros de trabajo</td>
-                    <td colspan="3">Aprobado</td>
-                </tr>
-            </tbody>
-        </table>
+
+        <h3>Estado de Anteproyecto TFG</h3>
+        <p id="anteproyecto-status">No subido</p>
+
+        <h3>Estado de Proyecto Final TFG</h3>
+        <p id="proyecto-status">No subido</p>
+
+        <h3>Nota de Trabajo de Fin de Grado</h3>
+        <input type="number" id="nota-final" value="8.5" readonly class="input-field" placeholder="Nota final">
     </div>
 
     <button id="guardar">Guardar</button>
@@ -264,6 +240,8 @@
 </div>
 
 <script>
+    let editMode = false;
+
     function previewImage(event) {
         const reader = new FileReader();
         reader.onload = function() {
@@ -273,6 +251,32 @@
         };
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    // Cambiar a modo de edición
+    document.getElementById('edit-button').onclick = function() {
+        editMode = !editMode;
+
+        // Mostrar/ocultar el botón "Sube tu foto" y el botón "Guardar"
+        document.getElementById('upload-label').style.display = editMode ? 'inline-block' : 'none';
+        document.getElementById('guardar').style.display = editMode ? 'block' : 'none';
+
+        // Activar o desactivar campos de entrada
+        document.querySelectorAll('.input-field').forEach(field => {
+            field.disabled = !editMode;
+        });
+        document.getElementById('profile-photo').disabled = !editMode;
+    };
+
+    // Al hacer clic en guardar, desactivar la edición
+    document.getElementById('guardar').onclick = function() {
+        editMode = false;
+        document.querySelectorAll('.input-field').forEach(field => {
+            field.disabled = true;
+        });
+        document.getElementById('profile-photo').disabled = true;
+        document.getElementById('upload-label').style.display = 'none';
+        document.getElementById('guardar').style.display = 'none';
+    };
 </script>
 
 </body>
