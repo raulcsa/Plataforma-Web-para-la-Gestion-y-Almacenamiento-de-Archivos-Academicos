@@ -39,7 +39,11 @@
     </form>
     <p class="mt-3">¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a></p>
   </div>
-
+  <footer class="bg-primary text-white text-center py-3 mt-5">
+    <div class="container">
+      <p class="mb-0">&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
 
 

@@ -73,7 +73,7 @@ function truncateText($text, $limit = 200) {
                   <li><a class="dropdown-item" href="panelAdmin.php">Panel Admin</a></li>
                 <?php else: ?>
                   <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
-                  <li><a class="dropdown-item" href="uploadtfg.php">Subir Proyecto</a></li>
+                  <li><a class="dropdown-item" href="upload.php">Subir Proyecto</a></li>
                 <?php endif; ?>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>

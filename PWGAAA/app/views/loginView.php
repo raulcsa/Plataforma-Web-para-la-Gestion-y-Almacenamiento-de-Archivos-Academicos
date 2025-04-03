@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Login de Usuario</title>
@@ -7,6 +8,7 @@
     <!-- Opcional: iconos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
@@ -34,7 +36,6 @@
         </form>
         <p class="mt-3">¿No tienes cuenta? <a href="registro.php">Regístrate</a></p>
     </div>
-
     <footer class="bg-primary text-white text-center py-3 mt-5">
         <div class="container">
             <p class="mb-0">&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
@@ -42,4 +43,5 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
