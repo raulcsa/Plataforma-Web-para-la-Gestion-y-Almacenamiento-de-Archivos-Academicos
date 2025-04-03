@@ -1,4 +1,5 @@
 <?php
+//Verificar si hay una sesión activa para no volver a arrancarla, evitar "errores" de noticias
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

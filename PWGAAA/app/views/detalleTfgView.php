@@ -103,13 +103,11 @@ if (session_status() === PHP_SESSION_NONE) {
           if ($extension === 'pdf'): 
         ?>
           <div class="pdf-container">
-            <h5 class="tfg-label">Documento PDF:</h5>
+            <h5 class="tfg-label">Ficheros subidos:</h5>
             <!-- Enlace para abrir el PDF en una nueva pestaña -->
-            <a href="<?php echo htmlspecialchars($archivo['ruta']); ?>" target="_blank" class="btn btn-primary mb-2">
-              Abrir PDF en nueva pestaña
+            <a href="<?php echo htmlspecialchars($archivo['ruta']); ?>" target="_blank">
+              <img src="../PDF/pdf_img.png" alt="Icono PDF" style="width: 80px;">
             </a>
-            <!-- Incrustamos el PDF inline -->
-            <embed src="<?php echo htmlspecialchars($archivo['ruta']); ?>" type="application/pdf" width="100%" height="600px" />
           </div>
         <?php endif; ?>
       <?php endforeach; ?>
