@@ -337,3 +337,10 @@ INSERT INTO usuarios (nombre, email, password, rol) VALUES ('Miguel Ángel Flore
 
 
 UPDATE `usuarios` SET `password`='$2y$10$EzDamVIz7VA8was7jiyeLOTFa1ACe3R/5nrJw.rUNdg4SxFdeaXLK' WHERE id < 230; 
+~~~
+
+## Inserts Tabla Archivos
+~~~
+INSERT INTO archivos (tfg_id, nombre, ruta, tipo)
+VALUES (1, 'Memoria TFG 1', '../PDF/tfg_1.pdf', 'pdf');
+~~~
