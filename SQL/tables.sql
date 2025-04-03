@@ -44,6 +44,24 @@ CREATE TABLE alumno_tfg (
 CREATE DATABASE PWGAAA;
 USE PWGAAA;
 
+-- Nueva tabla TFGs (Probar)
+CREATE TABLE tfgs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    fecha DATE DEFAULT NULL,
+    resumen TEXT,
+    palabras_clave VARCHAR(255) DEFAULT NULL,
+    integrante1 INT NOT NULL,
+    integrante2 INT DEFAULT NULL,
+    integrante3 INT DEFAULT NULL,
+    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_fecha CHECK (fecha REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'),
+    CONSTRAINT fk_integrante1 FOREIGN KEY (integrante1) REFERENCES usuarios(id) ON DELETE CASCADE,
+    CONSTRAINT fk_integrante2 FOREIGN KEY (integrante2) REFERENCES usuarios(id) ON DELETE SET NULL,
+    CONSTRAINT fk_integrante3 FOREIGN KEY (integrante3) REFERENCES usuarios(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 -- Tabla TFGs (se eliminó la columna "nota" para trasladarla a la tabla de notas)
 CREATE TABLE tfgs (
     id INT AUTO_INCREMENT PRIMARY KEY,
