@@ -1,19 +1,6 @@
 CREATE DATABASE PWGAAA;
 USE PWGAAA;
-
-CREATE TABLE tfgs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    fecha DATE DEFAULT NULL,
-    nota INT CHECK (nota BETWEEN 1 AND 10),
-    resumen TEXT,
-    palabras_clave VARCHAR(255) DEFAULT NULL,
-    integrantes TEXT,
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_fecha CHECK (fecha REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
-);
-
-
+-- Tabla Usuarios
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -21,57 +8,6 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     rol ENUM('alumno', 'profesor', 'admin') NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-CREATE TABLE alumno_tfg (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    alumno_id INT,
-    tfg_id INT,
-    FOREIGN KEY (alumno_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE
-);
-
-  CREATE TABLE profesor_tfg (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    profesor_id INT,
-    tfg_id INT,
-    FOREIGN KEY (profesor_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE
-);
-  
-//PROBAR
-CREATE DATABASE PWGAAA;
-USE PWGAAA;
-
--- Nueva tabla TFGs (Probar)
-CREATE TABLE tfgs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    fecha DATE DEFAULT NULL,
-    resumen TEXT,
-    palabras_clave VARCHAR(255) DEFAULT NULL,
-    integrante1 INT NOT NULL,
-    integrante2 INT DEFAULT NULL,
-    integrante3 INT DEFAULT NULL,
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_fecha CHECK (fecha REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'),
-    CONSTRAINT fk_integrante1 FOREIGN KEY (integrante1) REFERENCES usuarios(id) ON DELETE CASCADE,
-    CONSTRAINT fk_integrante2 FOREIGN KEY (integrante2) REFERENCES usuarios(id) ON DELETE SET NULL,
-    CONSTRAINT fk_integrante3 FOREIGN KEY (integrante3) REFERENCES usuarios(id) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- Tabla TFGs (se eliminó la columna "nota" para trasladarla a la tabla de notas)
-CREATE TABLE tfgs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    fecha DATE DEFAULT NULL,
-    resumen TEXT,
-    palabras_clave VARCHAR(255) DEFAULT NULL,
-    integrantes TEXT,
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_fecha CHECK (fecha REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Tabla Usuarios
