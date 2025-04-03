@@ -182,8 +182,7 @@
 
     <!-- Nombre, Apellidos y Edad -->
     <div class="name-age">
-        <h1>Juan Pérez</h1>
-        <p>Edad: 25 años</p>
+        <h1>Juan Pérez Gómez, 25</h1>
     </div>
 
     <!-- Datos de contacto -->
