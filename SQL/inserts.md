@@ -1,6 +1,6 @@
 # Tabla tfgs
 
-##INSERTS SIN NOTA
+## INSERTS SIN NOTA
 ~~~
 INSERT INTO tfgs (titulo, fecha, resumen, palabras_clave, integrante1, integrante2, integrante3)
 VALUES
