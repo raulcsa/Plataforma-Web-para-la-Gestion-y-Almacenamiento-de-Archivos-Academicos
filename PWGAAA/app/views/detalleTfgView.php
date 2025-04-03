@@ -79,7 +79,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <h2 class="tfg-detail-title"><?php echo htmlspecialchars($tfg['titulo']); ?></h2>
     <div class="tfg-section">
       <span class="tfg-label">Autor(es):</span>
-      <?php echo htmlspecialchars($tfg['integrantes']); ?>
+      <?php echo htmlspecialchars($tfg['integrantes_nombres']); ?>
     </div>
     <div class="tfg-section">
       <span class="tfg-label">Fecha de publicación:</span>

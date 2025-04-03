@@ -24,9 +24,40 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <a class="navbar-brand" href="index.php">PWGAAA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <?php if (isset($_SESSION['usuario'])): ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
+                <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
+                <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+                  <li><a class="dropdown-item" href="panelAdmin.php">Panel Admin</a></li>
+                <?php else: ?>
+                  <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
+                  <li><a class="dropdown-item" href="uploadtfg.php">Subir Proyecto</a></li>
+                <?php endif; ?>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          <?php else: ?>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a>
+            </li>
+          <?php endif; ?>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -43,10 +74,7 @@
         <input type="text" class="form-control" id="tituloProyecto" name="tituloProyecto" required>
       </div>
 
-      <div class="mb-3">
-        <label for="fechaProyecto" class="form-label">Fecha</label>
-        <input type="date" class="form-control" id="fechaProyecto" name="fechaProyecto" required>
-      </div>
+      <!-- Se ha eliminado el campo de fecha, pues se usará automáticamente la fecha de subida -->
 
       <div class="mb-3">
         <label for="resumenProyecto" class="form-label">Resumen</label>
@@ -59,8 +87,8 @@
       </div>
 
       <div class="mb-3">
-        <label for="integrantesSelect" class="form-label">Integrantes </label>
-        <select class="form-select" id="integrantesSelect" name="integrantesSelect[]" multiple="multiple" required>
+        <label for="integrantesSelect" class="form-label">Selecciona hasta 2 alumnos adicionales</label>
+        <select class="form-select" id="integrantesSelect" name="integrantesSelect[]" multiple="multiple">
           <?php foreach ($selectUsuarios as $alumno): ?>
             <option value="<?= $alumno['id'] ?>"><?= $alumno['nombre'] ?></option>
           <?php endforeach; ?>
@@ -88,15 +116,15 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
   <script>
-    // Activar Select2 con máximo de 3 selecciones
+    // Activar Select2 con máximo de 2 selecciones
     $(document).ready(function() {
       $('#integrantesSelect').select2({
-        placeholder: "Selecciona hasta 3 alumnos",
-        maximumSelectionLength: 10,
+        placeholder: "Selecciona hasta 2 alumnos adicionales",
+        maximumSelectionLength: 2,
         width: '100%',
         language: {
           maximumSelected: function () {
-            return "Solo puedes seleccionar hasta 3 alumnos";
+            return "Solo puedes seleccionar hasta 2 alumnos adicionales";
           }
         }
       });

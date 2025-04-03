@@ -9,12 +9,17 @@ class uploadTfg {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function insertarTFG($titulo, $fecha, $resumen, $keywords) {
+    // Ahora recibe el uploaderId y los alumnos seleccionados
+    public static function insertarTFG($titulo, $resumen, $keywords, $uploaderId, $selectedAlumnos) {
         $db = conectarDB();
-        $stmt = $db->prepare("INSERT INTO tfgs (titulo, fecha, resumen, palabras_clave) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$titulo, $fecha, $resumen, $keywords]);
-        return $db->lastInsertId(); // ID del TFG recién insertado
+        $integrante2 = isset($selectedAlumnos[0]) ? $selectedAlumnos[0] : NULL;
+        $integrante3 = isset($selectedAlumnos[1]) ? $selectedAlumnos[1] : NULL;
+        // Usamos CURRENT_DATE para que se inserte la fecha actual en la columna 'fecha'
+        $stmt = $db->prepare("INSERT INTO tfgs (titulo, fecha, resumen, palabras_clave, integrante1, integrante2, integrante3) VALUES (?, CURRENT_DATE, ?, ?, ?, ?, ?)");
+        $stmt->execute([$titulo, $resumen, $keywords, $uploaderId, $integrante2, $integrante3]);
+        return $db->lastInsertId();
     }
+    
 
     public static function asociarAlumnos($tfg_id, $alumnos) {
         $db = conectarDB();
