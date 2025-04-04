@@ -15,7 +15,7 @@ class Tfg {public static function buscar($busqueda = "", $campo = "", $limit = 6
         $stmtTotal = $db->query("SELECT COUNT(*) FROM tfgs");
         $total = $stmtTotal->fetchColumn();
 
-        $query = $baseQuery . "ORDER BY t.fecha DESC LIMIT ? OFFSET ?";
+        $query = $baseQuery . "ORDER BY t.fecha_subida DESC, t.id DESC LIMIT ? OFFSET ?";
         $stmt = $db->prepare($query);
         $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
         $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
@@ -58,9 +58,6 @@ class Tfg {public static function buscar($busqueda = "", $campo = "", $limit = 6
 
     return ['resultados' => $resultados, 'total' => $total];
 }
-
-    
-
     public static function obtenerPorId($id) {
         $db = conectarDB();
         $stmt = $db->prepare("SELECT t.*, CONCAT_WS(' ', u1.nombre, u2.nombre, u3.nombre) AS integrantes_nombres 

@@ -56,7 +56,7 @@ function truncateText($text, $limit = 200) {
       text-decoration: none;
     }
     .tfg-title a:hover {
-      color: #1abc9c;
+      color:rgb(18, 136, 112);
       text-decoration: underline;
     }
     .tfg-summary {
@@ -82,7 +82,7 @@ function truncateText($text, $limit = 200) {
           <?php if (isset($_SESSION['usuario'])): ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>
+                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
@@ -109,10 +109,12 @@ function truncateText($text, $limit = 200) {
     <form method="GET" action="index.php" class="mb-4">
       <div class="input-group">
         <select name="campo" class="form-select" style="max-width: 200px;">
-          <option value="" <?= $campo === "" ? 'selected' : ''; ?>>Todos</option>
-          <option value="titulo" <?= $campo === "titulo" ? 'selected' : ''; ?>>Título</option>
-          <option value="fecha" <?= $campo === "fecha" ? 'selected' : ''; ?>>Fecha</option>
-          <option value="resumen" <?= $campo === "resumen" ? 'selected' : ''; ?>>Resumen</option>
+        <option value="" <?php echo ($campo === "") ? 'selected' : ''; ?>>Todos</option>
+           <option value="titulo" <?php echo ($campo === "titulo") ? 'selected' : ''; ?>>Título</option>
+           <option value="fecha" <?php echo ($campo === "fecha") ? 'selected' : ''; ?>>Fecha</option>
+           <option value="palabras_clave" <?php echo ($campo === "palabras_clave") ? 'selected' : ''; ?>>Palabras Clave</option>
+           <option value="resumen" <?php echo ($campo === "resumen") ? 'selected' : ''; ?>>Resumen</option>
+           <option value="integrantes" <?php echo ($campo === "integrantes") ? 'selected' : ''; ?>>Integrantes</option>
         </select>
         <input type="text" class="form-control" name="busqueda" placeholder="Buscar" value="<?= htmlspecialchars($busqueda); ?>">
         <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i> Buscar</button>

@@ -17,7 +17,7 @@
         background-color: #2c3e50;
     }
     .navbar-brand, .nav-link {
-        color: #ecf0f1 !important;
+        color:rgb(73, 73, 73) !important;
     }
     .navbar-brand {
         font-weight: bold;
@@ -61,12 +61,38 @@
   </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg">
-  <div class="container">
-    <a class="navbar-brand" href="index.php">PWGAAA</a>
-  </div>
-</nav>
+    <div class="container">
+      <a class="navbar-brand" href="index.php">PWGAAA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <?php if (isset($_SESSION['usuario'])): ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
+                <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+                  <li><a class="dropdown-item" href="panelAdmin.php">Panel Admin</a></li>
+                <?php else: ?>
+                  <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
+                  <li><a class="dropdown-item" href="upload.php">Subir Proyecto</a></li>
+                <?php endif; ?>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          <?php else: ?>
+            <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a></li>
+          <?php endif; ?>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 <div class="container">
   <h2 class="text-primary mb-4">Subir un TFG</h2>

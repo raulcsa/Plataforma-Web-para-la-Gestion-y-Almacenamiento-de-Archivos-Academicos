@@ -32,14 +32,13 @@ if (session_status() === PHP_SESSION_NONE) {
             margin-top: 50px;
         }
         .tfg-detail-title {
-            color: #2980b9;
-            text-decoration: underline;
+            color:rgb(37, 53, 68);
             font-size: 1.75rem;
             margin-bottom: 1.5rem;
         }
         .tfg-label {
             font-weight: bold;
-            color: #2c3e50;
+            color:rgb(44, 62, 80);
         }
         .tfg-section {
             margin-bottom: 1.5rem;
@@ -65,21 +64,58 @@ if (session_status() === PHP_SESSION_NONE) {
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">PWGAAA</a>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">PWGAAA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <?php if (isset($_SESSION['usuario'])): ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
+                <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+                  <li><a class="dropdown-item" href="panelAdmin.php">Panel Admin</a></li>
+                <?php else: ?>
+                  <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
+                  <li><a class="dropdown-item" href="upload.php">Subir Proyecto</a></li>
+                <?php endif; ?>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          <?php else: ?>
+            <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a></li>
+          <?php endif; ?>
+        </ul>
+      </div>
+    </div>
+  </nav>
     
     <div class="container">
-        <h2 class="tfg-detail-title"><?php echo htmlspecialchars($tfg['titulo']); ?></h2>
+        <h2 class="tfg-detail-title">Título: <?php echo htmlspecialchars($tfg['titulo']); ?></h2>
         <div class="tfg-section">
             <span class="tfg-label">Autor(es):</span>
             <?php echo htmlspecialchars($tfg['integrantes_nombres']); ?>
         </div>
         <div class="tfg-section">
-            <span class="tfg-label">Fecha de publicación:</span>
-            <?php echo htmlspecialchars($tfg['fecha']); ?>
+            <span class="tfg-label">Fecha de publicación: </span>
+            <?php 
+                $formatter = new IntlDateFormatter(
+                    'es-ES',
+                    IntlDateFormatter::LONG,
+                    IntlDateFormatter::NONE,
+                    'Europe/Madrid',
+                    IntlDateFormatter::GREGORIAN
+                );
+                $date = new DateTime($tfg['fecha_subida']);
+                echo $formatter->format($date);
+            ?>
         </div>
         <div class="tfg-section">
             <span class="tfg-label">Palabras clave:</span>
