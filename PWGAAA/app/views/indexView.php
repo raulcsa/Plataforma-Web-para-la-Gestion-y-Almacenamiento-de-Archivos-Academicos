@@ -129,7 +129,29 @@ function truncateText($text, $limit = 200) {
                 <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
               </a>
             </h3>
-            <p class="card-text text-muted">Publicado el <?= highlight(htmlspecialchars($fila['fecha']), $busqueda); ?></p>
+            <p class="card-text text-muted">
+  Publicado el 
+  <?php 
+  $rawDate = $fila['fecha'] ?? '';
+  if (!empty($rawDate)) {
+      try {
+          $formatter = new IntlDateFormatter(
+              'es-ES',
+              IntlDateFormatter::LONG,
+              IntlDateFormatter::NONE,
+              'Europe/Madrid',
+              IntlDateFormatter::GREGORIAN
+          );
+          $dateObj = new DateTime($rawDate);
+          echo highlight(htmlspecialchars($formatter->format($dateObj)), $busqueda);
+      } catch (Exception $e) {
+          echo htmlspecialchars($rawDate);
+      }
+  } else {
+      echo "Sin fecha";
+  }
+  ?>
+</p>
             <p class="card-text tfg-summary">
               <?= highlight(truncateText(htmlspecialchars($fila['resumen']), 200), $busqueda); ?>
             </p>
@@ -139,6 +161,20 @@ function truncateText($text, $limit = 200) {
     <?php else: ?>
       <p class="text-center text-muted">No se encontraron TFGs.</p>
     <?php endif; ?>
+    <?php if (isset($totalPages) && $totalPages > 1): ?>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+      <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
+        <a class="page-link" href="index.php?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>">
+          <?= $i ?>
+        </a>
+      </li>
+    <?php endfor; ?>
+      </ul>
+    </nav>
+<?php endif; ?>
+
   </div>
   <footer class="text-center">
     <div class="container">
