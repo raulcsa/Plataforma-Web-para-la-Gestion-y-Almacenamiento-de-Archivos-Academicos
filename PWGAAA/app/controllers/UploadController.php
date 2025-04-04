@@ -92,8 +92,6 @@ class UploadController {
                     }
                 }
             }
-
-            include __DIR__ . '/../views/formularioSubida.php';
         }
     }
 }

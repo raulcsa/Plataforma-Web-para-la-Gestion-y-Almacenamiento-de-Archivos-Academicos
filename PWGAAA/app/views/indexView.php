@@ -9,7 +9,7 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 // Función para resaltar el término de búsqueda
 function highlight($text, $search) {
     if ($search === "") return $text;
-    return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<strong class="text-primary">$1</strong>', $text);
+    return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<strong class="text-info">$1</strong>', $text);
 }
 
 // Función para truncar el resumen a un límite de caracteres (por ejemplo, 200)
