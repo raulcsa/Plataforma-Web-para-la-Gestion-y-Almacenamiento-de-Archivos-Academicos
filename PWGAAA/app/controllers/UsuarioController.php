@@ -20,6 +20,9 @@ class UsuarioController {
                 try {
                     Usuario::registrar($nombre, $email, $password);
                     $mensaje = "Registro completado con éxito.";
+                    // Si se ha registrado correctamente, volvemos al Login
+                    header("Location: login.php");
+                    exit;
                 } catch (PDOException $e) {
                     if ($e->getCode() == 23000) {
                         $mensaje = "El correo ya está registrado.";
