@@ -105,6 +105,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
         <div class="tfg-section">
             <span class="tfg-label">Fecha de publicación: </span>
+            <!-- Sección para mostrar la fecha correctamente -->
             <?php 
                 $formatter = new IntlDateFormatter(
                     'es-ES',
