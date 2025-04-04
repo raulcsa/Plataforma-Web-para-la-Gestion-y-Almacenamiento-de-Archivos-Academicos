@@ -5,6 +5,10 @@ class UploadController {
 
     public function mostrarFormulario() {
         session_start();
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: login.php");
+            exit;
+        }
         // Obtener todos los alumnos
         $selectUsuarios = uploadTfg::obtenerAlumnos();
         // Filtrar el alumno que está logueado (ya que será integrante1)
