@@ -6,13 +6,13 @@ $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $campo = isset($_GET['campo']) ? trim($_GET['campo']) : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Función para resaltar el término de búsqueda
+// Función para resaltar el término de búsqueda con un toque moderno
 function highlight($text, $search) {
     if ($search === "") return $text;
-    return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<strong class="text-info">$1</strong>', $text);
+    return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<strong class="text-indigo-600">$1</strong>', $text);
 }
 
-// Función para truncar el resumen a un límite de caracteres (por ejemplo, 200)
+// Función para truncar el resumen a un límite de caracteres
 function truncateText($text, $limit = 200) {
     if (strlen($text) > $limit) {
         return substr($text, 0, $limit) . '...';
@@ -25,162 +25,202 @@ function truncateText($text, $limit = 200) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - PWGAAA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>TFGs - PWGAAA</title>
+  <!-- Uso de la tipografía Inter para un look moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS desde CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Iconos de Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    .navbar {
-      background-color: #2c3e50;
-    }
-    .navbar-brand, .nav-link {
-      color: #ecf0f1 !important;
-    }
-    .tfg-card {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s;
-    }
-    .tfg-card:hover {
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .tfg-title a {
-      color: #2c3e50;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .tfg-title a:hover {
-      color:rgb(18, 136, 112);
-      text-decoration: underline;
-    }
-    .tfg-summary {
-      font-size: 1rem;
-      color: #555;
-    }
-    footer {
-      background-color: #2c3e50;
-      color: #ecf0f1;
-      padding: 15px 0;
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">PWGAAA</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <?php if (isset($_SESSION['usuario'])): ?>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
-                <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-                  <li><a class="dropdown-item" href="panelAdmin.php">Panel Admin</a></li>
-                <?php else: ?>
-                  <li><a class="dropdown-item" href="misproyectos.php">Mis Proyectos</a></li>
-                  <li><a class="dropdown-item" href="upload.php">Subir Proyecto</a></li>
-                <?php endif; ?>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
-              </ul>
+<body class="bg-gradient-to-br from-gray-50 to-gray-200 text-gray-700">
+  <!-- Navbar -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
+      <nav class="hidden md:flex items-center space-x-6">
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <div class="relative inline-block">
+            <button id="userDropdownButton" class="flex items-center focus:outline-none text-gray-600 hover:text-indigo-600">
+              <i class="bi bi-person-circle text-2xl"></i>
+              <span class="ml-2"><?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)</span>
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 hidden z-20">
+              <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+                <a href="panelAdmin.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
+              <?php else: ?>
+                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+                <a href="misproyectos.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
+                <a href="upload.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
+              <?php endif; ?>
+              <div class="border-t border-gray-200"></div>
+              <a href="logout.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
+            </div>
+          </div>
+        <?php else: ?>
+          <a href="login.php" class="flex items-center text-gray-600 hover:text-indigo-600">
+            <i class="bi bi-person-circle text-2xl"></i>
+            <span class="ml-2">Login</span>
+          </a>
+        <?php endif; ?>
+      </nav>
+      <!-- Botón para móviles -->
+      <div class="md:hidden">
+        <button id="mobileMenuButton" class="text-gray-600 hover:text-indigo-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Menú móvil -->
+    <nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
+      <ul class="px-4 py-2">
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <li class="py-2">
+            <a href="perfil.php" class="block text-gray-700 hover:text-indigo-600">Perfil</a>
+          </li>
+          <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+            <li class="py-2">
+              <a href="panelAdmin.php" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
             </li>
           <?php else: ?>
-            <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a></li>
+            <li class="py-2">
+              <a href="misproyectos.php" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a>
+            </li>
+            <li class="py-2">
+              <a href="upload.php" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a>
+            </li>
           <?php endif; ?>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container mt-5">
-    <h1 class="mb-4 text-dark">Listado de TFGs</h1>
-    <form method="GET" action="index.php" class="mb-4">
-      <div class="input-group">
-        <select name="campo" class="form-select" style="max-width: 200px;">
-        <option value="" <?php echo ($campo === "") ? 'selected' : ''; ?>>Todos</option>
-           <option value="titulo" <?php echo ($campo === "titulo") ? 'selected' : ''; ?>>Título</option>
-           <option value="fecha" <?php echo ($campo === "fecha") ? 'selected' : ''; ?>>Fecha</option>
-           <option value="palabras_clave" <?php echo ($campo === "palabras_clave") ? 'selected' : ''; ?>>Palabras Clave</option>
-           <option value="resumen" <?php echo ($campo === "resumen") ? 'selected' : ''; ?>>Resumen</option>
-           <option value="integrantes" <?php echo ($campo === "integrantes") ? 'selected' : ''; ?>>Integrantes</option>
-        </select>
-        <input type="text" class="form-control" name="busqueda" placeholder="Buscar" value="<?= htmlspecialchars($busqueda); ?>">
-        <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i> Buscar</button>
-      </div>
-    </form>
-    <?php if (isset($resultados) && !empty($resultados)): ?>
-      <?php foreach ($resultados as $fila): ?>
-        <div class="card tfg-card mb-4">
-          <div class="card-body">
-            <h3 class="card-title tfg-title">
-              <a href="verTfg.php?id=<?= $fila['id']; ?>">
-                <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
-              </a>
-            </h3>
-            <p class="card-text text-muted">
-  Publicado el 
-  <?php 
-  $rawDate = $fila['fecha'] ?? '';
-  if (!empty($rawDate)) {
-      try {
-          $formatter = new IntlDateFormatter(
-              'es-ES',
-              IntlDateFormatter::LONG,
-              IntlDateFormatter::NONE,
-              'Europe/Madrid',
-              IntlDateFormatter::GREGORIAN
-          );
-          $dateObj = new DateTime($rawDate);
-          echo highlight(htmlspecialchars($formatter->format($dateObj)), $busqueda);
-      } catch (Exception $e) {
-          echo htmlspecialchars($rawDate);
-      }
-  } else {
-      echo "Sin fecha";
-  }
-  ?>
-</p>
-            <p class="card-text tfg-summary">
-              <?= highlight(truncateText(htmlspecialchars($fila['resumen']), 200), $busqueda); ?>
-            </p>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <p class="text-center text-muted">No se encontraron TFGs.</p>
-    <?php endif; ?>
-    <?php if (isset($totalPages) && $totalPages > 1): ?>
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-      <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
-        <a class="page-link" href="index.php?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>">
-          <?= $i ?>
-        </a>
-      </li>
-    <?php endfor; ?>
+          <li class="py-2 border-t border-gray-200 mt-2">
+            <a href="logout.php" class="block text-gray-700 hover:text-indigo-600">Cerrar sesión</a>
+          </li>
+        <?php else: ?>
+          <li class="py-2">
+            <a href="login.php" class="flex items-center text-gray-700 hover:text-indigo-600">
+              <i class="bi bi-person-circle text-2xl"></i>
+              <span class="ml-2">Login</span>
+            </a>
+          </li>
+        <?php endif; ?>
       </ul>
     </nav>
-<?php endif; ?>
-
-  </div>
-  <footer class="text-center">
-    <div class="container">
-      <p class="mb-0">&copy; <?= date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+  </header>
+  
+  <!-- Contenido principal -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Sección de búsqueda -->
+    <section class="mb-10 text-center">
+      <h1 class="text-4xl font-bold text-indigo-700 mb-6">Explora TFGs</h1>
+      <form method="GET" action="index.php" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <select name="campo" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
+          <option value="" <?php echo ($campo === "") ? 'selected' : ''; ?>>Todos</option>
+          <option value="titulo" <?php echo ($campo === "titulo") ? 'selected' : ''; ?>>Título</option>
+          <option value="fecha" <?php echo ($campo === "fecha") ? 'selected' : ''; ?>>Fecha</option>
+          <option value="palabras_clave" <?php echo ($campo === "palabras_clave") ? 'selected' : ''; ?>>Palabras Clave</option>
+          <option value="resumen" <?php echo ($campo === "resumen") ? 'selected' : ''; ?>>Resumen</option>
+          <option value="integrantes" <?php echo ($campo === "integrantes") ? 'selected' : ''; ?>>Integrantes</option>
+        </select>
+        <input type="text" name="busqueda" placeholder="Buscar..." value="<?= htmlspecialchars($busqueda); ?>" class="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
+        <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition-colors flex items-center">
+          <i class="bi bi-search"></i>
+          <span class="ml-2">Buscar</span>
+        </button>
+      </form>
+    </section>
+    
+    <!-- Grid de TFGs -->
+    <section class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
+      <?php if (isset($resultados) && !empty($resultados)): ?>
+        <?php foreach ($resultados as $fila): ?>
+          <article class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 p-6">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-3">
+              <a href="verTfg.php?id=<?= $fila['id']; ?>" class="hover:underline">
+                <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
+              </a>
+            </h2>
+            <p class="text-sm text-gray-500 mb-3">
+              Publicado el 
+              <?php 
+              $rawDate = $fila['fecha'] ?? '';
+              if (!empty($rawDate)) {
+                  try {
+                      $formatter = new IntlDateFormatter(
+                          'es-ES',
+                          IntlDateFormatter::LONG,
+                          IntlDateFormatter::NONE,
+                          'Europe/Madrid',
+                          IntlDateFormatter::GREGORIAN
+                      );
+                      $dateObj = new DateTime($rawDate);
+                      echo highlight(htmlspecialchars($formatter->format($dateObj)), $busqueda);
+                  } catch (Exception $e) {
+                      echo htmlspecialchars($rawDate);
+                  }
+              } else {
+                  echo "Sin fecha";
+              }
+              ?>
+            </p>
+            <p class="text-base text-gray-600">
+              <?= highlight(truncateText(htmlspecialchars($fila['resumen']), 200), $busqueda); ?>
+            </p>
+          </article>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p class="text-center text-gray-500 col-span-full">No se encontraron TFGs.</p>
+      <?php endif; ?>
+    </section>
+    
+    <!-- Paginación -->
+    <?php if (isset($totalPages) && $totalPages > 1): ?>
+      <nav aria-label="Pagination" class="mt-10">
+        <ul class="flex justify-center space-x-2">
+          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li>
+              <a href="index.php?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>" class="px-4 py-2 rounded-md <?php echo ($page == $i) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
+                <?= $i ?>
+              </a>
+            </li>
+          <?php endfor; ?>
+        </ul>
+      </nav>
+    <?php endif; ?>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-white shadow-inner mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
+      <p>&copy; <?= date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts para interacción -->
+  <script>
+    // Toggle menú móvil
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Toggle dropdown usuario
+    const userDropdownButton = document.getElementById('userDropdownButton');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    if(userDropdownButton) {
+      userDropdownButton.addEventListener('click', () => {
+        userDropdownMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
 </body>
 </html>

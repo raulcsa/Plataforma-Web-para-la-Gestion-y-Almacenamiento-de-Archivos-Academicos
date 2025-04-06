@@ -1,87 +1,76 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .navbar {
-            background-color: #2c3e50;
-        }
-        .navbar-brand, .nav-link {
-            color: #ecf0f1 !important;
-        }
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
-        .btn-primary {
-            background-color: #1abc9c;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #16a085;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px 0;
-            margin-top: 30px;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Usuario - PWGAAA</title>
+  <!-- Cargamos Tailwind CSS desde CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tipografía Inter para un look moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Iconos de Bootstrap (opcional) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
-<body>
-
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">PWGAAA</a>
-        </div>
-    </nav>
-
-    <div class="login-container">
-        <h2 class="text-center text-dark">Registro de Usuario</h2>
-        <?php if (!empty($mensaje)): ?>
-            <div class="alert alert-info"><?php echo htmlspecialchars($mensaje); ?></div>
-        <?php endif; ?>
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-        </form>
-        <p class="mt-3 text-center">¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a></p>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
+  <!-- Navbar -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
     </div>
+  </header>
 
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
-    </footer>
+  <!-- Contenedor del formulario de registro -->
+  <main class="flex-grow flex items-center justify-center px-4">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-center text-indigo-600 mb-6">Registro de Usuario</h2>
+      <?php if (!empty($mensaje)): ?>
+        <div class="mb-4 p-3 bg-indigo-100 text-indigo-700 rounded">
+          <?php echo htmlspecialchars($mensaje); ?>
+        </div>
+      <?php endif; ?>
+      <form method="POST" action="">
+        <div class="mb-4">
+          <label for="nombre" class="block text-gray-700 font-medium mb-2">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+          <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-medium mb-2">Contraseña</label>
+          <input type="password" id="password" name="password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="mb-6">
+          <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirmar Contraseña</label>
+          <input type="password" id="confirm_password" name="confirm_password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors flex items-center justify-center">
+          Registrarse
+        </button>
+      </form>
+      <p class="mt-6 text-center text-gray-600">
+        ¿Ya tienes cuenta? 
+        <a href="login.php" class="text-indigo-600 hover:underline">Inicia Sesión</a>
+      </p>
+    </div>
+  </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Footer -->
+  <footer class="bg-white shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
+      <p>&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>
