@@ -136,5 +136,73 @@ class Tfg {
         $stmt->execute([$tfgId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function buscarPorCalificar($limit = 6, $offset = 0) {
+        $db = conectarDB();
+        $query = "SELECT t.*, CONCAT_WS(' ', u1.nombre, u2.nombre, u3.nombre) AS integrantes_nombres
+                  FROM tfgs t
+                  LEFT JOIN usuarios u1 ON t.integrante1 = u1.id 
+                  LEFT JOIN usuarios u2 ON t.integrante2 = u2.id 
+                  LEFT JOIN usuarios u3 ON t.integrante3 = u3.id
+                  WHERE EXISTS (
+                      SELECT 1 FROM notas n 
+                      WHERE n.tfg_id = t.id AND n.nota IS NULL
+                  )
+                  ORDER BY t.fecha_subida DESC, t.id DESC
+                  LIMIT ? OFFSET ?";
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $stmtTotal = $db->query("SELECT COUNT(*) FROM tfgs t 
+                                 WHERE EXISTS (
+                                     SELECT 1 FROM notas n 
+                                     WHERE n.tfg_id = t.id AND n.nota IS NULL
+                                 )");
+        $total = $stmtTotal->fetchColumn();
+    
+        return ['resultados' => $resultados, 'total' => $total];
+    }
+    
+    public static function buscarCalificados($limit = 6, $offset = 0) {
+        $db = conectarDB();
+        $query = "SELECT t.*, CONCAT_WS(' ', u1.nombre, u2.nombre, u3.nombre) AS integrantes_nombres
+                  FROM tfgs t
+                  LEFT JOIN usuarios u1 ON t.integrante1 = u1.id 
+                  LEFT JOIN usuarios u2 ON t.integrante2 = u2.id 
+                  LEFT JOIN usuarios u3 ON t.integrante3 = u3.id
+                  WHERE EXISTS (
+                      SELECT 1 FROM notas n 
+                      WHERE n.tfg_id = t.id
+                  )
+                  AND NOT EXISTS (
+                      SELECT 1 FROM notas n 
+                      WHERE n.tfg_id = t.id AND n.nota IS NULL
+                  )
+                  ORDER BY t.fecha_subida DESC, t.id DESC
+                  LIMIT ? OFFSET ?";
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Contar solo aquellos TFGs que tienen notas y ninguna en NULL.
+        $stmtTotal = $db->query("SELECT COUNT(*) FROM tfgs t 
+                                 WHERE EXISTS (
+                                     SELECT 1 FROM notas n 
+                                     WHERE n.tfg_id = t.id
+                                 )
+                                 AND NOT EXISTS (
+                                     SELECT 1 FROM notas n 
+                                     WHERE n.tfg_id = t.id AND n.nota IS NULL
+                                 )");
+        $total = $stmtTotal->fetchColumn();
+    
+        return ['resultados' => $resultados, 'total' => $total];
+    }
+    
 }
 ?>

@@ -57,6 +57,10 @@ function truncateText($text, $limit = 200) {
               <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
                 <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
                 <a href="panelAdmin.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
+                <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
+                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+                <a href="proyectosPorCalificar.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por calificar</a>
+                <a href="proyectosCalificados.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
               <?php else: ?>
                 <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
                 <a href="misproyectos.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
@@ -92,6 +96,11 @@ function truncateText($text, $limit = 200) {
           <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
             <li class="py-2">
               <a href="panelAdmin.php" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
+            </li>
+            <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
+            <li class="py-2">
+            <a href="proyectosPorCalificar.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por calificar</a>
+            <a href="proyectosCalificados.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
             </li>
           <?php else: ?>
             <li class="py-2">
