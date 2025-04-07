@@ -1,8 +1,38 @@
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
+}
+
+// Construimos un arreglo con los nombres disponibles
+$autores = [];
+if (!empty($tfg['nombre1'])) { 
+    $autores[] = $tfg['nombre1']; 
+}
+if (!empty($tfg['nombre2'])) { 
+    $autores[] = $tfg['nombre2']; 
+}
+if (!empty($tfg['nombre3'])) { 
+    $autores[] = $tfg['nombre3']; 
+}
+
+// Función para formatear el listado de autores
+function formatAuthors($authors) {
+    $count = count($authors);
+    if ($count === 0) {
+        return "";
+    } elseif ($count === 1) {
+        return $authors[0];
+    } elseif ($count === 2) {
+        return $authors[0] . " y " . $authors[1];
+    } else {
+        // Para 3 o más: se unen todos menos el último con comas y se añade " y " antes del último
+        $last = array_pop($authors);
+        return implode(", ", $authors) . " y " . $last;
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -108,14 +138,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Autor(es) -->
         <div>
           <span class="font-semibold text-gray-700">Autor(es):</span>
-          <p class="text-gray-800">
-            <?php 
-              $autores = explode(',', $tfg['integrantes_nombres']);
-              $autores = array_map('trim', $autores);
-              $autores = array_map('htmlspecialchars', $autores);
-              echo implode(' | ', $autores);
-            ?>
-          </p>
+          <?php echo htmlspecialchars(formatAuthors($autores)); ?>
         </div>
         <!-- Fecha -->
         <div>

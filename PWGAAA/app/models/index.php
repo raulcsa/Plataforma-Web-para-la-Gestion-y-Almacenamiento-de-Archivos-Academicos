@@ -116,15 +116,19 @@ class Tfg {
     
     public static function obtenerPorId($id) {
         $db = conectarDB();
-        $stmt = $db->prepare("SELECT t.*, CONCAT_WS(' ', u1.nombre, u2.nombre, u3.nombre) AS integrantes_nombres 
-                              FROM tfgs t 
-                              LEFT JOIN usuarios u1 ON t.integrante1 = u1.id 
-                              LEFT JOIN usuarios u2 ON t.integrante2 = u2.id 
-                              LEFT JOIN usuarios u3 ON t.integrante3 = u3.id 
-                              WHERE t.id = ?");
+        $stmt = $db->prepare("SELECT t.*, 
+                                    u1.nombre AS nombre1, 
+                                    u2.nombre AS nombre2, 
+                                    u3.nombre AS nombre3 
+                               FROM tfgs t 
+                               LEFT JOIN usuarios u1 ON t.integrante1 = u1.id 
+                               LEFT JOIN usuarios u2 ON t.integrante2 = u2.id 
+                               LEFT JOIN usuarios u3 ON t.integrante3 = u3.id 
+                               WHERE t.id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    
     
     public static function obtenerArchivos($tfgId) {
         $db = conectarDB();
