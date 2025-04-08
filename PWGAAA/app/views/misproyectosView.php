@@ -104,8 +104,8 @@
     <?php if (!empty($proyectos)): ?>
       <div class="space-y-10">
         <?php foreach ($proyectos as $proyecto): ?>
-          <div class="bg-white rounded-lg shadow p-3">
-            <h3 class="text-lg font-bold text-indigo-600 mb-1">
+          <div class="bg-white rounded-md shadow p-3">
+            <h3 class="text-md font-bold text-indigo-600 mb-1">
               <a href="verTfg.php?id=<?php echo $proyecto['id']; ?>" class="hover:underline">
                 <?php echo htmlspecialchars($proyecto['titulo']); ?>
               </a>

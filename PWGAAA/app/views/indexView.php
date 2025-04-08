@@ -148,7 +148,7 @@ function truncateText($text, $limit = 200) {
     </section>
     
     <!-- Grid de TFGs -->
-    <section class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
+    <section class="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
       <?php if (isset($resultados) && !empty($resultados)): ?>
         <?php foreach ($resultados as $fila): ?>
           <article class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 p-6">
