@@ -79,6 +79,7 @@ function truncateText($text, $limit = 200) {
       </ul>
     </nav>
   </header>
+  <section class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
   <div class="container mt-5">
     <h1 class="mb-4">Proyectos Calificados</h1>
     <?php if (!empty($resultados)): ?>
@@ -111,6 +112,7 @@ function truncateText($text, $limit = 200) {
       <p>No hay proyectos calificados.</p>
     <?php endif; ?>
   </div>
+  </section>
 <!-- Footer -->
 <footer class="bg-white shadow-inner mt-12">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
