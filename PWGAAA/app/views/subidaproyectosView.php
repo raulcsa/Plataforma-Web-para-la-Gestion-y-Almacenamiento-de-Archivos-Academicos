@@ -42,40 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
   <!-- Navbar -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
-      <nav>
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <div class="relative inline-block">
-            <button id="userDropdownButton" class="flex items-center focus:outline-none text-gray-600 hover:text-indigo-600">
-              <i class="bi bi-person-circle text-2xl"></i>
-              <span class="ml-2"><?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?></span>
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 hidden z-20">
-              <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-              <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-                <a href="panelAdmin.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
-              <?php else: ?>
-                <a href="misproyectos.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
-                <a href="upload.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
-              <?php endif; ?>
-              <div class="border-t border-gray-200"></div>
-              <a href="logout.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
-            </div>
-          </div>
-        <?php else: ?>
-          <a href="login.php" class="flex items-center text-gray-600 hover:text-indigo-600">
-            <i class="bi bi-person-circle text-2xl"></i>
-            <span class="ml-2">Login</span>
-          </a>
-        <?php endif; ?>
-      </nav>
-    </div>
-  </header>
+  <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
 
   <!-- Contenido principal -->
   <main class="flex-grow container mx-auto px-4 py-8">
@@ -103,14 +70,34 @@ if (session_status() === PHP_SESSION_NONE) {
           <input type="text" id="palabraClave" name="palabraClave" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
 
-        <div class="mb-4">
-          <label for="integrantesSelect" class="block text-gray-700 font-medium mb-2">Selecciona hasta 2 alumnos adicionales</label>
-          <select id="integrantesSelect" name="integrantesSelect[]" multiple="multiple" class="w-full">
-            <?php foreach ($selectUsuarios as $alumno): ?>
-              <option value="<?= $alumno['id'] ?>"><?= $alumno['nombre'] ?></option>
-            <?php endforeach; ?>
-          </select>
+<!-- Campo para el checkbox (visible para profesor y admin) -->
+      <?php if (isset($_SESSION['usuario']) && ($_SESSION['usuario']['rol'] === 'profesor' || $_SESSION['usuario']['rol'] === 'admin')): ?>
+        <div class="mb-3">
+          <input type="checkbox" id="incluirYo" name="incluirYo" value="1">
+          <label for="incluirYo" class="text-gray-700">Incluirte como integrante de este TFG</label>
         </div>
+      <?php endif; ?>
+
+<!-- Campo para seleccionar alumnos adicionales -->
+  <div class="mb-4">
+    <label for="integrantesSelect" id="integrantesSelectLabel" class="block text-gray-700 font-medium mb-2">
+      <?php
+        // Para profesor y admin se muestra "Selecciona hasta 3 alumnos" por defecto
+        if (isset($_SESSION['usuario']) && 
+          ($_SESSION['usuario']['rol'] === 'profesor' || $_SESSION['usuario']['rol'] === 'admin')) {
+          echo "Selecciona hasta 3 alumnos";
+        } else {
+          echo "Selecciona hasta 2 alumnos";
+        }
+      ?>
+    </label>
+    <select id="integrantesSelect" name="integrantesSelect[]" multiple="multiple" class="w-full">
+      <?php foreach ($selectUsuarios as $alumno): ?>
+        <option value="<?= htmlspecialchars($alumno['id']); ?>"><?= htmlspecialchars($alumno['nombre']); ?></option>
+      <?php endforeach; ?>
+    </select>
+  </div>
+
 
         <div class="mb-6">
           <label for="fileToUpload" class="block text-gray-700 font-medium mb-2">Subir Archivo (PDF)</label>
@@ -131,31 +118,62 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-  <script>
-    $(document).ready(function() {
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Función para inicializar Select2 con los parámetros indicados
+    function initSelect2(maxSelection, placeholderText) {
       $('#integrantesSelect').select2({
-        placeholder: "Selecciona hasta 2 alumnos adicionales",
-        maximumSelectionLength: 2,
+        placeholder: placeholderText,
+        maximumSelectionLength: maxSelection,
         width: '100%',
         language: {
           maximumSelected: function () {
-            return "Solo puedes seleccionar hasta 2 alumnos adicionales";
+            return "Solo puedes seleccionar hasta " + maxSelection + " alumnos";
           }
         }
       });
-    });
+    }
 
-    // Toggle del dropdown del usuario
+    <?php if (isset($_SESSION['usuario']) && ($_SESSION['usuario']['rol'] === 'profesor' || $_SESSION['usuario']['rol'] === 'admin')): ?>
+      // Para profesor o admin se comprueba el estado del checkbox "incluirYo"
+      var incluirYoChecked = $('#incluirYo').is(':checked');
+      if (incluirYoChecked) {
+        initSelect2(2, "Selecciona hasta 2 alumnos");
+        $('#integrantesSelectLabel').text("Selecciona hasta 2 alumnos");
+      } else {
+        initSelect2(3, "Selecciona hasta 3 alumnos");
+        $('#integrantesSelectLabel').text("Selecciona hasta 3 alumnos");
+      }
+
+      // Al cambiar el estado del checkbox, destruir y re-inicializar Select2 y actualizar el label
+      $('#incluirYo').change(function() {
+        $('#integrantesSelect').select2('destroy');
+        if ($(this).is(':checked')) {
+          initSelect2(2, "Selecciona hasta 2 alumnos");
+          $('#integrantesSelectLabel').text("Selecciona hasta 2 alumnos");
+        } else {
+          initSelect2(3, "Selecciona hasta 3 alumnos");
+          $('#integrantesSelectLabel').text("Selecciona hasta 3 alumnos");
+        }
+      });
+    <?php else: ?>
+      // Para otros usuarios (alumnos) se permite siempre seleccionar hasta 2
+      initSelect2(2, "Selecciona hasta 2 alumnos");
+    <?php endif; ?>
+
+    // Toggle del dropdown del usuario, si corresponde
     const userDropdownButton = document.getElementById('userDropdownButton');
     const userDropdownMenu = document.getElementById('userDropdownMenu');
-    if(userDropdownButton) {
+    if (userDropdownButton) {
       userDropdownButton.addEventListener('click', () => {
         userDropdownMenu.classList.toggle('hidden');
       });
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>

@@ -5,10 +5,11 @@ class ProyectosPorCalificarController {
     public function index() {
         session_start();
         // Verificar que el usuario esté logueado y que sea profesor
-        if (!isset($_SESSION['usuario']) || strtolower(trim($_SESSION['usuario']['rol'])) !== 'profesor') {
+        if (!isset($_SESSION['usuario']) || (strtolower(trim($_SESSION['usuario']['rol'])) !== 'profesor' && strtolower(trim($_SESSION['usuario']['rol'])) !== 'admin')) {
             header("Location: login.php");
             exit;
         }
+        
         $limit = 6;
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;

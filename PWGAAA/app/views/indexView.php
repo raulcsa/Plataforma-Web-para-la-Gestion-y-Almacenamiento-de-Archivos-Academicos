@@ -25,7 +25,7 @@ function truncateText($text, $limit = 200) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TFGs - PWGAAA</title>
+  <title>Home - PWGAAA</title>
   <!-- Uso de la tipografía Inter para un look moderno -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS desde CDN -->
@@ -35,97 +35,47 @@ function truncateText($text, $limit = 200) {
   <style>
     body {
       font-family: 'Inter', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .navbar {
+      background-color: #2c3e50;
+    }
+    .navbar-brand, .nav-link {
+      color: #ecf0f1 !important;
+    }
+    .tfg-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s;
+    }
+    .tfg-card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .tfg-title a {
+      color: #2c3e50;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .tfg-title a:hover {
+      color: rgb(18, 136, 112);
+      text-decoration: underline;
+    }
+    .tfg-summary {
+      font-size: 1rem;
+      color: #555;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px 0;
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-200 text-gray-700">
-  <!-- Navbar -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
-      <nav class="hidden md:flex items-center space-x-6">
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <div class="relative inline-block">
-            <button id="userDropdownButton" class="flex items-center focus:outline-none text-gray-600 hover:text-indigo-600">
-              <i class="bi bi-person-circle text-2xl"></i>
-              <span class="ml-2"><?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)</span>
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 hidden z-20">
-              <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-                <a href="panelAdmin.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
-                <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
-                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-                <a href="proyectosPorCalificar.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por calificar</a>
-                <a href="proyectosCalificados.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
-              <?php else: ?>
-                <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-                <a href="misproyectos.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
-                <a href="upload.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
-              <?php endif; ?>
-              <div class="border-t border-gray-200"></div>
-              <a href="logout.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
-            </div>
-          </div>
-        <?php else: ?>
-          <a href="login.php" class="flex items-center text-gray-600 hover:text-indigo-600">
-            <i class="bi bi-person-circle text-2xl"></i>
-            <span class="ml-2">Login</span>
-          </a>
-        <?php endif; ?>
-      </nav>
-      <!-- Botón para móviles -->
-      <div class="md:hidden">
-        <button id="mobileMenuButton" class="text-gray-600 hover:text-indigo-600 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <!-- Menú móvil -->
-    <nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
-      <ul class="px-4 py-2">
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <li class="py-2">
-            <a href="perfil.php" class="block text-gray-700 hover:text-indigo-600">Perfil</a>
-          </li>
-          <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-            <li class="py-2">
-              <a href="panelAdmin.php" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
-            </li>
-            <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
-            <li class="py-2">
-            <a href="proyectosPorCalificar.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por calificar</a>
-            <a href="proyectosCalificados.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
-            </li>
-          <?php else: ?>
-            <li class="py-2">
-              <a href="misproyectos.php" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a>
-            </li>
-            <li class="py-2">
-              <a href="upload.php" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a>
-            </li>
-          <?php endif; ?>
-          <li class="py-2 border-t border-gray-200 mt-2">
-            <a href="logout.php" class="block text-gray-700 hover:text-indigo-600">Cerrar sesión</a>
-          </li>
-        <?php else: ?>
-          <li class="py-2">
-            <a href="login.php" class="flex items-center text-gray-700 hover:text-indigo-600">
-              <i class="bi bi-person-circle text-2xl"></i>
-              <span class="ml-2">Login</span>
-            </a>
-          </li>
-        <?php endif; ?>
-      </ul>
-    </nav>
-  </header>
-  
-  <!-- Contenido principal -->
+<body>
+<?php require_once __DIR__ . '/../views/navbarView.php'; ?>
+
   <main class="max-w-7xl mx-auto px-4 py-8">
     <!-- Sección de búsqueda -->
     <section class="mb-10 text-center">
@@ -137,7 +87,6 @@ function truncateText($text, $limit = 200) {
           <option value="fecha" <?php echo ($campo === "fecha") ? 'selected' : ''; ?>>Fecha</option>
           <option value="palabras_clave" <?php echo ($campo === "palabras_clave") ? 'selected' : ''; ?>>Palabras Clave</option>
           <option value="resumen" <?php echo ($campo === "resumen") ? 'selected' : ''; ?>>Resumen</option>
-          <option value="integrantes" <?php echo ($campo === "integrantes") ? 'selected' : ''; ?>>Integrantes</option>
         </select>
         <input type="text" name="busqueda" placeholder="Buscar..." value="<?= htmlspecialchars($busqueda); ?>" class="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
         <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition-colors flex items-center">
@@ -145,6 +94,11 @@ function truncateText($text, $limit = 200) {
           <span class="ml-2">Buscar</span>
         </button>
       </form>
+      
+      <!-- Mostrar el número total de resultados encontrados en la búsqueda -->
+      <?php if ($busqueda !== ""): ?>
+        <p class="mt-4 text-center text-gray-600">Se han encontrado <?= htmlspecialchars($total) ?> resultado(s).</p>
+      <?php endif; ?>
     </section>
     
     <!-- Grid de TFGs -->
@@ -209,7 +163,7 @@ function truncateText($text, $limit = 200) {
   <!-- Footer -->
   <footer class="bg-white shadow-inner mt-12">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
-      <p>&copy; <?= date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+      <p class="mb-0">&copy; <?= date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
     </div>
   </footer>
   
@@ -221,7 +175,7 @@ function truncateText($text, $limit = 200) {
     mobileMenuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
-
+    
     // Toggle dropdown usuario
     const userDropdownButton = document.getElementById('userDropdownButton');
     const userDropdownMenu = document.getElementById('userDropdownMenu');
