@@ -48,15 +48,47 @@ function formatDate($dateString) {
     <?php if (!empty($resultados)): ?>
       <div class="space-y-6">
         <?php foreach ($resultados as $fila): ?>
-          <div class="bg-white shadow rounded-lg p-6">
-            <h3 class="text-xl font-semibold text-indigo-600 mb-2">
-              <a href="verTfg?id=<?= $fila['id']; ?>">
-                <?= htmlspecialchars($fila['titulo']); ?>
-              </a>
-            </h3>
-            <p class="text-gray-500 mb-2">Publicado el <?= formatDate($fila['fecha']); ?></p>
-            <p class="text-gray-700"><?= htmlspecialchars(truncateText($fila['resumen'], 200)); ?></p>
-          </div>
+          <div class="space-y-6">
+  <?php foreach ($resultados as $fila): ?>
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-indigo-600 mb-2">
+        <a href="verTfg?id=<?= $fila['id']; ?>">
+          <?= htmlspecialchars($fila['titulo']); ?>
+        </a>
+      </h3>
+      <p class="text-gray-500 mb-2">Publicado el <?= formatDate($fila['fecha']); ?></p>
+      <p class="text-gray-700"><?= htmlspecialchars(truncateText($fila['resumen'], 200)); ?></p>
+
+      <?php if (in_array($_SESSION['usuario']['rol'], ['admin', 'profesor'])): ?>
+        <button
+          type="button"
+          class="mt-4 text-indigo-600 hover:underline focus:outline-none"
+          onclick="toggleNotas('notas-<?= $fila['id']; ?>')"
+        >
+          Ver calificaciones
+        </button>
+
+        <div id="notas-<?= $fila['id']; ?>" class="hidden mt-4 bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded">
+          <?php if (!empty($fila['calificaciones'])): ?>
+            <?php foreach ($fila['calificaciones'] as $nota): ?>
+              <div class="mb-2">
+                <p class="font-semibold text-gray-800"><?= htmlspecialchars($nota['nombre']); ?></p>
+                <p class="text-gray-700">Nota: <?= htmlspecialchars($nota['nota']); ?></p>
+                <?php if (!empty($nota['comentario'])): ?>
+                  <p class="text-gray-600 text-sm mt-1">Comentario: <?= nl2br(htmlspecialchars($nota['comentario'])); ?></p>
+                <?php endif; ?>
+              </div>
+              <hr class="my-2 border-gray-300">
+            <?php endforeach; ?>
+          <?php else: ?>
+            <p class="text-gray-500">No hay notas registradas.</p>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+    </div>
+  <?php endforeach; ?>
+</div>
+
         <?php endforeach; ?>
       </div>
       
@@ -104,5 +136,14 @@ function formatDate($dateString) {
       });
     }
   </script>
+  <script>
+function toggleNotas(id) {
+  const notasDiv = document.getElementById(id);
+  if (notasDiv) {
+    notasDiv.classList.toggle('hidden');
+  }
+}
+</script>
+
 </body>
 </html>
