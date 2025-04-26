@@ -5,11 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $role = $_SESSION['usuario']['rol'] ?? '';
 $isEditor = in_array(strtolower($role), ['profesor','admin']);
 
-// Listado de todos los alumnos para el <select>
 require_once __DIR__ . '/../models/subidaProyectos.php';
 $alumnos = uploadTfg::obtenerAlumnos();
 
-// Preparamos el array de IDs de los integrantes actuales
 $currentIntegrantes = array_filter([
     $tfg['integrante1'],
     $tfg['integrante2'],
@@ -51,7 +49,6 @@ $currentIntegrantes = array_filter([
         <form action="editarTfg.php?id=<?= $tfg['id'] ?>" method="POST" enctype="multipart/form-data">
       <?php endif; ?>
 
-        <!-- Título -->
         <div class="mb-4">
           <label class="font-semibold text-gray-700 block mb-1">Título</label>
           <?php if ($isEditor): ?>
@@ -63,14 +60,12 @@ $currentIntegrantes = array_filter([
           <?php endif; ?>
         </div>
 
-        <!-- Integrantes -->
         <div class="mb-4">
           <label class="font-semibold text-gray-700 block mb-1">Integrantes</label>
           <?php if ($isEditor): ?>
             <select id="integrantes" name="integrantes[]" multiple class="w-full">
               <?php foreach($alumnos as $al): ?>
-                <option value="<?= $al['id'] ?>"
-                  <?= in_array($al['id'], $currentIntegrantes) ? 'selected' : '' ?>>
+                <option value="<?= $al['id'] ?>" <?= in_array($al['id'], $currentIntegrantes) ? 'selected' : '' ?>>
                   <?= htmlspecialchars($al['nombre']) ?>
                 </option>
               <?php endforeach; ?>
@@ -80,7 +75,6 @@ $currentIntegrantes = array_filter([
           <?php endif; ?>
         </div>
 
-        <!-- Fecha de publicación -->
         <div class="mb-4">
           <label class="font-semibold text-gray-700 block mb-1">Fecha de publicación</label>
           <?php if ($isEditor): ?>
@@ -95,7 +89,6 @@ $currentIntegrantes = array_filter([
           <?php endif; ?>
         </div>
 
-        <!-- Palabras clave -->
         <div class="mb-4">
           <label class="font-semibold text-gray-700 block mb-1">Palabras clave</label>
           <?php if ($isEditor): ?>
@@ -107,7 +100,6 @@ $currentIntegrantes = array_filter([
           <?php endif; ?>
         </div>
 
-        <!-- Resumen -->
         <div class="mb-4">
           <label class="font-semibold text-gray-700 block mb-1">Resumen</label>
           <?php if ($isEditor): ?>
@@ -119,21 +111,18 @@ $currentIntegrantes = array_filter([
           <?php endif; ?>
         </div>
 
-        <!-- PDF -->
         <div class="mb-6">
           <label class="font-semibold text-gray-700 block mb-1">Documento PDF</label>
           <?php if ($isEditor): ?>
-            <input type="file" name="pdf" accept=".pdf"
-              class="block w-full text-gray-600">
-                <?php if (!empty($archivos)): ?>
-                    <p class="mt-2">
-                        <a href="<?= htmlspecialchars($archivos[0]['ruta']) ?>" target="_blank"
-                            class="text-indigo-600 hover:underline">
-                        <i class="bi bi-file-earmark-pdf"></i> Ver PDF actual
-                        </a>
-                    </p>
-                <?php endif; ?>
-
+            <input type="file" name="pdf" accept=".pdf" class="block w-full text-gray-600">
+            <?php if (!empty($archivos)): ?>
+              <p class="mt-2">
+                <a href="<?= htmlspecialchars($archivos[0]['ruta']) ?>" target="_blank"
+                  class="text-indigo-600 hover:underline">
+                  <i class="bi bi-file-earmark-pdf"></i> Ver PDF actual
+                </a>
+              </p>
+            <?php endif; ?>
           <?php else: ?>
             <?php if (!empty($archivos)): ?>
               <a href="<?= $archivos[0]['ruta'] ?>" target="_blank"
@@ -145,23 +134,24 @@ $currentIntegrantes = array_filter([
             <?php endif; ?>
           <?php endif; ?>
         </div>
-        <?php if ($isEditor): ?>
-        </form>
+
         <div class="flex gap-4 mt-6">
-            <!-- Enlace “Calificar” que siempre redirige a la página de calificación -->
-            <a href="correction.php?action=editar&id=<?= $tfg['id'] ?>"
-                class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition text-center">
-                Calificar
-            </a>
-            <!-- Volver atrás a la lista de pendientes -->
-            <a href="proyectosPorCalificar.php"
-                class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition">
-                Atrás
-            </a>
+          <button type="submit" name="action" value="calificar" 
+              class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition">
+              Calificar
+          </button>
+          <a href="proyectosPorCalificar.php"
+              class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition">
+              Atrás
+          </a>
         </div>
-        <?php endif; ?>
-        </div>
-        </main>
+
+      <?php if ($isEditor): ?>
+        </form>
+      <?php endif; ?>
+
+    </div>
+  </main>
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto py-4 text-center text-gray-600">
@@ -178,7 +168,6 @@ $currentIntegrantes = array_filter([
           width:'100%'
         });
       <?php endif; ?>
-      // dropdown user
       $('#userDropdownButton').click(()=>$('#userDropdownMenu').toggleClass('hidden'));
       $('#mobileMenuButton').click(()=>$('#mobileMenu').toggleClass('hidden'));
     });

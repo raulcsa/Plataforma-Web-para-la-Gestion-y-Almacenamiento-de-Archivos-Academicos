@@ -1,0 +1,6 @@
+Options +MultiViews
+
+# Para seguir protegiendo con rewrite reglas normales
+RewriteEngine On
+
+# Protege si quieres más (opcional)

@@ -1,10 +1,21 @@
 <?php
-require_once __DIR__ . '/../app/controllers/CorrectionController.php';
-$ctrl = new CorrectionController();
+require_once __DIR__.'/../app/controllers/CorrectionController.php';
 
-$action = $_GET['action'] ?? 'calificar';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'validar') {
-    $ctrl->validar();
-} else {
-    $ctrl->calificar();
+$controller = new CorrectionController();
+
+$action = $_GET['action'] ?? 'listar'; // o lo que sea tu acción por defecto
+
+switch ($action) {
+    case 'calificar':
+        $controller->calificar();
+        break;
+    case 'validar':
+        $controller->validar();
+        break;
+    // otros cases...
+    default:
+        // Redirigir a algún sitio si no es válido
+        header('Location: index.php');
+        exit;
 }
+?>

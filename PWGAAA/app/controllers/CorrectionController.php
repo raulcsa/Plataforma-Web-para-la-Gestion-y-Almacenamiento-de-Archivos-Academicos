@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 // app/controllers/CorrectionController.php
 
 require_once __DIR__ . '/../models/index.php';        // para Tfg::actualizar()
@@ -7,14 +9,10 @@ require_once __DIR__ . '/../../config/database.php';     // para conectarDB()
 
 class CorrectionController {
 
-    /**
-     * Muestra el formulario de edición (o detalle) de un TFG.
-     */
     public function editar(): void {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        // Sólo profesores y admins pueden editar; otros verán sólo el detalle
         $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
         if (!in_array($rol, ['profesor','admin', 'alumno'])) {
             header('Location: index.php');
@@ -28,9 +26,6 @@ class CorrectionController {
         require_once __DIR__ . '/../views/editarTfgView.php';
     }
 
-    /**
-     * Procesa el POST de edición y guarda cambios.
-     */
     public function actualizar(): void {
         session_start();
         $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
@@ -38,51 +33,42 @@ class CorrectionController {
             header('Location: index.php');
             exit;
         }
-
+    
         $id       = (int)($_GET['id'] ?? 0);
         $titulo   = trim($_POST['titulo'] ?? '');
         $resumen  = trim($_POST['resumen'] ?? '');
         $keywords = trim($_POST['palabras_clave'] ?? '');
         $integrantes = $_POST['integrantes'] ?? [];
-
-        // 1) Validaciones mínimas
+    
         if (empty($titulo) || empty($resumen) || empty($keywords) || count($integrantes) < 1) {
             $_SESSION['mensaje'] = 'Rellena todos los campos y al menos un integrante.';
             header("Location: editarTfg.php?id=$id");
             exit;
         }
-
-        // 2) Actualizamos los datos del TFG (tfgs + notas)
+    
         Tfg::actualizar($id, $titulo, $resumen, $keywords, $integrantes);
-
-        // 2) Procesar sustitución de PDF si se ha enviado uno nuevo
+    
         if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === 0) {
             $ext = strtolower(pathinfo($_FILES['pdf']['name'], PATHINFO_EXTENSION));
             if ($ext === 'pdf') {
-                // 2.a) Obtenemos el registro actual en 'archivos' para borrar el anterior
-                $old = uploadTfg::obtenerArchivoPorTfg($id); 
-                // Debes implementar este método (o consulta) en tu model para traer:
-                // nombre, ruta, y ruta fisica si quieres, p.ej.:
-                // SELECT nombre, ruta FROM archivos WHERE tfg_id = ? LIMIT 1
-                if ($old) {
-                    // Ruta física del antiguo
-                    $oldPath = dirname(__DIR__,2) . '/PDF/' . basename($old['ruta']);
+        
+                // 1) Recuperar el archivo antiguo
+                $oldArchivo = uploadTfg::obtenerArchivoPorTfg($id);
+        
+                if ($oldArchivo) {
+                    $oldPath = dirname(__DIR__,2) . '/PDF/' . basename($oldArchivo['ruta']);
                     if (file_exists($oldPath)) {
-                        @unlink($oldPath);
+                        @unlink($oldPath); // Borra el PDF viejo del disco
                     }
-                    // Y eliminar el registro en la tabla
-                    uploadTfg::borrarRegistroArchivo($id);
-                    // Implementa borrarRegistroArchivo() con:
-                    // DELETE FROM archivos WHERE tfg_id = ?
+                    uploadTfg::borrarRegistroArchivo($id); // Borra el registro antiguo en BD
                 }
-    
-                // 2.b) Guardamos el nuevo PDF
+        
+                // 2) Guardar el nuevo archivo
                 $final     = uniqid('tfg_') . '.pdf';
-                $publicUrl = '../PDF/' . $final;           // lo que guardas en BD
-                $diskPath  = dirname(__DIR__,2) . '/PDF/' . $final; // dónde se guarda en disco
-    
+                $publicUrl = '../PDF/' . $final;
+                $diskPath  = dirname(__DIR__,2) . '/PDF/' . $final;
+        
                 if (move_uploaded_file($_FILES['pdf']['tmp_name'], $diskPath)) {
-                    // 2.c) Insertar el nuevo registro en la tabla archivos
                     uploadTfg::registrarArchivo($id, $final, $publicUrl, 'pdf', $_FILES['pdf']['size']);
                 } else {
                     $_SESSION['mensaje'] = 'No se pudo subir el nuevo PDF.';
@@ -91,11 +77,18 @@ class CorrectionController {
                 }
             }
         }
-    // 3) Finalmente redirigir de vuelta a pendientes
-    header('Location: proyectosPorCalificar.php');
-    exit;
-}
-    // GET  /correction.php?action=calificar&id=123
+        
+    
+        // AQUÍ DISTINGUIMOS SEGÚN EL BOTÓN QUE PULSASTE
+        if (isset($_POST['action']) && $_POST['action'] === 'calificar') {
+            header('Location: correction.php?action=calificar&id=' . $id);
+            exit;
+        } else {
+            header('Location: proyectosPorCalificar.php');
+            exit;
+        }
+    }
+
     public function calificar(): void {
         session_start();
         $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
@@ -110,7 +103,6 @@ class CorrectionController {
         require_once __DIR__ . '/../views/calificarView.php';
     }
 
-    // POST /correction.php?action=validar&id=123
     public function validar(): void {
         session_start();
         $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
@@ -123,7 +115,6 @@ class CorrectionController {
         $notas       = $_POST['nota']       ?? [];
         $comentarios = $_POST['comentario'] ?? [];
 
-        // Validar que cada alumno tenga nota del 1 al 10
         foreach ($notas as $alumnoId => $valor) {
             $n = floatval($valor);
             if ($n < 1 || $n > 10) {
@@ -133,13 +124,11 @@ class CorrectionController {
             }
         }
 
-        // Guardar cada nota+comentario
         foreach ($notas as $alumnoId => $valor) {
             $c = trim($comentarios[$alumnoId] ?? '');
             uploadTfg::actualizarNota($id, (int)$alumnoId, $valor, $c);
         }
 
-        // Al terminar, redirigimos a proyectos ya calificados
         header('Location: proyectosCalificados.php');
         exit;
     }

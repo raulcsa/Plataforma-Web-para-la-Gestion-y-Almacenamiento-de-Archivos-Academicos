@@ -81,5 +81,26 @@ if (session_status() === PHP_SESSION_NONE) session_start();
       &copy; <?= date('Y') ?> PWGAAA. Todos los derechos reservados.
     </div>
   </footer>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  var userButton = document.getElementById('userDropdownButton');
+  var userMenu = document.getElementById('userDropdownMenu');
+
+  if (userButton && userMenu) {
+    userButton.addEventListener('click', function () {
+      userMenu.classList.toggle('hidden');
+    });
+  }
+
+  var mobileButton = document.getElementById('mobileMenuButton');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileButton && mobileMenu) {
+    mobileButton.addEventListener('click', function () {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+});
+</script>
 </body>
 </html>
