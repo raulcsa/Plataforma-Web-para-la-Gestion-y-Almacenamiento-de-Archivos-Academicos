@@ -29,7 +29,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
   <!-- Navbar -->
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
+      <a href="index" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
       <nav class="hidden md:flex items-center space-x-6">
         <?php if (isset($_SESSION['usuario'])): ?>
           <div class="relative">
@@ -41,16 +41,16 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
               </svg>
             </button>
             <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden z-20">
-              <a href="perfil.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-              <a href="panelAdmin.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
-              <a href="misproyectos.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
-              <a href="upload.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
+              <a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+              <a href="panelAdmin" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
+              <a href="misproyectos" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
+              <a href="upload" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
               <div class="border-t border-gray-200"></div>
-              <a href="logout.php" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
+              <a href="logout" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
             </div>
           </div>
         <?php else: ?>
-          <a href="login.php" class="flex items-center text-gray-700 hover:text-indigo-600">
+          <a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
             <i class="bi bi-person-circle text-2xl"></i>
             <span class="ml-2">Login</span>
           </a>
@@ -70,23 +70,23 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
       <ul class="px-4 py-2">
         <?php if (isset($_SESSION['usuario'])): ?>
           <li class="py-2">
-            <a href="perfil.php" class="block text-gray-700 hover:text-indigo-600">Perfil</a>
+            <a href="perfil" class="block text-gray-700 hover:text-indigo-600">Perfil</a>
           </li>
           <li class="py-2">
-            <a href="panelAdmin.php" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
+            <a href="panelAdmin" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
           </li>
           <li class="py-2">
-            <a href="misproyectos.php" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a>
+            <a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a>
           </li>
           <li class="py-2">
-            <a href="upload.php" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a>
+            <a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a>
           </li>
           <li class="py-2 border-t border-gray-200 mt-2">
-            <a href="logout.php" class="block text-gray-700 hover:text-indigo-600">Cerrar sesión</a>
+            <a href="logout" class="block text-gray-700 hover:text-indigo-600">Cerrar sesión</a>
           </li>
         <?php else: ?>
           <li class="py-2">
-            <a href="login.php" class="flex items-center text-gray-700 hover:text-indigo-600">
+            <a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
               <i class="bi bi-person-circle text-2xl"></i>
               <span class="ml-2">Login</span>
             </a>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
   <main class="flex-grow container mx-auto px-4 py-8">
     <h1 class="text-center text-3xl font-semibold text-indigo-600 mb-6">Añadir Nuevo Usuario</h1>
     <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
-      <form method="POST" action="panelAdmin.php?action=store">
+      <form method="POST" action="panelAdmin?action=store">
         <div class="mb-4">
           <label for="nombre" class="block text-gray-700 font-semibold mb-2">Nombre</label>
           <input type="text" name="nombre" id="nombre" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">

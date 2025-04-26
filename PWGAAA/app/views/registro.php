@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <!-- Navbar -->
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index.php" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
+      <a href="index" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
     </div>
   </header>
 
@@ -61,7 +61,7 @@ if (session_status() === PHP_SESSION_NONE) {
       </form>
       <p class="mt-6 text-center text-gray-600">
         ¿Ya tienes cuenta? 
-        <a href="login.php" class="text-indigo-600 hover:underline">Inicia Sesión</a>
+        <a href="login" class="text-indigo-600 hover:underline">Inicia Sesión</a>
       </p>
     </div>
   </main>

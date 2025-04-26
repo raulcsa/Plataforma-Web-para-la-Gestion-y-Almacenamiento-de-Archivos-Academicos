@@ -1,6 +1,12 @@
-Options +MultiViews
-
-# Para seguir protegiendo con rewrite reglas normales
+# Activar reescritura
 RewriteEngine On
 
-# Protege si quieres más (opcional)
+# Si el archivo o directorio solicitado NO existe
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Si existe el archivo con .php, entonces reescribir
+RewriteCond %{REQUEST_FILENAME}.php -f
+
+# Añadir .php y procesarlo
+RewriteRule ^(.*)$ $1.php [L]

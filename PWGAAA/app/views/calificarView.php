@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
         </div>
       <?php endif; ?>
 
-      <form action="correction.php?action=validar&id=<?= $tfg['id'] ?>" method="POST">
+      <form action="correction?action=validar&id=<?= $tfg['id'] ?>" method="POST">
         <?php foreach($alumnosNotas as $row): ?>
           <div class="mb-6">
             <!-- Primera fila: cuadro nombre + cuadro nota -->
@@ -66,7 +66,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
             Validar
           </button>
           <a
-            href="editarTfg.php?id=<?= $tfg['id'] ?>"
+            href="editarTfg?id=<?= $tfg['id'] ?>"
             class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition"
           >
             Atrás

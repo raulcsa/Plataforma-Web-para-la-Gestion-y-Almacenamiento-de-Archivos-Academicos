@@ -80,7 +80,7 @@ function truncateText($text, $limit = 200) {
     <!-- Sección de búsqueda -->
     <section class="mb-10 text-center">
       <h1 class="text-4xl font-bold text-indigo-700 mb-6">Explora TFGs</h1>
-      <form method="GET" action="index.php" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <form method="GET" action="index" class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <select name="campo" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
           <option value="" <?php echo ($campo === "") ? 'selected' : ''; ?>>Todos</option>
           <option value="titulo" <?php echo ($campo === "titulo") ? 'selected' : ''; ?>>Título</option>
@@ -107,7 +107,7 @@ function truncateText($text, $limit = 200) {
         <?php foreach ($resultados as $fila): ?>
           <article class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 p-6">
             <h2 class="text-2xl font-semibold text-indigo-700 mb-3">
-              <a href="verTfg.php?id=<?= $fila['id']; ?>" class="hover:underline">
+              <a href="verTfg?id=<?= $fila['id']; ?>" class="hover:underline">
                 <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
               </a>
             </h2>
@@ -150,7 +150,7 @@ function truncateText($text, $limit = 200) {
         <ul class="flex justify-center space-x-2">
           <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <li>
-              <a href="index.php?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>" class="px-4 py-2 rounded-md <?php echo ($page == $i) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
+              <a href="index?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>" class="px-4 py-2 rounded-md <?php echo ($page == $i) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
                 <?= $i ?>
               </a>
             </li>

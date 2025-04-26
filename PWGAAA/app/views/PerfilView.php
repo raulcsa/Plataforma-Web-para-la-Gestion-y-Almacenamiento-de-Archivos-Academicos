@@ -64,7 +64,7 @@
 
       <!-- Botón de Editar Perfil -->
       <div class="mt-8">
-        <a href="editarPerfil.php" class="block w-full bg-indigo-600 text-white text-center py-3 rounded hover:bg-indigo-700 transition-colors">
+        <a href="editarPerfil" class="block w-full bg-indigo-600 text-white text-center py-3 rounded hover:bg-indigo-700 transition-colors">
           Editar Perfil
         </a>
       </div>

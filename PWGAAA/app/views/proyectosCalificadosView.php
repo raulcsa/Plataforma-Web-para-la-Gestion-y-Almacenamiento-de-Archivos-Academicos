@@ -50,7 +50,7 @@ function formatDate($dateString) {
         <?php foreach ($resultados as $fila): ?>
           <div class="bg-white shadow rounded-lg p-6">
             <h3 class="text-xl font-semibold text-indigo-600 mb-2">
-              <a href="verTfg.php?id=<?= $fila['id']; ?>">
+              <a href="verTfg?id=<?= $fila['id']; ?>">
                 <?= htmlspecialchars($fila['titulo']); ?>
               </a>
             </h3>

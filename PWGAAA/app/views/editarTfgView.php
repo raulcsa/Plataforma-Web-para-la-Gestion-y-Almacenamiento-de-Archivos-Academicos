@@ -46,7 +46,7 @@ $currentIntegrantes = array_filter([
       </h1>
 
       <?php if ($isEditor): ?>
-        <form action="editarTfg.php?id=<?= $tfg['id'] ?>" method="POST" enctype="multipart/form-data">
+        <form action="editarTfg?id=<?= $tfg['id'] ?>" method="POST" enctype="multipart/form-data">
       <?php endif; ?>
 
         <div class="mb-4">
@@ -140,7 +140,7 @@ $currentIntegrantes = array_filter([
               class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition">
               Calificar
           </button>
-          <a href="proyectosPorCalificar.php"
+          <a href="proyectosPorCalificar"
               class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition">
               Atrás
           </a>
