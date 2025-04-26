@@ -8,3 +8,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     $controller->mostrarFormulario();
 }
+?>

@@ -11,3 +11,4 @@ if (!isset($_SESSION['usuario'])) {
 $user = $_SESSION['usuario'];
 
 require_once __DIR__ . '/../views/PerfilView.php';
+?>

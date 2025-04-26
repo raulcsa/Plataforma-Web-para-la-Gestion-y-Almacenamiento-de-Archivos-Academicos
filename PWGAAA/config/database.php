@@ -13,6 +13,4 @@ function realizarquery($conexion,$texto,$argumentos=null,$isfetch=false)
     $comand->execute($argumentos);
     if($isfetch) return $comand->fetchAll();
 }
-
-
 ?>

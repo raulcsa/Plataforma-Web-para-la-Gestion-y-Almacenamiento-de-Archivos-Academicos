@@ -105,3 +105,4 @@ class UploadController {
         include __DIR__ . '/../views/subidaproyectosView.php';
     }
 }
+?>
