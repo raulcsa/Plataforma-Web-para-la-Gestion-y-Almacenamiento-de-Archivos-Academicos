@@ -95,4 +95,52 @@ class CorrectionController {
     header('Location: proyectosPorCalificar.php');
     exit;
 }
+    // GET  /correction.php?action=calificar&id=123
+    public function calificar(): void {
+        session_start();
+        $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
+        if (!in_array($rol, ['profesor','admin'])) {
+            header('Location: index.php');
+            exit;
+        }
+
+        $id = (int)($_GET['id'] ?? 0);
+        $tfg = Tfg::obtenerPorId($id);
+        $alumnosNotas = uploadTfg::obtenerNotasPorTfg($id);
+        require_once __DIR__ . '/../views/calificarView.php';
+    }
+
+    // POST /correction.php?action=validar&id=123
+    public function validar(): void {
+        session_start();
+        $rol = strtolower($_SESSION['usuario']['rol'] ?? '');
+        if (!in_array($rol, ['profesor','admin'])) {
+            header('Location: index.php');
+            exit;
+        }
+
+        $id = (int)($_GET['id'] ?? 0);
+        $notas       = $_POST['nota']       ?? [];
+        $comentarios = $_POST['comentario'] ?? [];
+
+        // Validar que cada alumno tenga nota del 1 al 10
+        foreach ($notas as $alumnoId => $valor) {
+            $n = floatval($valor);
+            if ($n < 1 || $n > 10) {
+                $_SESSION['mensaje'] = "La nota de cada alumno debe estar entre 1 y 10.";
+                header("Location: correction.php?action=calificar&id=$id");
+                exit;
+            }
+        }
+
+        // Guardar cada nota+comentario
+        foreach ($notas as $alumnoId => $valor) {
+            $c = trim($comentarios[$alumnoId] ?? '');
+            uploadTfg::actualizarNota($id, (int)$alumnoId, $valor, $c);
+        }
+
+        // Al terminar, redirigimos a proyectos ya calificados
+        header('Location: proyectosCalificados.php');
+        exit;
+    }
 }

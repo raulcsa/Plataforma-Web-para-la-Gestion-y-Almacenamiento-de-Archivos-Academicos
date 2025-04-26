@@ -145,27 +145,23 @@ $currentIntegrantes = array_filter([
             <?php endif; ?>
           <?php endif; ?>
         </div>
-
         <?php if ($isEditor): ?>
-        <div class="flex gap-4">
-          <button type="submit"
-            class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition">
-            Guardar cambios
-          </button>
-          <a href="proyectosPorCalificar.php"
-            class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition">
-            Atrás
-          </a>
-        </div>
         </form>
-        <?php else: ?>
-          <a href="index.php"
-            class="mt-6 block w-full bg-gray-200 text-gray-800 py-2 rounded text-center hover:bg-gray-300 transition">
-            Volver al listado
-          </a>
+        <div class="flex gap-4 mt-6">
+            <!-- Enlace “Calificar” que siempre redirige a la página de calificación -->
+            <a href="correction.php?action=editar&id=<?= $tfg['id'] ?>"
+                class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition text-center">
+                Calificar
+            </a>
+            <!-- Volver atrás a la lista de pendientes -->
+            <a href="proyectosPorCalificar.php"
+                class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition">
+                Atrás
+            </a>
+        </div>
         <?php endif; ?>
-    </div>
-  </main>
+        </div>
+        </main>
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto py-4 text-center text-gray-600">

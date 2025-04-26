@@ -14,17 +14,38 @@ class Tfg
                       LEFT JOIN usuarios u3 ON t.integrante3 = u3.id ";
 
         if ($busqueda === "") {
-            // Sin filtro: obtenemos el total de registros sin limitación
-            $stmtTotal = $db->query("SELECT COUNT(*) FROM tfgs");
+            // Sólo TFGs completamente calificados (todas las notas != NULL)
+            // 1) Contar cuántos TFGs cumplen la condición
+            $stmtTotal = $db->query("
+                SELECT COUNT(*) 
+                FROM tfgs t
+                WHERE EXISTS (
+                SELECT 1 FROM notas n WHERE n.tfg_id = t.id
+                )
+                AND NOT EXISTS (
+                SELECT 1 FROM notas n WHERE n.tfg_id = t.id AND n.nota IS NULL
+                )
+            ");
             $total = $stmtTotal->fetchColumn();
 
-            $query = $baseQuery . "ORDER BY t.fecha_subida DESC, t.id DESC LIMIT ? OFFSET ?";
-            $stmt = $db->prepare($query);
-            $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
-            $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
-            $stmt->execute();
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } else {
+            // 2) Traer los resultados paginados
+            $query = $baseQuery . "
+                WHERE EXISTS (
+                SELECT 1 FROM notas n WHERE n.tfg_id = t.id
+                )
+                AND NOT EXISTS (
+                SELECT 1 FROM notas n WHERE n.tfg_id = t.id AND n.nota IS NULL
+                )
+                ORDER BY t.fecha_subida DESC, t.id DESC
+                LIMIT ? OFFSET ?
+                ";
+                $stmt = $db->prepare($query);
+                $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
+                $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+                $stmt->execute();
+                $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        else {
             // Si se realiza una búsqueda, definimos la cláusula WHERE
             if ($campo === "integrantes") {
                 $whereClause = "WHERE CONCAT_WS(' ', u1.nombre, u2.nombre, u3.nombre) LIKE ?";

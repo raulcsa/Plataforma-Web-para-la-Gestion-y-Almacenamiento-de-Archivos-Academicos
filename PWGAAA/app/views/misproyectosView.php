@@ -42,11 +42,18 @@
             <p class="text-sm text-gray-700 mb-1">
               <?php echo htmlspecialchars($proyecto['resumen']); ?>
             </p>
-            <?php if (isset($proyecto['nota'])): ?>
-              <p class="text-sm text-gray-800">
-                <strong>Nota:</strong> <?php echo htmlspecialchars($proyecto['nota']); ?>
-              </p>
-            <?php endif; ?>
+          <?php if (isset($proyecto['nota'])): ?>
+              <div class="mt-2 p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
+              <span class="font-medium text-gray-700">Nota:</span>
+              <p class="mt-1 text-gray-800"><?= htmlspecialchars($proyecto['nota']); ?></p>
+            </div>
+          <?php endif; ?>
+          <?php if (!empty($proyecto['comentario'])): ?>
+              <div class="mt-2 p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
+                <span class="font-medium text-gray-700">Comentario:</span>
+                <p class="mt-1 text-gray-800"><?= nl2br(htmlspecialchars($proyecto['comentario'])); ?></p>
+              </div>
+          <?php endif; ?>
           </div>
         <?php endforeach; ?>
       </div>

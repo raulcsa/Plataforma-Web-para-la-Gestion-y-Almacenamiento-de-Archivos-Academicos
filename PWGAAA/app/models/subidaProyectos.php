@@ -107,5 +107,34 @@ class uploadTfg {
         $stmt->execute([$tfgId]);
     }
 
+    public static function obtenerNotasPorTfg(int $tfgId): array {
+        $db = conectarDB();
+        $sql = "
+          SELECT u.id AS alumno_id, u.nombre, n.nota, n.comentario
+          FROM notas n
+          JOIN usuarios u ON u.id = n.alumno_id
+          WHERE n.tfg_id = ?
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$tfgId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Actualiza la nota y comentario de un alumno en un TFG
+    public static function actualizarNota(
+        int $tfgId,
+        int $alumnoId,
+        float $nota,
+        ?string $comentario
+    ): void {
+        $db = conectarDB();
+        $stmt = $db->prepare("
+          UPDATE notas
+            SET nota = ?, comentario = ?
+          WHERE tfg_id = ? AND alumno_id = ?
+        ");
+        $stmt->execute([$nota, $comentario, $tfgId, $alumnoId]);
+    }
+
 }
 ?>
