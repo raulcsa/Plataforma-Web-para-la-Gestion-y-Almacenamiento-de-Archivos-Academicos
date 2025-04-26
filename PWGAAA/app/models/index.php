@@ -116,6 +116,51 @@ class Tfg
         return ['resultados' => $resultados, 'total' => $total];
     }
 
+    public static function actualizar(int $id, string $titulo, string $resumen, string $keywords, array $integrantes): void {
+        $db = conectarDB();
+        $stmt = $db->prepare("
+            UPDATE tfgs
+               SET titulo = ?, resumen = ?, palabras_clave = ?,
+                   integrante1 = ?, integrante2 = ?, integrante3 = ?
+             WHERE id = ?
+        ");
+        $i1 = $integrantes[0] ?? null;
+        $i2 = $integrantes[1] ?? null;
+        $i3 = $integrantes[2] ?? null;
+        $stmt->execute([$titulo, $resumen, $keywords, $i1, $i2, $i3, $id]);
+
+        // Repoblamos la tabla notas con los nuevos integrantes
+        self::registrarNotasFromTfg($id);
+    }
+
+    public static function registrarNotasFromTfg(int $tfgId): void {
+        $db = conectarDB();
+        // 1) Obtenemos los integrantes desde tfgs
+        $stmt = $db->prepare("
+            SELECT integrante1, integrante2, integrante3
+              FROM tfgs
+             WHERE id = ?
+        ");
+        $stmt->execute([$tfgId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) throw new Exception("TFG #$tfgId no encontrado al registrar notas");
+
+        // 2) Borramos notas previas
+        $db->prepare("DELETE FROM notas WHERE tfg_id = ?")
+           ->execute([$tfgId]);
+
+        // 3) Insertamos notas NULL para cada integrante
+        $ins = $db->prepare("
+            INSERT INTO notas (tfg_id, alumno_id, nota)
+            VALUES (?, ?, NULL)
+        ");
+        foreach (['integrante1','integrante2','integrante3'] as $col) {
+            if (!empty($row[$col])) {
+                $ins->execute([$tfgId, (int)$row[$col]]);
+            }
+        }
+    }
+
     public static function obtenerPorId($id)
     {
         $db = conectarDB();

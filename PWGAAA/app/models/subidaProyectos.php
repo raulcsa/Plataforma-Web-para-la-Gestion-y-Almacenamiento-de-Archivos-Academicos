@@ -71,5 +71,41 @@ class uploadTfg {
         $stmt = $db->prepare("INSERT INTO archivos (tfg_id, nombre, ruta, tipo, tamaño) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$tfg_id, $nombre, $ruta, $tipo, $tamaño]);
     }
+
+    public static function reemplazarArchivo(int $tfg_id, string $nombre, string $ruta, string $tipo, int $tamaño) {
+        $db = conectarDB();
+        // 1) Opcionalmente, recupera la ruta física del viejo PDF y bórralo del disco:
+        $stmt = $db->prepare("SELECT ruta FROM archivos WHERE tfg_id = ? AND tipo = ?");
+        $stmt->execute([$tfg_id, $tipo]);
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $viejaRuta = dirname(realpath(__DIR__ . '/../../public')) . '/' . ltrim($row['ruta'], '/');
+            if (file_exists($viejaRuta)) {
+                @unlink($viejaRuta);
+            }
+        }
+        // 2) Borra los registros antiguos en BD
+        $stmt = $db->prepare("DELETE FROM archivos WHERE tfg_id = ? AND tipo = ?");
+        $stmt->execute([$tfg_id, $tipo]);
+    
+        // 3) Inserta el nuevo
+        self::registrarArchivo($tfg_id, $nombre, $ruta, $tipo, $tamaño);
+    }
+
+        // Devuelve el registro único del PDF actual para ese TFG
+    public static function obtenerArchivoPorTfg(int $tfgId): ?array {
+        $db = conectarDB();
+        $stmt = $db->prepare("SELECT id, nombre, ruta FROM archivos WHERE tfg_id = ? LIMIT 1");
+        $stmt->execute([$tfgId]);
+        $f = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $f ?: null;
+    }
+
+        // Borra el registro antiguo en la tabla archivos
+    public static function borrarRegistroArchivo(int $tfgId): void {
+        $db = conectarDB();
+        $stmt = $db->prepare("DELETE FROM archivos WHERE tfg_id = ?");
+        $stmt->execute([$tfgId]);
+    }
+
 }
 ?>
