@@ -42,6 +42,30 @@ class uploadTfg {
         }
     }
 
+    public static function registrarNotasFromTfg(int $tfgId) {
+        $db = conectarDB();
+        $stmt = $db->prepare(
+            "SELECT integrante1, integrante2, integrante3
+             FROM tfgs
+             WHERE id = ?"
+        );
+        $stmt->execute([$tfgId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            throw new Exception("TFG #{$tfgId} no encontrado al registrar notas");
+        }
+        $integrantes = [];
+        foreach (['integrante1','integrante2','integrante3'] as $col) {
+            if (!empty($row[$col])) {
+                $integrantes[] = (int)$row[$col];
+            }
+        }
+        if (empty($integrantes)) {
+            throw new Exception("El TFG #{$tfgId} no tiene ningún integrante válido.");
+        }
+        self::registrarNotas($tfgId, $integrantes);
+    }
+
     public static function registrarArchivo($tfg_id, $nombre, $ruta, $tipo, $tamaño) {
         $db = conectarDB();
         $stmt = $db->prepare("INSERT INTO archivos (tfg_id, nombre, ruta, tipo, tamaño) VALUES (?, ?, ?, ?, ?)");
