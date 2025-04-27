@@ -109,16 +109,46 @@ class uploadTfg {
 
     public static function obtenerNotasPorTfg(int $tfgId): array {
         $db = conectarDB();
+        
         $sql = "
-          SELECT u.id AS alumno_id, u.nombre, n.nota, n.comentario
-          FROM notas n
-          JOIN usuarios u ON u.id = n.alumno_id
-          WHERE n.tfg_id = ?
+            SELECT u.id AS alumno_id, u.nombre, n.nota, n.comentario
+            FROM notas n
+            INNER JOIN usuarios u ON u.id = n.alumno_id
+            WHERE n.tfg_id = ?
         ";
+        
         $stmt = $db->prepare($sql);
         $stmt->execute([$tfgId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $notas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Si no hay notas aún, construimos manualmente a partir de los integrantes del TFG
+        if (empty($notas)) {
+            $stmt2 = $db->prepare("
+                SELECT u.id AS alumno_id, u.nombre
+                FROM tfgs t
+                JOIN usuarios u ON u.id IN (t.integrante1, t.integrante2, t.integrante3)
+                WHERE t.id = ?
+            ");
+            $stmt2->execute([$tfgId]);
+            $notas = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Inicializamos nota y comentario como nulos
+            foreach ($notas as &$n) {
+                $n['nota'] = null;
+                $n['comentario'] = null;
+            }
+        }
+    
+        return $notas;
     }
+    
+    public static function obtenerUsuarioPorId($id) {
+    $db = conectarDB();
+    $stmt = $db->prepare("SELECT id, nombre FROM usuarios WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
     
     // Actualiza la nota y comentario de un alumno en un TFG
     public static function actualizarNota(

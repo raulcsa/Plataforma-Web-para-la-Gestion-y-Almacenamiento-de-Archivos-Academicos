@@ -8,6 +8,33 @@ $isEditor = in_array(strtolower($role), ['profesor','admin']);
 require_once __DIR__ . '/../models/subidaProyectos.php';
 $alumnos = uploadTfg::obtenerAlumnos();
 
+// Cargar también los integrantes actuales, aunque no sean alumnos
+$integrantesActuales = [];
+foreach ([$tfg['integrante1'], $tfg['integrante2'], $tfg['integrante3']] as $integranteId) {
+    if (!empty($integranteId)) {
+        $integrantesActuales[$integranteId] = true;
+    }
+}
+
+// Ahora verificamos si algún integrante actual falta en la lista de alumnos
+foreach ($integrantesActuales as $id => $_) {
+    $existe = false;
+    foreach ($alumnos as $a) {
+        if ((int)$a['id'] === (int)$id) {
+            $existe = true;
+            break;
+        }
+    }
+    if (!$existe) {
+        // Buscar manualmente en la tabla usuarios y añadirlo
+        $usuario = uploadTfg::obtenerUsuarioPorId($id);
+        if ($usuario) {
+            $alumnos[] = $usuario;
+        }
+    }
+}
+
+
 $currentIntegrantes = array_filter([
     $tfg['integrante1'],
     $tfg['integrante2'],
@@ -158,19 +185,19 @@ $currentIntegrantes = array_filter([
       &copy; <?= date('Y') ?> PWGAAA. Todos los derechos reservados.
     </div>
   </footer>
-
   <script>
-    $(document).ready(function(){
-      <?php if ($isEditor): ?>
-        $('#integrantes').select2({
-          placeholder: "Selecciona hasta 3 integrantes",
-          maximumSelectionLength: 3,
-          width:'100%'
-        });
-      <?php endif; ?>
-      $('#userDropdownButton').click(()=>$('#userDropdownMenu').toggleClass('hidden'));
-      $('#mobileMenuButton').click(()=>$('#mobileMenu').toggleClass('hidden'));
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', function () {
+    <?php if ($isEditor): ?>
+      $('#integrantes').select2({
+        placeholder: "Selecciona hasta 3 integrantes",
+        maximumSelectionLength: 3,
+        width: '100%'
+      });
+    <?php endif; ?>
+  });
+</script>
+
+
+
 </body>
 </html>

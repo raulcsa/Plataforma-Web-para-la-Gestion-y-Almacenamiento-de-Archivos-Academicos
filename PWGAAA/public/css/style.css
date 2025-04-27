@@ -1,0 +1,102 @@
+/* Archivo: /public/assets/css/style.css */
+
+/* General */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #1e3a8a; /* Indigo más serio */
+}
+
+/* Enlaces */
+a {
+    color: #4f46e5; /* Indigo claro */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #4338ca; /* Indigo más oscuro */
+    text-decoration: underline;
+}
+
+/* Botones */
+button, .btn {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #4338ca;
+}
+
+/* Formularios */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #4f46e5;
+    outline: none;
+}
+
+/* Cards (como los TFGs) */
+.card {
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Footer */
+footer {
+    background-color: #f1f5f9;
+    color: #6b7280;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1e3a8a;
+}
+
+.navbar a {
+    color: #f9fafb;
+}
+
+.navbar a:hover {
+    color: #c7d2fe;
+}
+
+/* Pequeñas animaciones */
+.transition {
+    transition: all 0.3s ease-in-out;
+}

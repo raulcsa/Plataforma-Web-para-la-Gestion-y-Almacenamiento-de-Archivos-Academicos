@@ -163,8 +163,17 @@ if (session_status() === PHP_SESSION_NONE) {
       // Para otros usuarios (alumnos) se permite siempre seleccionar hasta 2
       initSelect2(2, "Selecciona hasta 2 alumnos");
     <?php endif; ?>
-
-    // Toggle del dropdown del usuario, si corresponde
+  });
+</script>
+<script>
+    // Toggle menú móvil
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  
+    // Toggle dropdown usuario
     const userDropdownButton = document.getElementById('userDropdownButton');
     const userDropdownMenu = document.getElementById('userDropdownMenu');
     if (userDropdownButton) {
@@ -172,7 +181,6 @@ if (session_status() === PHP_SESSION_NONE) {
         userDropdownMenu.classList.toggle('hidden');
       });
     }
-  });
-</script>
+  </script>
 </body>
 </html>

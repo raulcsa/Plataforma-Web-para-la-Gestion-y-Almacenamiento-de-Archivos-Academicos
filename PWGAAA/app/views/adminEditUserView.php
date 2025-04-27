@@ -27,74 +27,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
 </head>
 <body class="min-h-screen bg-gradient-to-br from-indigo-50 to-indigo-100 flex flex-col">
   <!-- Navbar -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
-      <nav class="hidden md:flex items-center space-x-6">
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <div class="relative">
-            <button id="userDropdownButton" class="flex items-center text-gray-700 hover:text-indigo-600 focus:outline-none">
-              <i class="bi bi-person-circle text-2xl"></i>
-              <span class="ml-2"><?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?php echo htmlspecialchars($_SESSION['usuario']['rol']); ?>)</span>
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden z-20">
-              <a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
-              <a href="panelAdmin" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
-              <a href="misproyectos" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
-              <a href="upload" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
-              <div class="border-t border-gray-200"></div>
-              <a href="logout" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Cerrar sesión</a>
-            </div>
-          </div>
-        <?php else: ?>
-          <a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
-            <i class="bi bi-person-circle text-2xl"></i>
-            <span class="ml-2">Login</span>
-          </a>
-        <?php endif; ?>
-      </nav>
-      <!-- Botón para móviles -->
-      <div class="md:hidden">
-        <button id="mobileMenuButton" class="text-gray-700 hover:text-indigo-600 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <!-- Menú móvil -->
-    <nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
-      <ul class="px-4 py-2">
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <li class="py-2">
-            <a href="perfil" class="block text-gray-700 hover:text-indigo-600">Perfil</a>
-          </li>
-          <li class="py-2">
-            <a href="panelAdmin" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a>
-          </li>
-          <li class="py-2">
-            <a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a>
-          </li>
-          <li class="py-2">
-            <a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a>
-          </li>
-          <li class="py-2 border-t border-gray-200 mt-2">
-            <a href="logout" class="block text-gray-700 hover:text-indigo-600">Cerrar sesión</a>
-          </li>
-        <?php else: ?>
-          <li class="py-2">
-            <a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
-              <i class="bi bi-person-circle text-2xl"></i>
-              <span class="ml-2">Login</span>
-            </a>
-          </li>
-        <?php endif; ?>
-      </ul>
-    </nav>
-  </header>
+  <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
 
   <!-- Contenido principal -->
   <main class="flex-grow container mx-auto px-4 py-8">
