@@ -18,10 +18,10 @@ function sendEmail(string $to, string $subject, string $body, array $attachments
         // Configuración del servidor SMTP
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
+        $mail->SMTPAuth   = false;
         $mail->Username   = 'pwgavisos@gmail.com';
         $mail->Password   = 'ixju yykf zmuo rvrc';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
         // Remitente y destinatario
