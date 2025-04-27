@@ -166,5 +166,18 @@ class uploadTfg {
         $stmt->execute([$nota, $comentario, $tfgId, $alumnoId]);
     }
 
+    public static function obtenerAlumnosPorTfg(int $tfgId): array {
+        $db = conectarDB();
+        $sql = "SELECT a.id, a.nombre, a.email
+                FROM alumnos a
+                JOIN notas n ON n.alumno_id = a.id
+                WHERE n.tfg_id = :tfgId";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':tfgId', $tfgId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
+
+
