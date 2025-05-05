@@ -73,5 +73,23 @@ class Usuario {
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public static function obtenerPorEmail($email) {
+    $db = conectarDB();
+    $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = ?");
+    $stmt->execute([$email]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public static function registrarDesdeGoogle($nombre, $email) {
+    $db = conectarDB();
+    $rol = 'alumno';
+    $password = password_hash(bin2hex(random_bytes(10)), PASSWORD_BCRYPT); // Contraseña aleatoria
+
+    $stmt = $db->prepare("INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$nombre, $email, $password, $rol]);
+}
+
+
 }
 ?>

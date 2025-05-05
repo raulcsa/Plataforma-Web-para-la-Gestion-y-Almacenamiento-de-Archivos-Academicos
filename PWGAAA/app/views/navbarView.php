@@ -59,33 +59,44 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
   </div>
 
-  <!-- Menú móvil -->
-  <nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
-    <ul class="px-4 py-4 space-y-2">
-      <?php if (isset($_SESSION['usuario'])): ?>
-        <!--<li><a href="perfil" class="block text-gray-700 hover:text-indigo-600">Perfil</a></li>-->
-        <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-          <li><a href="panelAdmin" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a></li>
-          <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
-          <li><a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a></li>
-          <li><a href="proyectosPorCalificar" class="block text-gray-700 hover:text-indigo-600">Por Calificar</a></li>
-          <li><a href="proyectosCalificados" class="block text-gray-700 hover:text-indigo-600">Calificados</a></li>
-        <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
-          <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
-          <li><a href="proyectosPorCalificar" class="block text-gray-700 hover:text-indigo-600">Por Calificar</a></li>
-          <li><a href="proyectosCalificados" class="block text-gray-700 hover:text-indigo-600">Calificados</a></li>
-        <?php else: ?>
-          <li><a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a></li>
-          <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
-        <?php endif; ?>
-        <li class="border-t border-gray-200 pt-2"><a href="logout" class="block text-red-600 hover:text-red-700">Cerrar sesión</a></li>
+<!-- Menú móvil -->
+<nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
+  <ul class="px-4 py-4 space-y-2">
+    <?php if (isset($_SESSION['usuario'])): ?>
+      <!-- Mostrar usuario en móviles -->
+      <li class="flex items-center text-indigo-700 font-semibold mb-2">
+        <i class="bi bi-person-circle mr-2 text-xl"></i>
+        <?= htmlspecialchars($_SESSION['usuario']['nombre']); ?> (<?= htmlspecialchars($_SESSION['usuario']['rol']); ?>)
+      </li>
+      <li class="border-t border-gray-200 pt-2"></li>
+      <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
+        <li><a href="panelAdmin" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a></li>
+        <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
+        <li><a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a></li>
+        <li><a href="proyectosPorCalificar" class="block text-gray-700 hover:text-indigo-600">Por Calificar</a></li>
+        <li><a href="proyectosCalificados" class="block text-gray-700 hover:text-indigo-600">Calificados</a></li>
+      <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
+        <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
+        <li><a href="proyectosPorCalificar" class="block text-gray-700 hover:text-indigo-600">Por Calificar</a></li>
+        <li><a href="proyectosCalificados" class="block text-gray-700 hover:text-indigo-600">Calificados</a></li>
       <?php else: ?>
-        <li><a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
-          <i class="bi bi-person-circle text-2xl"></i><span class="ml-2">Login</span>
-        </a></li>
+        <li><a href="misproyectos" class="block text-gray-700 hover:text-indigo-600">Mis Proyectos</a></li>
+        <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
       <?php endif; ?>
-    </ul>
-  </nav>
+      <li class="border-t border-gray-200 pt-2">
+        <a href="logout" class="block text-red-600 hover:text-red-700">Cerrar sesión</a>
+      </li>
+    <?php else: ?>
+      <li>
+        <a href="login" class="flex items-center text-gray-700 hover:text-indigo-600">
+          <i class="bi bi-person-circle text-2xl"></i>
+          <span class="ml-2">Login</span>
+        </a>
+      </li>
+    <?php endif; ?>
+  </ul>
+</nav>
+
 </header>
 
 <script>
@@ -109,5 +120,16 @@ if (session_status() === PHP_SESSION_NONE) {
     });
   }
 </script>
+<script>
+  const mobileMenuButton = document.getElementById('mobileMenuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', function () {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>
+
 
 
