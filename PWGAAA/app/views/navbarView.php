@@ -21,19 +21,19 @@ if (session_status() === PHP_SESSION_NONE) {
           </button>
           <div id="userDropdownMenu" class="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg border border-gray-200 hidden transition-all duration-300">
             <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
-              <a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+              <!--<a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>-->
               <a href="panelAdmin" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Panel Admin</a>
               <a href="upload" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
               <a href="misproyectos" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
               <a href="proyectosPorCalificar" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por Calificar</a>
               <a href="proyectosCalificados" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
             <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
-              <a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+              <!--<a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>-->
               <a href="upload" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
               <a href="proyectosPorCalificar" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos por Calificar</a>
               <a href="proyectosCalificados" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Proyectos Calificados</a>
             <?php else: ?>
-              <a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>
+              <!--<a href="perfil" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Perfil</a>-->
               <a href="misproyectos" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Mis Proyectos</a>
               <a href="upload" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Subir Proyecto</a>
             <?php endif; ?>
@@ -63,7 +63,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <nav id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
     <ul class="px-4 py-4 space-y-2">
       <?php if (isset($_SESSION['usuario'])): ?>
-        <li><a href="perfil" class="block text-gray-700 hover:text-indigo-600">Perfil</a></li>
+        <!--<li><a href="perfil" class="block text-gray-700 hover:text-indigo-600">Perfil</a></li>-->
         <?php if ($_SESSION['usuario']['rol'] === 'admin'): ?>
           <li><a href="panelAdmin" class="block text-gray-700 hover:text-indigo-600">Panel Admin</a></li>
           <li><a href="upload" class="block text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>

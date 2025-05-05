@@ -131,24 +131,5 @@ class CorrectionController {
 
         header('Location: proyectosCalificados.php');
         exit;
-
-          // Enviar notificación por correo a los alumnos
-        require_once __DIR__ . "../../app/mailer.php";
-        $tfg = Tfg::obtenerPorId($id); // Asegurar que $tfg esté definido
-        $alumnos = uploadTfg::obtenerAlumnosPorTfg($id);
-        foreach ($alumnos as $alumno) {
-            $to = $alumno['email'];
-            $subject = "Calificación TFG: {$tfg['titulo']}";
-            $body = "<p>Hola {$alumno['nombre']},</p>";
-            $body .= "<p>Tu proyecto ha sido validado y ya es visible para el resto de usuarios, además puedes consultar tu nota.</p>";
-            $body .= "<p>Comentario: " . htmlspecialchars($comentarios[$alumno['id']]) . "</p>";
-            if (!sendEmail($to, $subject, $body)) {
-                error_log("Error enviando correo a: $to");
-            }
-        }
-
-        // Finalmente redirigir
-        header('Location: proyectosCalificados.php');
-        exit;
     }
 }
