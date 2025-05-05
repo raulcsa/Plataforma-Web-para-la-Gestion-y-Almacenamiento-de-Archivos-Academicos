@@ -28,6 +28,13 @@ if (session_status() === PHP_SESSION_NONE) {
   <main class="flex-grow flex items-center justify-center px-4">
     <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
       <h2 class="text-2xl font-bold text-center text-indigo-800 mb-6">Iniciar Sesión</h2>
+
+      <?php if (isset($_GET['expirada'])): ?>
+        <div class="mb-4 p-3 bg-yellow-100 text-yellow-800 border border-yellow-300 rounded">
+          Tu sesión ha expirado por inactividad. Por favor, inicia sesión de nuevo.
+        </div>
+      <?php endif; ?>
+
       <?php if (!empty($mensaje)): ?>
       <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
         <?php echo htmlspecialchars($mensaje); ?>

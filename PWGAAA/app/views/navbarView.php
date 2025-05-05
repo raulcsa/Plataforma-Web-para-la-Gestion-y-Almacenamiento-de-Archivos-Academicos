@@ -2,6 +2,22 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+$tiempoLimite = 300;
+
+// Verificamos si hay una sesión activa y tiempo de último acceso
+if (isset($_SESSION['ultimoAcceso'])) {
+    $inactividad = time() - $_SESSION['ultimoAcceso'];
+    if ($inactividad > $tiempoLimite) {
+        session_unset();
+        session_destroy();
+        header("Location: login.php?expirada=1");
+        exit;
+    }
+}
+
+// Guardamos el tiempo actual como última actividad
+$_SESSION['ultimoAcceso'] = time();
 ?>
 
 <!-- Navbar -->
