@@ -1,37 +1,31 @@
 <?php
-// app/utils/mailer.php
+/// app/mailer.php
 
+require_once __DIR__ . '/../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-
-function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml): bool {
+function enviarCorreo($para, $asunto, $cuerpoHTML): bool {
     $mail = new PHPMailer(true);
-
     try {
-        // Configuración del servidor SMTP de Gmail
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'pwgaaa.tfg@gmail.com';     // Correo emisor
-        $mail->Password   = 'jlubqkpmuoekzprz';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'pwgaaa.tfg@gmail.com';
+        $mail->Password = 'jlubqkpmuoekzprz';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port = 587;
 
-        // Configuración del correo
         $mail->setFrom('pwgaaa.tfg@gmail.com', 'PWGAAA - Plataforma TFG');
-        $mail->addAddress($destinatario);
-
+        $mail->addAddress($para);
         $mail->isHTML(true);
         $mail->Subject = $asunto;
-        $mail->Body    = $cuerpoHtml;
+        $mail->Body = $cuerpoHTML;
 
-        $mail->send();
-        return true;
+        return $mail->send();
     } catch (Exception $e) {
-        error_log("Error al enviar correo: {$mail->ErrorInfo}");
+        error_log("Mailer error: " . $mail->ErrorInfo);
         return false;
     }
 }
+

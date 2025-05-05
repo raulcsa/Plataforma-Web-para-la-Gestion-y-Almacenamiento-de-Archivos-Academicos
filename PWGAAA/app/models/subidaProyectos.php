@@ -143,11 +143,12 @@ class uploadTfg {
     }
     
     public static function obtenerUsuarioPorId($id) {
-    $db = conectarDB();
-    $stmt = $db->prepare("SELECT id, nombre FROM usuarios WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+        $db = conectarDB();
+        $stmt = $db->prepare("SELECT id, nombre, email FROM usuarios WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 
     
     // Actualiza la nota y comentario de un alumno en un TFG

@@ -110,11 +110,12 @@ class CorrectionController {
             header('Location: index.php');
             exit;
         }
-
+    
         $id = (int)($_GET['id'] ?? 0);
         $notas       = $_POST['nota']       ?? [];
         $comentarios = $_POST['comentario'] ?? [];
-
+    
+        // Validación de notas
         foreach ($notas as $alumnoId => $valor) {
             $n = floatval($valor);
             if ($n < 1 || $n > 10) {
@@ -123,12 +124,34 @@ class CorrectionController {
                 exit;
             }
         }
-
+    
+        // Requiere el mailer
+        require_once __DIR__ . '/../mailer.php';
+    
+        // Guardado y envío de correos
         foreach ($notas as $alumnoId => $valor) {
             $c = trim($comentarios[$alumnoId] ?? '');
             uploadTfg::actualizarNota($id, (int)$alumnoId, $valor, $c);
+    
+            // Obtener info del usuario (incluido email)
+            $usuario = uploadTfg::obtenerUsuarioPorId($alumnoId);
+            if ($usuario && filter_var($usuario['email'], FILTER_VALIDATE_EMAIL)) {
+                $nombreProfesor = $_SESSION['usuario']['nombre'] ?? 'El profesor';
+                $link = 'https://www.pwgaaa.xyz/proyectosCalificados';
+                $asunto = 'Tu TFG ha sido corregido';
+    
+                $mensaje = "
+                    <p>Hola <strong>{$usuario['nombre']}</strong>,</p>
+                    <p>El profesor <strong>{$nombreProfesor}</strong> ha corregido tu Trabajo de Fin de Grado.</p>
+                    <p>Puedes consultar tu nota en el siguiente enlace:</p>
+                    <p><a href='{$link}'>{$link}</a></p>
+                    <p>Gracias por usar la plataforma <strong>PWGAAA</strong>.</p>
+                ";
+    
+                enviarCorreo($usuario['email'], $asunto, $mensaje);
+            }
         }
-
+    
         header('Location: proyectosCalificados.php');
         exit;
     }
