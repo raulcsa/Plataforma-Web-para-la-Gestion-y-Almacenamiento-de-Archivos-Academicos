@@ -9,11 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión - PWGAAA</title>
-  <!-- Cargamos Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Tipografía Inter para un look moderno -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Iconos de Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <style>
     body {
@@ -22,14 +19,12 @@ if (session_status() === PHP_SESSION_NONE) {
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
-  <!-- Navbar -->
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="index" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
     </div>
   </header>
 
-  <!-- Contenedor del formulario de login -->
   <main class="flex-grow flex items-center justify-center px-4">
     <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
       <h2 class="text-2xl font-bold text-center text-indigo-800 mb-6">Iniciar Sesión</h2>
@@ -51,13 +46,21 @@ if (session_status() === PHP_SESSION_NONE) {
           <i class="bi bi-box-arrow-in-right mr-2"></i> Iniciar Sesión
         </button>
       </form>
+
+      <div class="mt-6 flex flex-col items-center">
+        <p class="text-gray-600 mb-2">o</p>
+        <a href="google-login.php" class="w-full flex justify-center items-center gap-3 border border-gray-300 rounded py-2 px-4 hover:bg-gray-50 transition">
+          <img src="https://developers.google.com/identity/images/g-logo.png" class="w-5 h-5" alt="Google logo">
+          <span class="text-gray-700 font-medium">Iniciar sesión con Google</span>
+        </a>
+      </div>
+
       <p class="mt-6 text-center text-gray-600">
         ¿No tienes cuenta? <a href="registro" class="text-indigo-600 hover:underline">Regístrate</a>
       </p>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
       <p>&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
