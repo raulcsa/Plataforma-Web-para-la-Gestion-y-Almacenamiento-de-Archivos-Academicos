@@ -72,9 +72,50 @@ function truncateText($text, $limit = 200) {
       padding: 15px 0;
     }
   </style>
+<?php
+$notificaciones = ['subida', 'registro'];
+$parametroActivo = null;
+
+foreach ($notificaciones as $n) {
+    if (isset($_GET[$n]) && $_GET[$n] === 'ok') {
+        $parametroActivo = $n;
+        break;
+    }
+}
+?>
+
+<?php if ($parametroActivo): ?>
+  <script>
+    if (window.history.replaceState) {
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  </script>
+<?php endif; ?>
+
+
 </head>
 <body>
 <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
+<?php if ($parametroActivo === 'subida'): ?>
+  <div id="popupNoti" class="max-w-xl mx-auto mt-6 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded shadow text-center">
+  ✅ TFG subido correctamente, ahora está pendiente de ser corregido por el tutor correspondiente.
+  </div>
+<?php elseif ($parametroActivo === 'registro'): ?>
+  <div id="popupNoti" class="max-w-xl mx-auto mt-6 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded shadow text-center">
+  ✅ Registro realizado correctamente.
+  </div>
+<?php endif; ?>
+
+<?php if ($parametroActivo): ?>
+  <script>
+    setTimeout(() => {
+      const el = document.getElementById('popupNoti');
+      if (el) el.remove();
+    }, 5000);
+  </script>
+<?php endif; ?>
+
 
   <main class="max-w-7xl mx-auto px-4 py-8">
     <!-- Sección de búsqueda -->

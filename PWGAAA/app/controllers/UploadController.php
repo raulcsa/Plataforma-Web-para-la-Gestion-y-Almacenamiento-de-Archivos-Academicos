@@ -89,7 +89,7 @@ class UploadController {
                             uploadTfg::registrarArchivo($tfgId, $titulo, $rutaFinal, 'pdf', $archivo['size']);
 
                             // 4) Redirigir al listado
-                            header('Location: index.php');
+                            header('Location: index?subida=ok');
                             exit;
 
                         } catch (\Exception $e) {

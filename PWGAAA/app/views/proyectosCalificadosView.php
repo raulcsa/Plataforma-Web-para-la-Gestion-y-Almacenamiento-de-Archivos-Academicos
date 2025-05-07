@@ -2,6 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+$mostrarPopup = isset($_GET['validacion']) && $_GET['validacion'] === 'ok';
+
 
 // Función para truncar el resumen a 200 caracteres
 function truncateText($text, $limit = 200) {
@@ -40,6 +42,27 @@ function formatDate($dateString) {
 
   <!-- Header / Navbar -->
   <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
+  <!-- Mensaje de feedback -->
+  <?php if ($mostrarPopup): ?>
+  <div id="popupNoti" class="max-w-xl mx-auto mt-6 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded shadow text-center">
+  ✅ TFG corregido y evaluado correctamente.
+  </div>
+  <script>
+    // Ocultar popup a los 5 segundos
+    setTimeout(() => {
+      const popup = document.getElementById('popupNoti');
+      if (popup) popup.remove();
+    }, 5000);
+
+    // Eliminar parámetro ?validacion=ok de la URL sin recargar
+    if (window.history.replaceState) {
+      const url = new URL(window.location);
+      url.searchParams.delete('validacion');
+      window.history.replaceState({}, document.title, url.pathname + url.search);
+    }
+  </script>
+<?php endif; ?>
+
   
   <!-- Contenido principal -->
   <main class="flex-grow container mx-auto px-4 py-8">

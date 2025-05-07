@@ -152,7 +152,7 @@ class CorrectionController {
             }
         }
     
-        header('Location: proyectosCalificados.php');
+        header('Location: proyectosCalificados?validacion=ok');
         exit;
     }
 }
