@@ -17,7 +17,7 @@ class LoginController {
                 // Iniciar la sesión y guardar la información del usuario
                 $_SESSION['usuario'] = $usuario;
                 // Redirigir a la página de inicio (o a una página protegida)
-                header("Location: index.php");
+                header("Location: index");
                 exit;
             } else {
                 $mensaje = "Correo o contraseña incorrectos.";

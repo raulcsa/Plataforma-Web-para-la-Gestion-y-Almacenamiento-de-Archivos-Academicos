@@ -112,5 +112,26 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
       });
     }
   </script>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location);
+    const params = url.searchParams;
+
+    // Elimina parámetros vacíos
+    ['busqueda', 'rol', 'fecha'].forEach(key => {
+      if (!params.get(key)) {
+        params.delete(key);
+      }
+    });
+
+    // Si hay cambios, actualiza la URL sin recargar
+    const newParams = params.toString();
+    const cleanUrl = newParams ? `${url.pathname}?${newParams}` : url.pathname;
+    if (window.location.href !== cleanUrl) {
+      window.history.replaceState({}, '', cleanUrl);
+    }
+  });
+</script>
+
 </body>
 </html>

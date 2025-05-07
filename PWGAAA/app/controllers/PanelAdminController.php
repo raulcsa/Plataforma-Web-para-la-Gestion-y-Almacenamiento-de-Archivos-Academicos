@@ -7,14 +7,36 @@ class PanelAdminController {
         $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
         $filtroRol = isset($_GET['rol']) ? trim($_GET['rol']) : '';
         $filtroFecha = isset($_GET['fecha']) ? trim($_GET['fecha']) : '';
-        
-        // Si no se aplican filtros, se podrían obtener todos:
-        if ($busqueda === '' && $filtroRol === '' && $filtroFecha === '') {
+    
+        // Si hay filtros aplicados, guardarlos en sesión y redirigir para limpiar la URL
+        if (!empty($_GET)) {
+            $_SESSION['filtros_panel'] = [
+                'busqueda' => $busqueda,
+                'rol' => $filtroRol,
+                'fecha' => $filtroFecha
+            ];
+            header('Location: panelAdmin');
+            exit;
+        }
+    
+        // Recuperar filtros desde sesión si existen
+        $filtros = $_SESSION['filtros_panel'] ?? [
+            'busqueda' => '',
+            'rol' => '',
+            'fecha' => ''
+        ];
+        unset($_SESSION['filtros_panel']);
+    
+        // Obtener usuarios según filtros
+        if ($filtros['busqueda'] === '' && $filtros['rol'] === '' && $filtros['fecha'] === '') {
             $usuarios = Usuario::obtenerTodos();
         } else {
-            $usuarios = Usuario::obtenerFiltrados($busqueda, $filtroRol, $filtroFecha);
+            $usuarios = Usuario::obtenerFiltrados($filtros['busqueda'], $filtros['rol'], $filtros['fecha']);
         }
-        
+    
+        // Hacer los filtros disponibles en la vista
+        $_GET = $filtros;
+    
         require_once __DIR__ . '/../views/adminPanelView.php';
     }
     
@@ -22,13 +44,13 @@ class PanelAdminController {
     // Muestra el formulario de edición de usuario
     public function edit() {
         if (!isset($_GET['id'])) {
-            header("Location: panelAdmin.php");
+            header("Location: panelAdmin");
             exit;
         }
         $id = $_GET['id'];
         $usuario = Usuario::obtenerPorId($id);
         if (!$usuario) {
-            header("Location: panelAdmin.php");
+            header("Location: panelAdmin");
             exit;
         }
         require_once __DIR__ . '/../views/adminEditUserView.php';
@@ -44,7 +66,7 @@ class PanelAdminController {
             $password = $_POST['password']; // Si está vacío, no se actualizará
             Usuario::actualizar($id, $nombre, $email, $rol, $password);
         }
-        header("Location: panelAdmin.php");
+        header("Location: panelAdmin");
         exit;
     }
     
@@ -54,7 +76,7 @@ class PanelAdminController {
             $id = $_GET['id'];
             Usuario::eliminar($id);
         }
-        header("Location: panelAdmin.php");
+        header("Location: panelAdmin");
         exit;
     }
     
@@ -72,7 +94,7 @@ class PanelAdminController {
             $password = $_POST['password'];
             Usuario::registrar($nombre, $email, $password, $rol);
         }
-        header("Location: panelAdmin.php");
+        header("Location: panelAdmin");
         exit;
     }
 }

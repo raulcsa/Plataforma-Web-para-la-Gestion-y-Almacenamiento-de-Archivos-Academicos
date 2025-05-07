@@ -122,7 +122,7 @@ function formatAuthors($authors) {
         </div>
       <?php endif; ?>
       <!-- Botón de volver -->
-      <a href="index" class="mt-8 block w-full py-3 bg-indigo-600 text-white text-center rounded hover:bg-indigo-700 transition-colors">
+      <a href="proyectosCalificados" class="mt-8 block w-full py-3 bg-indigo-600 text-white text-center rounded hover:bg-indigo-700 transition-colors">
         Volver al listado
       </a>
     </div>
