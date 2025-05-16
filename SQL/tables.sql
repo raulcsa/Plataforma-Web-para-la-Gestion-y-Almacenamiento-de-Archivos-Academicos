@@ -27,26 +27,6 @@ CREATE TABLE tfgs (
      CONSTRAINT fk_integrante3 FOREIGN KEY (integrante3) REFERENCES usuarios(id) ON DELETE SET NULL
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Relación muchos a muchos entre alumnos y TFGs
-CREATE TABLE alumno_tfg (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    alumno_id INT NOT NULL,
-    tfg_id INT NOT NULL,
-    FOREIGN KEY (alumno_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE,
-    UNIQUE (alumno_id, tfg_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Relación muchos a muchos entre profesores y TFGs
-CREATE TABLE profesor_tfg (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    profesor_id INT NOT NULL,
-    tfg_id INT NOT NULL,
-    FOREIGN KEY (profesor_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE,
-    UNIQUE (profesor_id, tfg_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- Tabla Notas: relaciona un alumno con un TFG y almacena la nota asignada
 CREATE TABLE notas (
     id INT AUTO_INCREMENT PRIMARY KEY,
