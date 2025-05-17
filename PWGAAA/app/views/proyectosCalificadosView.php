@@ -70,8 +70,6 @@ function formatDate($dateString) {
     
     <?php if (!empty($resultados)): ?>
       <div class="space-y-6">
-        <?php foreach ($resultados as $fila): ?>
-          <div class="space-y-6">
   <?php foreach ($resultados as $fila): ?>
     <div class="bg-white shadow rounded-lg p-6">
       <h3 class="text-xl font-semibold text-indigo-600 mb-2">
@@ -111,8 +109,6 @@ function formatDate($dateString) {
     </div>
   <?php endforeach; ?>
 </div>
-
-        <?php endforeach; ?>
       </div>
       
       <!-- Paginación -->
