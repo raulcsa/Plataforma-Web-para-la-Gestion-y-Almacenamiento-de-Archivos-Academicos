@@ -7,7 +7,19 @@ if (session_status() === PHP_SESSION_NONE) {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Subir TFG - PWGAAA</title>
+  <!-- Navegadores de escritorio -->
+  <link rel="icon" href="/PDF/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/PDF/logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PDF/logo-16x16.png">
+
+  <!-- Dispositivos Apple -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/PDF/apple-touch-icon.png">
+
+  <!-- Android y Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/PDF/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/PDF/android-chrome-512x512.png">
+
+  <title>Subir TFG - TFCloud</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Cargamos Tailwind CSS desde CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -114,7 +126,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <!-- Footer -->
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
-      <p>&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+      <p>&copy; <?php echo date('Y'); ?> TFCloud. Todos los derechos reservados.</p>
     </div>
   </footer>
 

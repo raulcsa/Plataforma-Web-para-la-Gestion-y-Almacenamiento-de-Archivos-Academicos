@@ -19,11 +19,12 @@ if (isset($_SESSION['ultimoAcceso'])) {
 // Guardamos el tiempo actual como última actividad
 $_SESSION['ultimoAcceso'] = time();
 ?>
-
 <!-- Navbar -->
 <header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-    <a href="index" class="text-2xl font-extrabold text-indigo-700 hover:text-indigo-900 transition">PWGAAA</a>
+<div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
+  <a href="index" class="flex items-center">
+  <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-10 w-auto">
+</a>
 
     <nav class="hidden md:flex items-center space-x-8">
       <?php if (isset($_SESSION['usuario'])): ?>

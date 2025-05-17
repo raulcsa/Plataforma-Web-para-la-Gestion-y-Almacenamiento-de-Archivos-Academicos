@@ -8,7 +8,19 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar Sesión - PWGAAA</title>
+  <!-- Navegadores de escritorio -->
+  <link rel="icon" href="/PDF/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/PDF/logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PDF/logo-16x16.png">
+
+  <!-- Dispositivos Apple -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/PDF/apple-touch-icon.png">
+
+  <!-- Android y Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/PDF/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/PDF/android-chrome-512x512.png">
+
+  <title>Iniciar Sesión - TFCloud</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -20,8 +32,10 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
   <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="index" class="text-2xl font-bold text-indigo-600">PWGAAA</a>
+  <div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
+  <a href="index" class="flex items-center">
+  <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-10 w-auto">
+</a>
     </div>
   </header>
 
@@ -70,7 +84,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
-      <p>&copy; <?php echo date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+      <p>&copy; <?php echo date('Y'); ?> TFCloud. Todos los derechos reservados.</p>
     </div>
   </footer>
 </body>

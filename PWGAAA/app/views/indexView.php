@@ -25,7 +25,19 @@ function truncateText($text, $limit = 200) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Inicio - PWGAAA</title>
+  <!-- Navegadores de escritorio -->
+  <link rel="icon" href="/PDF/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/PDF/logo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PDF/logo-16x16.png">
+
+  <!-- Dispositivos Apple -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/PDF/apple-touch-icon.png">
+
+  <!-- Android y Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/PDF/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/PDF/android-chrome-512x512.png">
+
+  <title>Página de Inicio - TFCloud</title>
   <!-- Uso de la tipografía Inter para un look moderno -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS desde CDN -->
@@ -204,7 +216,7 @@ foreach ($notificaciones as $n) {
   <!-- Footer -->
   <footer class="bg-white shadow-inner mt-12">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
-      <p class="mb-0">&copy; <?= date('Y'); ?> PWGAAA. Todos los derechos reservados.</p>
+      <p class="mb-0">&copy; <?= date('Y'); ?> TFCloud. Todos los derechos reservados.</p>
     </div>
   </footer>
   

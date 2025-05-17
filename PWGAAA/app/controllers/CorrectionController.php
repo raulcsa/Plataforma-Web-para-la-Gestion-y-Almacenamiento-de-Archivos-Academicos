@@ -154,7 +154,7 @@ class CorrectionController {
                     <p>El profesor <strong>{$nombreProfesor}</strong> ha corregido tu Trabajo de Fin de Grado.</p>
                     <p>Puedes consultar tu nota en el siguiente enlace:</p>
                     <p><a href='{$link}'>{$link}</a></p>
-                    <p>Gracias por usar la plataforma <strong>PWGAAA</strong>.</p>
+                    <p>Gracias por usar la plataforma <strong>TFCloud</strong>.</p>
                 ";
     
                 enviarCorreo($usuario['email'], $asunto, $mensaje);
