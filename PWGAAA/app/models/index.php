@@ -137,18 +137,19 @@ class Tfg
         return ['resultados' => $resultados, 'total' => $total];
     }
 
-    public static function actualizar(int $id, string $titulo, string $resumen, string $keywords, array $integrantes): void {
+    public static function actualizar(int $id, string $titulo, string $resumen, string $keywords, array $integrantes, ?string $fecha = null): void {
         $db = conectarDB();
         $stmt = $db->prepare("
-            UPDATE tfgs
-               SET titulo = ?, resumen = ?, palabras_clave = ?,
-                   integrante1 = ?, integrante2 = ?, integrante3 = ?
-             WHERE id = ?
-        ");
+        UPDATE tfgs
+           SET titulo = ?, resumen = ?, palabras_clave = ?, fecha = ?,
+               integrante1 = ?, integrante2 = ?, integrante3 = ?
+         WHERE id = ?
+    ");
+    
         $i1 = $integrantes[0] ?? null;
         $i2 = $integrantes[1] ?? null;
         $i3 = $integrantes[2] ?? null;
-        $stmt->execute([$titulo, $resumen, $keywords, $i1, $i2, $i3, $id]);
+        $stmt->execute([$titulo, $resumen, $keywords, $fecha, $i1, $i2, $i3, $id]);
 
         // Repoblamos la tabla notas con los nuevos integrantes
         self::registrarNotasFromTfg($id);

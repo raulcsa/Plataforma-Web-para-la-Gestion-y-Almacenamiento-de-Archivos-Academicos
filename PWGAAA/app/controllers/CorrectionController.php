@@ -39,6 +39,8 @@ class CorrectionController {
         $resumen  = trim($_POST['resumen'] ?? '');
         $keywords = trim($_POST['palabras_clave'] ?? '');
         $integrantes = $_POST['integrantes'] ?? [];
+        $fecha = $_POST['fecha'] ?? null;
+
     
         if (empty($titulo) || empty($resumen) || empty($keywords) || count($integrantes) < 1) {
             $_SESSION['mensaje'] = 'Rellena todos los campos y al menos un integrante.';
@@ -46,7 +48,7 @@ class CorrectionController {
             exit;
         }
     
-        Tfg::actualizar($id, $titulo, $resumen, $keywords, $integrantes);
+        Tfg::actualizar($id, $titulo, $resumen, $keywords, $integrantes, $fecha);
     
         if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === 0) {
             $ext = strtolower(pathinfo($_FILES['pdf']['name'], PATHINFO_EXTENSION));
@@ -114,6 +116,7 @@ class CorrectionController {
         $id = (int)($_GET['id'] ?? 0);
         $notas       = $_POST['nota']       ?? [];
         $comentarios = $_POST['comentario'] ?? [];
+        $fecha       = $_POST['fecha']      ?? [];
     
         // Validación de notas
         foreach ($notas as $alumnoId => $valor) {
@@ -123,6 +126,12 @@ class CorrectionController {
                 header("Location: correction.php?action=calificar&id=$id");
                 exit;
             }
+        }
+
+        if ($fecha && DateTime::createFromFormat('Y-m-d', $fecha) !== false) {
+            $db = conectarDB();
+            $stmt = $db->prepare("UPDATE tfgs SET fecha = ? WHERE id = ?");
+            $stmt->execute([$fecha, $id]);
         }
     
         // Requiere el mailer
