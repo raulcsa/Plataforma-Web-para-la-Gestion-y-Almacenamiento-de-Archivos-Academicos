@@ -81,7 +81,7 @@ class CorrectionController {
         }
         
     
-        // AQUÍ DISTINGUIMOS SEGÚN EL BOTÓN QUE PULSASTE
+        // AQUÍ DISTINGUIMOS SEGÚN EL BOTÓN QUE SE PULSÓ
         if (isset($_POST['action']) && $_POST['action'] === 'calificar') {
             header('Location: correction.php?action=calificar&id=' . $id);
             exit;

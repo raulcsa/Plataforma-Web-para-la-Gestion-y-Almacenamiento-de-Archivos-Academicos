@@ -52,7 +52,7 @@ class Tfg
                 $params = ["%" . $busqueda . "%"];
             } elseif (in_array($campo, ['titulo', 'fecha', 'palabras_clave', 'resumen'])) {
                 if ($campo === "fecha") {
-                    // Mapeo de meses en español a su número correspondiente (dos dígitos)
+                    // Mapeo de meses en su número correspondiente (dos dígitos)
                     $meses = [
                         'enero'      => '01',
                         'febrero'    => '02',
