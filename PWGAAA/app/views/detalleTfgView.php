@@ -143,6 +143,8 @@ function formatAuthors($authors) {
                   $volverA = 'index';
                 } elseif (strpos($referer, 'proyectosCalificados') !== false) {
                   $volverA = 'proyectosCalificados';
+                } elseif (strpos($referer, 'misproyectos') !== false) {
+                  $volverA = 'misproyectos';
                 }
             }
         ?>

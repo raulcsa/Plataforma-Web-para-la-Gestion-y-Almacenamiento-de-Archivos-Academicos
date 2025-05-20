@@ -52,45 +52,82 @@ function formatDate($dateString) {
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+  <style>
+  .animate-fade-in {
+    animation: fadeIn 0.7s ease-in-out;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 </head>
 <body class="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 text-gray-700">
 <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
   <!-- Main Content -->
-  <main class="flex-grow container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Proyectos por Calificar</h1>
-    <?php if (!empty($resultados)): ?>
-      <div class="space-y-6">
-        <?php foreach ($resultados as $fila): ?>
-          <div class="bg-white shadow rounded-lg p-6">
-            <h3 class="text-xl font-semibold text-indigo-600 mb-2">
-              <a href="editarTfg?id=<?= $fila['id']; ?>">
-                <?= htmlspecialchars($fila['titulo']); ?>
+  <main class="flex-grow container mx-auto px-4 py-12 relative">
+  <section class="text-center mb-12">
+    <h1 class="text-4xl font-extrabold text-indigo-700 tracking-tight animate-fade-in">
+      Proyectos por Calificar
+    </h1>
+    <p class="mt-2 text-gray-600">Consulta y califica los TFGs pendientes de revisión</p>
+  </section>
+
+  <?php if (!empty($resultados)): ?>
+    <section class="grid gap-10 sm:grid-cols-1 md:grid-cols-2">
+      <?php foreach ($resultados as $fila): ?>
+        <article class="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow p-6 relative overflow-hidden animate-fade-in-up">
+          <h2 class="text-lg font-semibold text-indigo-700 mb-2">
+            <a href="editarTfg?id=<?= $fila['id']; ?>" class="hover:underline">
+              <?= htmlspecialchars($fila['titulo']); ?>
+            </a>
+          </h2>
+          <p class="text-sm text-gray-500 mb-3">
+            Publicado el <?= formatDate($fila['fecha']); ?>
+          </p>
+          <p class="text-sm text-gray-700">
+            <?= htmlspecialchars(truncateText($fila['resumen'], 200)); ?>
+          </p>
+        </article>
+      <?php endforeach; ?>
+    </section>
+
+    <?php if ($totalPages > 1): ?>
+      <nav aria-label="Paginación" class="mt-12">
+        <ul class="flex justify-center flex-wrap gap-2">
+          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li>
+              <a href="?page=<?= $i; ?>" class="px-4 py-2 rounded-lg text-sm transition-all duration-200 <?php echo ($i === $page) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
+                <?= $i; ?>
               </a>
-            </h3>
-            <p class="text-gray-500 mb-2">Publicado el <?= formatDate($fila['fecha']); ?></p>
-            <p class="text-gray-700"><?= htmlspecialchars(truncateText($fila['resumen'], 200)); ?></p>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      
-      <!-- Paginación -->
-      <?php if ($totalPages > 1): ?>
-        <nav class="mt-6 flex justify-center">
-          <ul class="inline-flex -space-x-px">
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-              <li>
-                <a href="?page=<?= $i; ?>" class="px-3 py-2 border border-gray-300 <?= ($i === $page) ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'; ?>">
-                  <?= $i; ?>
-                </a>
-              </li>
-            <?php endfor; ?>
-          </ul>
-        </nav>
-      <?php endif; ?>
-    <?php else: ?>
-      <p class="text-center text-gray-600">No hay proyectos por calificar.</p>
+            </li>
+          <?php endfor; ?>
+        </ul>
+      </nav>
     <?php endif; ?>
-  </main>
+
+  <?php else: ?>
+    <p class="text-center text-gray-600 text-lg animate-fade-in">
+      No hay proyectos por calificar.
+    </p>
+  <?php endif; ?>
+</main>
+
   
   <!-- Footer -->
   <footer class="bg-white shadow-inner mt-12">

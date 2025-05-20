@@ -21,71 +21,77 @@ if (session_status() === PHP_SESSION_NONE) session_start();
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <style>body { font-family:'Inter',sans-serif; }</style>
+  <style>body { font-family:'Inter',sans-serif; }
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+  }
+  </style>
 </head>
 <body class="min-h-screen bg-indigo-50 flex flex-col">
   <?php require __DIR__ . '/navbarView.php'; ?>
 
-  <main class="flex-grow flex items-center justify-center p-4">
-    <div class="w-full max-w-lg bg-white rounded-xl shadow p-8">
-      <h1 class="text-2xl font-bold text-indigo-600 mb-6">Calificar TFG</h1>
+  <main class="flex-grow flex items-center justify-center px-6 py-10 bg-indigo-50">
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 animate-fade-in">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-8 text-center">Calificar TFG</h1>
 
-      <?php if (!empty($_SESSION['mensaje'])): ?>
-        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
-          <?= htmlspecialchars($_SESSION['mensaje']); unset($_SESSION['mensaje']); ?>
-        </div>
-      <?php endif; ?>
+    <?php if (!empty($_SESSION['mensaje'])): ?>
+      <div class="mb-6 p-4 bg-red-100 border border-red-300 text-red-800 rounded shadow-sm">
+        <?= htmlspecialchars($_SESSION['mensaje']); unset($_SESSION['mensaje']); ?>
+      </div>
+    <?php endif; ?>
 
-      <form action="correction?action=validar&id=<?= $tfg['id'] ?>" method="POST">
-        <?php foreach($alumnosNotas as $row): ?>
-          <div class="mb-6">
-            <!-- Primera fila: cuadro nombre + cuadro nota -->
-            <div class="grid grid-cols-2 gap-4 mb-2">
-              <input
-                type="text"
-                value="<?= htmlspecialchars($row['nombre']) ?>"
-                disabled
-                class="p-2 border border-gray-300 rounded bg-gray-100"
-              />
-              <input
-                type="number"
-                name="nota[<?= $row['alumno_id'] ?>]"
-                value="<?= htmlspecialchars($row['nota'] ?? '') ?>"
-                min="1"
-                max="10"
-                required
-                class="p-2 border border-gray-300 rounded"
-                placeholder="Nota (1-10)"
-              />
-            </div>
-            <!-- Segunda fila: comentario -->
-            <textarea
-              name="comentario[<?= $row['alumno_id'] ?>]"
-              rows="3"
-              placeholder="Comentario (opcional)"
-              class="w-full p-2 border border-gray-300 rounded"
-            ><?= htmlspecialchars($row['comentario'] ?? '') ?></textarea>
+    <form action="correction?action=validar&id=<?= $tfg['id'] ?>" method="POST" class="space-y-6">
+      <?php foreach($alumnosNotas as $row): ?>
+        <div class="space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              value="<?= htmlspecialchars($row['nombre']) ?>"
+              disabled
+              class="bg-gray-100 border border-gray-300 rounded-md px-4 py-3 text-gray-700"
+            />
+            <input
+              type="number"
+              name="nota[<?= $row['alumno_id'] ?>]"
+              value="<?= htmlspecialchars($row['nota'] ?? '') ?>"
+              min="1"
+              max="10"
+              required
+              class="border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-indigo-500 transition"
+              placeholder="Nota (1-10)"
+            />
           </div>
-        <?php endforeach; ?>
-
-        <!-- Botones al final -->
-        <div class="flex gap-4 mt-6">
-          <button
-            type="submit"
-            class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500 transition"
-          >
-            Validar
-          </button>
-          <a
-            href="editarTfg?id=<?= $tfg['id'] ?>"
-            class="flex-1 text-center border border-gray-300 py-2 rounded hover:bg-gray-100 transition"
-          >
-            Atrás
-          </a>
+          <textarea
+            name="comentario[<?= $row['alumno_id'] ?>]"
+            rows="3"
+            placeholder="Comentario (opcional)"
+            class="w-full px-4 py-3 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-indigo-500 transition"
+          ><?= htmlspecialchars($row['comentario'] ?? '') ?></textarea>
         </div>
-      </form>
-    </div>
-  </main>
+      <?php endforeach; ?>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-6">
+      <a
+          href="editarTfg?id=<?= $tfg['id'] ?>"
+          class="flex-1 text-center py-3 border border-gray-300 rounded-md hover:bg-gray-100 transition"
+        >
+          Atrás
+        </a>
+        <button
+          type="submit"
+          class="flex-1 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-transform transform hover:scale-[1.02] shadow-md inline-flex items-center justify-center gap-2"
+        >
+          <i class="bi bi-check2-circle text-lg"></i> Validar
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
+
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto py-4 text-center text-gray-600">

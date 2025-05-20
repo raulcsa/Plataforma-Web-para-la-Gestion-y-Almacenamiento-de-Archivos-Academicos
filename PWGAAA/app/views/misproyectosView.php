@@ -1,7 +1,16 @@
-<?php if (session_status() === PHP_SESSION_NONE) {
+<?php
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$fmt = new IntlDateFormatter(
+    'es_ES',
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::NONE,
+    'Europe/Madrid',
+    IntlDateFormatter::GREGORIAN
+);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,49 +39,73 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
 <?php require_once __DIR__ . '/../views/navbarView.php'; ?>
   
   <!-- Contenido principal -->
-  <main class="flex-grow container mx-auto px-4 py-8">
-    <h1 class="mb-6 text-3xl font-semibold text-indigo-600 text-center">Mis Proyectos</h1>
+  <main class="flex-grow container mx-auto px-4 py-12">
+  <h1 class="mb-10 text-4xl font-extrabold text-center text-indigo-700 animate-fade-in">Mis Proyectos</h1>
 
-    <?php if (!empty($proyectos)): ?>
-      <div class="space-y-10">
-        <?php foreach ($proyectos as $proyecto): ?>
-          <div class="bg-white rounded-md shadow p-3">
-            <h3 class="text-md font-bold text-indigo-600 mb-1">
-              <a href="verTfg?id=<?php echo $proyecto['id']; ?>" class="hover:underline">
-                <?php echo htmlspecialchars($proyecto['titulo']); ?>
-              </a>
-            </h3>
-            <p class="text-xs text-gray-500 mb-1">
-              Fecha: <?php echo htmlspecialchars($proyecto['fecha']); ?>
-            </p>
-            <p class="text-sm text-gray-700 mb-1">
-              <?php echo htmlspecialchars($proyecto['resumen']); ?>
-            </p>
+  <?php if (!empty($proyectos)): ?>
+    <div class="grid gap-8 animate-fade-in">
+      <?php foreach ($proyectos as $proyecto): ?>
+        <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition p-6">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">
+            <a href="verTfg?id=<?= $proyecto['id']; ?>" class="hover:underline">
+              <?= htmlspecialchars($proyecto['titulo']); ?>
+            </a>
+          </h3>
+          <p class="text-sm text-gray-500 mb-2">
+            Publicado el 
+              <?php
+                $fecha = $proyecto['fecha'] ?? '';
+                  if (!empty($fecha)) {
+                    try {
+                      $dateObj = new DateTime($fecha);
+                      echo htmlspecialchars($fmt->format($dateObj));
+                    } catch (Exception $e) {
+                      echo htmlspecialchars($fecha);
+                    }
+                } else {
+                echo "Sin fecha";
+                }
+              ?>
+          </p>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            <?= nl2br(htmlspecialchars($proyecto['resumen'])); ?>
+          </p>
+
           <?php if (isset($proyecto['nota'])): ?>
-              <div class="mt-2 p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
-              <span class="font-medium text-gray-700">Nota:</span>
-              <p class="mt-1 text-gray-800"><?= htmlspecialchars($proyecto['nota']); ?></p>
+            <div class="mt-4 px-4 py-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
+              <span class="block text-sm font-semibold text-gray-700">Nota:</span>
+              <p class="mt-1 text-gray-900"><?= htmlspecialchars($proyecto['nota']); ?></p>
             </div>
           <?php endif; ?>
+
           <?php if (!empty($proyecto['comentario'])): ?>
-              <div class="mt-2 p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
-                <span class="font-medium text-gray-700">Comentario:</span>
-                <p class="mt-1 text-gray-800"><?= nl2br(htmlspecialchars($proyecto['comentario'])); ?></p>
-              </div>
+            <div class="mt-3 px-4 py-3 bg-indigo-50 border-l-4 border-indigo-500 rounded">
+              <span class="block text-sm font-semibold text-gray-700">Comentario:</span>
+              <p class="mt-1 text-gray-900"><?= nl2br(htmlspecialchars($proyecto['comentario'])); ?></p>
+            </div>
           <?php endif; ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    <?php else: ?>
-      <p class="text-center text-gray-600">No tienes proyectos asociados.</p>
-    <?php endif; ?>
-  </main>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php else: ?>
+    <p class="text-center text-gray-600 animate-fade-in">No tienes proyectos asociados.</p>
+  <?php endif; ?>
+</main>
+
   
   
   <!-- Footer -->
