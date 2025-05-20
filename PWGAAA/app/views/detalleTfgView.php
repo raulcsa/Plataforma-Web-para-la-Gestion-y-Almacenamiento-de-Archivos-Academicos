@@ -134,9 +134,21 @@ function formatAuthors($authors) {
         </div>
       <?php endif; ?>
       <!-- Botón de volver -->
-      <a href="proyectosCalificados" class="mt-8 block w-full py-3 bg-indigo-600 text-white text-center rounded hover:bg-indigo-700 transition-colors">
-        Volver al listado
-      </a>
+      <?php
+          $volverA = 'index'; // valor por defecto
+            if (isset($_SERVER['HTTP_REFERER'])) {
+              $referer = $_SERVER['HTTP_REFERER'];
+              // Solo permitimos volver si viene de una de estas páginas conocidas
+                if (strpos($referer, 'index') !== false) {
+                  $volverA = 'index';
+                } elseif (strpos($referer, 'proyectosCalificados') !== false) {
+                  $volverA = 'proyectosCalificados';
+                }
+            }
+        ?>
+        <a href="<?= $volverA ?>" class="mt-8 block w-full py-3 bg-indigo-600 text-white text-center rounded hover:bg-indigo-700 transition-colors">
+          Volver atrás
+        </a>
     </div>
   </main>
 
