@@ -287,5 +287,14 @@ foreach ($notificaciones as $n) {
       });
     }
   </script>
+  <script>
+// Eliminar parámetros de búsqueda de la URL una vez mostrados los resultados
+if (window.history.replaceState && window.location.search.includes('busqueda')) {
+    const url = new URL(window.location);
+    url.searchParams.delete('busqueda');
+    url.searchParams.delete('campo');
+    window.history.replaceState({}, document.title, url.pathname);
+}
+</script>
 </body>
 </html>

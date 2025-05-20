@@ -199,17 +199,16 @@ $currentIntegrantes = array_filter([
           <i class="bi bi-check2-circle text-lg"></i> Calificar
         </button>
       </div>
-
     <?php if ($isEditor): ?>
       </form>
     <?php endif; ?>
-  </div>
-</main>
-  <footer class="bg-white shadow-inner">
-    <div class="max-w-7xl mx-auto py-4 text-center text-gray-600">
-      &copy; <?= date('Y') ?> TFCloud. Todos los derechos reservados.
-    </div>
-  </footer>
+      </div>
+    </main>
+    <footer class="bg-white shadow-inner">
+      <div class="max-w-7xl mx-auto py-4 text-center text-gray-600">
+        &copy; <?= date('Y') ?> TFCloud. Todos los derechos reservados.
+      </div>
+    </footer>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     <?php if ($isEditor): ?>

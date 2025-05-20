@@ -48,6 +48,7 @@ $_SESSION['ultimoAcceso'] = time();
               <a href="proyectosCalificados" class="block px-5 py-3 text-sm hover:bg-indigo-50">Calificados</a>
             <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
               <a href="upload" class="block px-5 py-3 text-sm hover:bg-indigo-50">Subir Proyecto</a>
+              <a href="misproyectos" class="block px-5 py-3 text-sm hover:bg-indigo-50">Mis Proyectos</a>
               <a href="proyectosPorCalificar" class="block px-5 py-3 text-sm hover:bg-indigo-50">Por Calificar</a>
               <a href="proyectosCalificados" class="block px-5 py-3 text-sm hover:bg-indigo-50">Calificados</a>
             <?php else: ?>
@@ -93,6 +94,7 @@ $_SESSION['ultimoAcceso'] = time();
           <li><a href="proyectosCalificados" class="block text-sm text-gray-700 hover:text-indigo-600">Calificados</a></li>
         <?php elseif ($_SESSION['usuario']['rol'] === 'profesor'): ?>
           <li><a href="upload" class="block text-sm text-gray-700 hover:text-indigo-600">Subir Proyecto</a></li>
+          <li><a href="misproyectos" class="block text-sm text-gray-700 hover:text-indigo-600">Mis Proyectos</a></li>
           <li><a href="proyectosPorCalificar" class="block text-sm text-gray-700 hover:text-indigo-600">Por Calificar</a></li>
           <li><a href="proyectosCalificados" class="block text-sm text-gray-700 hover:text-indigo-600">Calificados</a></li>
         <?php else: ?>

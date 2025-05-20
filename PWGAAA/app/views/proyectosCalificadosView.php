@@ -120,6 +120,27 @@ function formatDate($dateString) {
     <p class="mt-2 text-gray-600">Consulta las calificaciones y comentarios de los TFG evaluados</p>
   </section>
 
+  <!-- Buscador -->
+<form method="GET" action="proyectosCalificados" class="max-w-3xl mx-auto mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+  <input type="text" name="busqueda" placeholder="Buscar TFG por título, resumen, autor..." value="<?= htmlspecialchars($_GET['busqueda'] ?? '') ?>" class="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+  
+  <select name="campo" class="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <option value="">Todos los campos</option>
+    <option value="titulo" <?= ($_GET['campo'] ?? '') === 'titulo' ? 'selected' : '' ?>>Título</option>
+    <option value="palabras_clave" <?= ($_GET['campo'] ?? '') === 'palabras_clave' ? 'selected' : '' ?>>Palabras clave</option>
+    <option value="resumen" <?= ($_GET['campo'] ?? '') === 'resumen' ? 'selected' : '' ?>>Resumen</option>
+    <option value="fecha" <?= ($_GET['campo'] ?? '') === 'fecha' ? 'selected' : '' ?>>Fecha</option>
+    <option value="integrantes" <?= ($_GET['campo'] ?? '') === 'integrantes' ? 'selected' : '' ?>>Integrantes</option>
+  </select>
+
+  <button type="submit" class="p-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all">
+    Buscar
+  </button>
+
+  <a href="proyectosCalificados" class="p-3 text-center bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all">Reiniciar</a>
+</form>
+
+
   <?php if (!empty($resultados)): ?>
     <section class="grid gap-10 sm:grid-cols-1 md:grid-cols-2">
       <?php foreach ($resultados as $fila): ?>
@@ -231,6 +252,16 @@ function toggleNotas(button, id) {
   }
 }
 </script>
+<script>
+// Eliminar parámetros de búsqueda de la URL una vez mostrados los resultados
+if (window.history.replaceState && window.location.search.includes('busqueda')) {
+    const url = new URL(window.location);
+    url.searchParams.delete('busqueda');
+    url.searchParams.delete('campo');
+    window.history.replaceState({}, document.title, url.pathname);
+}
+</script>
+
 
 </body>
 </html>
