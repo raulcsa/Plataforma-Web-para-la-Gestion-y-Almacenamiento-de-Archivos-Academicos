@@ -28,59 +28,80 @@ if (session_status() === PHP_SESSION_NONE) {
     body {
       font-family: 'Inter', sans-serif;
     }
+
+    @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out both;
+  }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
-  <header class="bg-white shadow">
-  <div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
-  <a href="index" class="flex items-center">
-  <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-10 w-auto">
-</a>
+
+
+<main class="flex-grow flex items-center justify-center px-4 relative overflow-hidden">
+  <!-- Fondo decorativo con degradado suave -->
+  <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-purple-100 opacity-60"></div>
+
+  <!-- Contenedor del formulario -->
+  <div class="relative z-10 w-full max-w-md backdrop-blur-xl bg-white/70 border border-indigo-100 rounded-2xl shadow-xl p-8 animate-fade-in-up">
+    
+    <!-- Logo centrado clicable -->
+    <div class="flex justify-center mb-6">
+      <a href="index">
+        <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-12 w-auto hover:scale-105 transition-transform duration-200">
+      </a>
     </div>
-  </header>
 
-  <main class="flex-grow flex items-center justify-center px-4">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-center text-indigo-800 mb-6">Iniciar Sesión</h2>
+    <h2 class="text-2xl font-extrabold text-center text-indigo-700 mb-4">Iniciar Sesión</h2>
+    <p class="text-center text-gray-500 mb-6 text-sm">Accede a tu cuenta para continuar</p>
 
-      <?php if (isset($_GET['expirada'])): ?>
-        <div class="mb-4 p-3 bg-yellow-100 text-yellow-800 border border-yellow-300 rounded">
-          Tu sesión ha expirado por inactividad. Por favor, inicia sesión de nuevo.
-        </div>
-      <?php endif; ?>
-
-      <?php if (!empty($mensaje)): ?>
-      <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
-        <?php echo htmlspecialchars($mensaje); ?>
+    <?php if (isset($_GET['expirada'])): ?>
+      <div class="mb-4 p-3 bg-yellow-100 text-yellow-800 border border-yellow-300 rounded text-sm">
+        Tu sesión ha expirado por inactividad. Por favor, inicia sesión de nuevo.
       </div>
-      <?php endif; ?>
-      <form method="POST" action="">
-        <div class="mb-4">
-          <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
-          <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <div class="mb-6">
-          <label for="password" class="block text-gray-700 font-medium mb-2">Contraseña</label>
-          <input type="password" id="password" name="password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors flex items-center justify-center">
-          <i class="bi bi-box-arrow-in-right mr-2"></i> Iniciar Sesión
-        </button>
-      </form>
+    <?php endif; ?>
 
-      <div class="mt-6 flex flex-col items-center">
-        <p class="text-gray-600 mb-2">o</p>
-        <a href="google-login.php" class="w-full flex justify-center items-center gap-3 border border-gray-300 rounded py-2 px-4 hover:bg-gray-50 transition">
-          <img src="https://developers.google.com/identity/images/g-logo.png" class="w-5 h-5" alt="Google logo">
-          <span class="text-gray-700 font-medium">Iniciar sesión con Google</span>
-        </a>
+    <?php if (!empty($mensaje)): ?>
+      <div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">
+        <?= htmlspecialchars($mensaje); ?>
       </div>
+    <?php endif; ?>
 
-      <p class="mt-6 text-center text-gray-600">
-        ¿No tienes cuenta? <a href="registro" class="text-indigo-600 hover:underline">Regístrate</a>
-      </p>
+    <form method="POST" action="" class="space-y-4">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+        <input type="password" id="password" name="password" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 font-medium">
+        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+      </button>
+    </form>
+
+    <div class="mt-6">
+      <div class="flex items-center text-gray-400 text-sm mb-4">
+        <hr class="flex-grow border-gray-300"> <span class="mx-2">o</span> <hr class="flex-grow border-gray-300">
+      </div>
+      <a href="google-login.php" class="w-full flex justify-center items-center gap-3 border border-gray-300 rounded-md py-2 px-4 hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+        <img src="https://developers.google.com/identity/images/g-logo.png" class="w-5 h-5" alt="Google logo">
+        Iniciar sesión con Google
+      </a>
     </div>
-  </main>
+
+    <p class="mt-6 text-center text-sm text-gray-600">
+      ¿No tienes cuenta? <a href="registro" class="text-indigo-600 hover:underline">Regístrate</a>
+    </p>
+  </div>
+</main>
+
+
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">

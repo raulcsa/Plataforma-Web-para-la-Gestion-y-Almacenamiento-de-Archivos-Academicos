@@ -44,6 +44,7 @@ function truncateText($text, $limit = 200) {
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Iconos de Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -105,6 +106,31 @@ foreach ($notificaciones as $n) {
   </script>
 <?php endif; ?>
 
+<style>
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out both;
+  }
+
+  .section-line {
+    height: 4px;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    border-radius: 9999px;
+    width: 60px;
+    margin: 1rem auto 0 auto;
+    animation: growWidth 1s ease-out forwards;
+  }
+
+  @keyframes growWidth {
+    0% { width: 0; opacity: 0; }
+    100% { width: 60px; opacity: 1; }
+  }
+</style>
+
 
 </head>
 <body>
@@ -128,97 +154,120 @@ foreach ($notificaciones as $n) {
   </script>
 <?php endif; ?>
 
+<main class="max-w-7xl mx-auto px-4 py-12 relative">
+  <!-- HERO mejorado -->
+  <section class="text-center mb-10 relative z-10">
+  <div class="mx-auto max-w-3xl">
+  <h2 class="text-5xl font-extrabold text-indigo-700 leading-tight animate-fade-in-up">
+  Descubre los <span class="bg-indigo-100 px-2 rounded-md">mejores TFGs</span> de La Salle Institución
+  </h2>
+  <div class="section-line"></div>
+    <p class="mt-4 text-lg text-slate-600 font-medium tracking-tight animate-fade-in-up" style="animation-delay: 0.15s;">
+      Inspírate, aprende y colabora con otros estudiantes como tú.
+    </p>
+  </div>
+</section>
 
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <!-- Sección de búsqueda -->
-    <section class="mb-10 text-center">
-      <h1 class="text-4xl font-bold text-indigo-700 mb-6">Explora TFGs</h1>
-      <form method="GET" action="index" class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <select name="campo" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
-          <option value="" <?php echo ($campo === "") ? 'selected' : ''; ?>>Todos</option>
-          <option value="titulo" <?php echo ($campo === "titulo") ? 'selected' : ''; ?>>Título</option>
-          <option value="fecha" <?php echo ($campo === "fecha") ? 'selected' : ''; ?>>Fecha</option>
-          <option value="palabras_clave" <?php echo ($campo === "palabras_clave") ? 'selected' : ''; ?>>Palabras Clave</option>
-          <option value="resumen" <?php echo ($campo === "resumen") ? 'selected' : ''; ?>>Resumen</option>
+
+  <!-- Cinta animada -->
+  <section class="mb-6 text-center">
+  <hr class="mb-4 border-t border-indigo-100 w-24 mx-auto">
+  <p class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium px-6 py-2 rounded-full shadow-md animate-pulse">
+    💡 “El conocimiento compartido impulsa la innovación”
+  </p>
+</section>
+
+
+  <!-- Buscador con acento visual -->
+  <section class="bg-white rounded-2xl shadow-xl p-8 mb-16 border border-gray-100">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-semibold text-indigo-700 flex items-center gap-2">
+        <i class="bi bi-search text-xl"></i> Buscar proyectos
+      </h2>
+    </div>
+    <form method="GET" action="index" class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      <div class="flex flex-col md:flex-row gap-4 flex-1">
+        <select name="campo" class="w-full md:w-48 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+          <option value="" <?= $campo === "" ? 'selected' : ''; ?>>Todos</option>
+          <option value="titulo" <?= $campo === "titulo" ? 'selected' : ''; ?>>Título</option>
+          <option value="fecha" <?= $campo === "fecha" ? 'selected' : ''; ?>>Fecha</option>
+          <option value="palabras_clave" <?= $campo === "palabras_clave" ? 'selected' : ''; ?>>Palabras Clave</option>
+          <option value="resumen" <?= $campo === "resumen" ? 'selected' : ''; ?>>Resumen</option>
         </select>
-        <input type="text" name="busqueda" placeholder="Buscar..." value="<?= htmlspecialchars($busqueda); ?>" class="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-400">
-        <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition-colors flex items-center">
-          <i class="bi bi-search"></i>
-          <span class="ml-2">Buscar</span>
-        </button>
-      </form>
-      
-      <!-- Mostrar el número total de resultados encontrados en la búsqueda -->
-      <?php if ($busqueda !== ""): ?>
-        <p class="mt-4 text-center text-gray-600">Se han encontrado <?= htmlspecialchars($total) ?> resultado(s).</p>
-      <?php endif; ?>
-    </section>
-    
-    <!-- Grid de TFGs -->
-    <section class="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
-      <?php if (isset($resultados) && !empty($resultados)): ?>
-        <?php foreach ($resultados as $fila): ?>
-          <article class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 p-6">
-            <h2 class="text-2xl font-semibold text-indigo-700 mb-3">
-              <a href="verTfg?id=<?= $fila['id']; ?>" class="hover:underline">
-                <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
-              </a>
-            </h2>
-            <p class="text-sm text-gray-500 mb-3">
-              Publicado el 
-              <?php 
+        <input type="text" name="busqueda" placeholder="Buscar por palabra clave..." value="<?= htmlspecialchars($busqueda); ?>" class="flex-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+      </div>
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+        <i class="bi bi-search"></i><span>Buscar</span>
+      </button>
+    </form>
+    <?php if ($busqueda !== ""): ?>
+      <p class="mt-4 text-gray-500">Se han encontrado <?= htmlspecialchars($total) ?> resultado(s).</p>
+    <?php endif; ?>
+  </section>
+
+  <!-- TFG Cards -->
+  <section class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+    <?php if (isset($resultados) && !empty($resultados)): ?>
+      <?php foreach ($resultados as $fila): ?>
+        <article class="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 relative overflow-hidden">
+        <span class="absolute top-0 right-0 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-bl-xl">TFG</span>
+          <h2 class="text-lg font-semibold text-indigo-700 mb-2">
+            <a href="verTfg?id=<?= $fila['id']; ?>" class="hover:underline">
+              <?= highlight(htmlspecialchars($fila['titulo']), $busqueda); ?>
+            </a>
+          </h2>
+          <p class="text-xs text-gray-500 mb-3">
+            Publicado el 
+            <?php
               $rawDate = $fila['fecha'] ?? '';
               if (!empty($rawDate)) {
-                  try {
-                      $formatter = new IntlDateFormatter(
-                          'es-ES',
-                          IntlDateFormatter::LONG,
-                          IntlDateFormatter::NONE,
-                          'Europe/Madrid',
-                          IntlDateFormatter::GREGORIAN
-                      );
-                      $dateObj = new DateTime($rawDate);
-                      echo highlight(htmlspecialchars($formatter->format($dateObj)), $busqueda);
-                  } catch (Exception $e) {
-                      echo htmlspecialchars($rawDate);
-                  }
+                try {
+                  $formatter = new IntlDateFormatter('es-ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Madrid', IntlDateFormatter::GREGORIAN);
+                  $dateObj = new DateTime($rawDate);
+                  echo highlight(htmlspecialchars($formatter->format($dateObj)), $busqueda);
+                } catch (Exception $e) {
+                  echo htmlspecialchars($rawDate);
+                }
               } else {
-                  echo "Sin fecha";
+                echo "Sin fecha";
               }
-              ?>
-            </p>
-            <p class="text-base text-gray-600">
-              <?= highlight(truncateText(htmlspecialchars($fila['resumen']), 200), $busqueda); ?>
-            </p>
-          </article>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <p class="text-center text-gray-500 col-span-full">No se encontraron TFGs.</p>
-      <?php endif; ?>
-    </section>
-    
-    <!-- Paginación -->
-    <?php if (isset($totalPages) && $totalPages > 1): ?>
-      <nav aria-label="Pagination" class="mt-10">
-        <ul class="flex justify-center space-x-2">
-          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <li>
-              <a href="index?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>" class="px-4 py-2 rounded-md <?php echo ($page == $i) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
-                <?= $i ?>
-              </a>
-            </li>
-          <?php endfor; ?>
-        </ul>
-      </nav>
+            ?>
+          </p>
+          <p class="text-sm text-gray-600">
+            <?= highlight(truncateText(htmlspecialchars($fila['resumen']), 200), $busqueda); ?>
+          </p>
+        </article>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p class="text-center text-gray-500 col-span-full">No se encontraron TFGs con los criterios de búsqueda.</p>
     <?php endif; ?>
-  </main>
+  </section>
+
+  <!-- Paginación -->
+  <?php if (isset($totalPages) && $totalPages > 1): ?>
+    <nav aria-label="Paginación" class="mt-12">
+      <ul class="flex justify-center flex-wrap gap-2">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+          <li>
+            <a href="index?page=<?= $i ?>&busqueda=<?= urlencode($busqueda) ?>&campo=<?= urlencode($campo) ?>" class="px-4 py-2 rounded-lg text-sm <?php echo ($page == $i) ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'; ?>">
+              <?= $i ?>
+            </a>
+          </li>
+        <?php endfor; ?>
+      </ul>
+    </nav>
+  <?php endif; ?>
+</main>
+
   
   <!-- Footer -->
-  <footer class="bg-white shadow-inner mt-12">
-    <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">
-      <p class="mb-0">&copy; <?= date('Y'); ?> TFCloud. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+  <footer class="bg-indigo-700 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+    <p class="text-sm">&copy; <?= date('Y'); ?> TFCloud - Donde los TFGs cobran vida.</p>
+    <p class="text-xs text-indigo-200 mt-1">“Porque compartir el conocimiento es el primer paso hacia el cambio.”</p>
+  </div>
+</footer>
+
   
   <!-- Scripts para interacción -->
   <script>

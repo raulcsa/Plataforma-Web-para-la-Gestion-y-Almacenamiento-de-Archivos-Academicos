@@ -27,65 +27,83 @@ if (session_status() === PHP_SESSION_NONE) {
     body {
       font-family: 'Inter', sans-serif;
     }
+
+    @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out both;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col">
-  <!-- Navbar -->
-  <header class="bg-white shadow">
-  <div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
-  <a href="index" class="flex items-center">
-  <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-10 w-auto">
-</a>
-    </div>
-  </header>
 
   <!-- Contenedor del formulario de registro -->
-  <main class="flex-grow flex items-center justify-center px-4">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-center text-indigo-600 mb-6">Registro de Usuario</h2>
-      <?php if (!empty($mensaje)): ?>
-        <div class="mb-4 p-3 bg-indigo-100 text-indigo-700 rounded">
-          <?php echo htmlspecialchars($mensaje); ?>
-        </div>
-      <?php endif; ?>
-      <form method="POST" action="">
-        <div class="mb-4">
-          <label for="nombre" class="block text-gray-700 font-medium mb-2">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <div class="mb-4">
-          <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
-          <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <div class="mb-4">
-          <label for="password" class="block text-gray-700 font-medium mb-2">Contraseña</label>
-          <input type="password" id="password" name="password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <div class="mb-6">
-          <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirmar Contraseña</label>
-          <input type="password" id="confirm_password" name="confirm_password" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors flex items-center justify-center">
-          <i class="bi bi-person-plus mr-2"></i> Registrarse
+  <main class="flex-grow flex items-center justify-center px-4 relative overflow-hidden">
+  <!-- Fondo decorativo degradado -->
+  <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-purple-100 opacity-60"></div>
+
+  <!-- Formulario -->
+  <div class="relative z-10 w-full max-w-md backdrop-blur-xl bg-white/70 border border-indigo-100 rounded-2xl shadow-xl p-8 animate-fade-in-up">
+    
+    <!-- Logo clicable -->
+    <div class="flex justify-center mb-6">
+      <a href="index">
+        <img src="../PDF/logo_sinfondo.png" alt="TFCloud" class="h-12 w-auto hover:scale-105 transition-transform duration-200">
+      </a>
+    </div>
+
+    <h2 class="text-2xl font-extrabold text-center text-indigo-700 mb-4">Crear cuenta en TFCloud</h2>
+    <p class="text-center text-gray-500 mb-6 text-sm">Únete a nuestra comunidad y sube tus TFGs</p>
+
+    <?php if (!empty($mensaje)): ?>
+      <div class="mb-4 p-3 bg-indigo-100 text-indigo-700 rounded text-sm">
+        <?= htmlspecialchars($mensaje); ?>
+      </div>
+    <?php endif; ?>
+
+    <form method="POST" action="" class="space-y-4">
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+        <input type="password" id="password" name="password" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <div>
+        <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
+        <input type="password" id="confirm_password" name="confirm_password" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
+      </div>
+      <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 font-medium">
+        <i class="bi bi-person-plus"></i> Registrarse
+      </button>
+    </form>
+
+    <div class="mt-6">
+      <div class="flex items-center text-gray-400 text-sm mb-4">
+        <hr class="flex-grow border-gray-300"> <span class="mx-2">o</span> <hr class="flex-grow border-gray-300">
+      </div>
+      <form action="google-login.php" method="GET">
+        <button type="submit" class="w-full py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition flex items-center justify-center gap-3 text-sm font-medium">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
+          Registrarse con Google
         </button>
       </form>
-
-      <!-- Botón de registro con Google -->
-      <div class="mt-6">
-        <form action="google-login.php" method="GET">
-          <button type="submit" class="w-full py-3 bg-white text-gray-700 border border-gray-300 rounded hover:bg-gray-100 transition flex items-center justify-center">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5 mr-3">
-            Registrarse con Google
-          </button>
-        </form>
-      </div>
-
-      <p class="mt-6 text-center text-gray-600">
-        ¿Ya tienes cuenta?
-        <a href="login" class="text-indigo-600 hover:underline">Inicia Sesión</a>
-      </p>
     </div>
-  </main>
+
+    <p class="mt-6 text-center text-sm text-gray-600">
+      ¿Ya tienes cuenta? <a href="login" class="text-indigo-600 hover:underline">Inicia sesión</a>
+    </p>
+  </div>
+</main>
+
 
   <footer class="bg-white shadow-inner">
     <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-600">

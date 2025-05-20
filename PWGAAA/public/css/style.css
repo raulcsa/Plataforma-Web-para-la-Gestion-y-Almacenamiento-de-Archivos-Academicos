@@ -1,43 +1,52 @@
-/* Archivo: /public/assets/css/style.css */
+/* Archivo: /public/assets/css/style.css (Versión futurista y modernizada) */
+
+/* Importar fuente futurista */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 /* General */
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f9fafb;
-    color: #333;
+    font-family: 'Orbitron', 'Inter', sans-serif;
+    background: linear-gradient(to bottom right, #0f172a, #1e293b);
+    color: #e2e8f0;
     line-height: 1.6;
+    min-height: 100vh;
 }
 
 /* Títulos */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
-    color: #1e3a8a; /* Indigo más serio */
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Enlaces */
 a {
-    color: #4f46e5; /* Indigo claro */
+    color: #38bdf8;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-    color: #4338ca; /* Indigo más oscuro */
+    color: #0ea5e9;
     text-decoration: underline;
 }
 
 /* Botones */
 button, .btn {
-    background-color: #4f46e5;
+    background: linear-gradient(to right, #6366f1, #4f46e5);
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+    border-radius: 9999px;
+    font-weight: 700;
+    box-shadow: 0 0 10px #4f46e5aa;
+    transition: all 0.3s ease;
+    border: none;
 }
 
 button:hover, .btn:hover {
-    background-color: #4338ca;
+    background: linear-gradient(to right, #4338ca, #3730a3);
+    box-shadow: 0 0 15px #4338caaa;
 }
 
 /* Formularios */
@@ -49,54 +58,81 @@ select,
 textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
+    border: 1px solid #334155;
+    border-radius: 0.75rem;
+    background-color: #1e293b;
+    color: #f1f5f9;
     transition: border-color 0.2s ease-in-out;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #4f46e5;
+    border-color: #60a5fa;
     outline: none;
+    box-shadow: 0 0 5px #60a5fa88;
 }
 
-/* Cards (como los TFGs) */
+/* Cards (TFGs u otros) */
 .card {
-    background: #ffffff;
+    background: #1e293b;
     border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     padding: 1.5rem;
+    backdrop-filter: blur(4px);
+    border: 1px solid #334155;
 }
 
 .card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Footer */
 footer {
-    background-color: #f1f5f9;
-    color: #6b7280;
+    background-color: #0f172a;
+    color: #94a3b8;
     padding: 2rem 0;
     font-size: 0.9rem;
+    border-top: 1px solid #334155;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #1e3a8a;
+    background: linear-gradient(to right, #0f172a, #1e3a8a);
+    border-bottom: 1px solid #334155;
 }
 
 .navbar a {
-    color: #f9fafb;
+    color: #f8fafc;
+    font-weight: 600;
+    transition: color 0.2s ease-in-out;
 }
 
 .navbar a:hover {
-    color: #c7d2fe;
+    color: #93c5fd;
 }
 
-/* Pequeñas animaciones */
+/* Pequeñas animaciones y transiciones */
 .transition {
     transition: all 0.3s ease-in-out;
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4338ca;
 }
