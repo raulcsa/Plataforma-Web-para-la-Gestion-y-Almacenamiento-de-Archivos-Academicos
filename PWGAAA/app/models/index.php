@@ -36,7 +36,7 @@ class Tfg
                 AND NOT EXISTS (
                 SELECT 1 FROM notas n WHERE n.tfg_id = t.id AND n.nota IS NULL
                 )
-                ORDER BY t.fecha_subida DESC, t.id DESC
+                ORDER BY t.fecha DESC, t.id DESC
                 LIMIT ? OFFSET ?
                 ";
                 $stmt = $db->prepare($query);
@@ -255,7 +255,7 @@ class Tfg
             SELECT 1 FROM notas n 
             WHERE n.tfg_id = t.id AND n.nota IS NULL
         )
-        ORDER BY t.fecha_subida DESC, t.id DESC
+        ORDER BY t.fecha DESC, t.id DESC
         LIMIT ? OFFSET ?";
 
         $stmt = $db->prepare($query);
