@@ -33,6 +33,7 @@ CREATE TABLE notas (
     alumno_id INT NOT NULL,
     tfg_id INT NOT NULL,
     nota INT CHECK (nota BETWEEN 1 AND 10),
+    comentario TEXT,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (alumno_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (tfg_id) REFERENCES tfgs(id) ON DELETE CASCADE,
