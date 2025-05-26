@@ -11,7 +11,7 @@ if (isset($_SESSION['ultimoAcceso'])) {
     if ($inactividad > $tiempoLimite) {
         session_unset();
         session_destroy();
-        header("Location: login.php?expirada=1");
+        header("Location: login");
         exit;
     }
 }

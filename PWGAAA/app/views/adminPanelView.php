@@ -6,6 +6,20 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
     header("Location: index.php");
     exit;
 }
+
+$mensaje = '';
+if (isset($_SESSION['flash'])) {
+    if (str_starts_with($_SESSION['flash'], 'creado:')) {
+        $correo = htmlspecialchars(substr($_SESSION['flash'], 7));
+        $mensaje = "✅ Usuario <strong>$correo</strong> ha sido creado correctamente.";
+    } elseif ($_SESSION['flash'] === 'editado') {
+        $mensaje = "✅ Usuario editado correctamente.";
+    } elseif ($_SESSION['flash'] === 'eliminado') {
+        $mensaje = "✅ Usuario borrado correctamente.";
+    }
+    unset($_SESSION['flash']); 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,6 +88,22 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
   <p class="text-gray-600 mt-2">Gestiona usuarios registrados en TFCloud</p>
   <div class="section-line"></div>
 </section>
+<?php if ($mensaje): ?>
+  <div id="popupNoti" class="max-w-xl mx-auto mb-6 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded shadow text-center animate-fade-in-up">
+    <?= $mensaje ?>
+  </div>
+  <script>
+    setTimeout(() => {
+      const popup = document.getElementById('popupNoti');
+      if (popup) popup.remove();
+    }, 5000);
+
+    const url = new URL(window.location);
+    ['creado', 'editado', 'eliminado'].forEach(p => url.searchParams.delete(p));
+    window.history.replaceState({}, document.title, url.pathname + url.search);
+  </script>
+<?php endif; ?>
+
 
 <!-- Filtros -->
 <section class="mb-8">

@@ -66,7 +66,8 @@ class PanelAdminController {
             $password = $_POST['password']; // Si está vacío, no se actualizará
             Usuario::actualizar($id, $nombre, $email, $rol, $password);
         }
-        header("Location: panelAdmin");
+        $_SESSION['flash'] = 'editado';
+        header("Location: panelAdmin?editado=ok");
         exit;
     }
     
@@ -76,7 +77,8 @@ class PanelAdminController {
             $id = $_GET['id'];
             Usuario::eliminar($id);
         }
-        header("Location: panelAdmin");
+        $_SESSION['flash'] = 'eliminado';
+        header("Location: panelAdmin?eliminado=ok");
         exit;
     }
     
@@ -94,7 +96,8 @@ class PanelAdminController {
             $password = $_POST['password'];
             Usuario::registrar($nombre, $email, $password, $rol);
         }
-        header("Location: panelAdmin");
+        $_SESSION['flash'] = 'creado:' . $email;
+        header("Location: panelAdmin?creado=" . urlencode($email));
         exit;
     }
 }
