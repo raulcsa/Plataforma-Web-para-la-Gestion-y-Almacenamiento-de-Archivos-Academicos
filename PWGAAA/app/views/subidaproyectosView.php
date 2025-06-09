@@ -137,7 +137,7 @@ if (session_status() === PHP_SESSION_NONE) {
       </div>
 
       <div>
-        <label for="fileToUpload" class="block text-sm font-medium text-gray-700 mb-1">Archivo del TFG (PDF)</label>
+        <label for="fileToUpload" class="block text-sm font-medium text-gray-700 mb-1">Archivo del TFG (PDF) - (Máximo 10MB)</label>
         <input type="file" id="fileToUpload" name="fileToUpload" accept=".pdf" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
       </div>
 
